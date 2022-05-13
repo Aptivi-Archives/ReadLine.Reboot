@@ -25,4 +25,4 @@
  */
 
 // This is so ReadLine.tests can access internal tools
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ReadLine.Tests")]
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("ReadLine.Reboot.Tests")]
