@@ -1,0 +1,46 @@
+{
+    "metadata": [
+        {
+            "src": [
+                {
+                    "files": [ "src/ReadLine/**.csproj" ],
+                    "src": ".."
+                }
+            ],
+            "dest": "api",
+            "disableGitFeatures": false,
+            "disableDefaultFilter": false,
+            "filter": "filterConfig.yml"
+        }
+    ],
+    "build": {
+        "content": [
+            {
+                "files": [
+                    "api/**.yml",
+                    "index.md",
+                    "toc.yml"
+                ]
+            }
+        ],
+        "resource": [
+            {
+                "files": [ "images/**" ]
+            }
+        ],
+        "dest": "../docs",
+        "globalMetadata": {
+            "_appTitle": "ReadLine.Reboot API - Eofla Internals",
+            "_enableSearch": true
+        },
+        "globalMetadataFiles": [],
+        "fileMetadataFiles": [],
+        "template": [ "default" ],
+        "postProcessors": [],
+        "markdownEngineName": "markdig",
+        "noLangKeyword": false,
+        "keepFileLink": false,
+        "cleanupCacheHistory": false,
+        "disableGitFeatures": false
+    }
+}

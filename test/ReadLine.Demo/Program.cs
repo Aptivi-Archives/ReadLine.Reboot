@@ -1,4 +1,4 @@
-/*
+﻿/*
  * MIT License
  *
  * Copyright (c) 2017 Toni Solarin-Sodara
@@ -24,17 +24,40 @@
  * 
  */
 
-namespace Internal.ReadLine.Abstractions
+using System;
+
+namespace ConsoleApplication
 {
-    internal interface IConsole
+    public class Program
     {
-        int CursorLeft { get; }
-        int CursorTop { get; }
-        int BufferWidth { get; }
-        int BufferHeight { get; }
-        void SetCursorPosition(int left, int top);
-        void SetBufferSize(int width, int height);
-        void Write(string value);
-        void WriteLine(string value);
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("ReadLine Library Demo");
+            Console.WriteLine("---------------------");
+            Console.WriteLine();
+
+            string[] history = new string[] { "ls -a", "dotnet run", "git init" };
+            ReadLine.AddHistory(history);
+
+            ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
+
+            string input = ReadLine.Read("(prompt)> ");
+            Console.WriteLine(input);
+
+            input = ReadLine.ReadPassword("Enter Password> ");
+            Console.WriteLine(input);
+        }
+    }
+
+    class AutoCompletionHandler : IAutoCompleteHandler
+    {
+        public char[] Separators { get; set; } = new char[] { ' ', '.', '/', '\\', ':' };
+        public string[] GetSuggestions(string text, int index)
+        {
+            if (text.StartsWith("git "))
+                return new string[] { "init", "clone", "pull", "push" };
+            else
+                return null;
+        }
     }
 }

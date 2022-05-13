@@ -1,17 +1,15 @@
-[![Windows build status](https://ci.appveyor.com/api/projects/status/github/tonerdo/readline?branch=master&svg=true)](https://ci.appveyor.com/project/tonerdo/readline)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![NuGet version](https://badge.fury.io/nu/ReadLine.svg)](https://www.nuget.org/packages/ReadLine)
-# ReadLine
+# ReadLine.Reboot
 
-ReadLine is a [GNU Readline](https://en.wikipedia.org/wiki/GNU_Readline) like library built in pure C#. It can serve as a drop in replacement for the inbuilt `Console.ReadLine()` and brings along
-with it some of the terminal goodness you get from unix shells, like command history navigation and tab auto completion.
+[![Build status](https://ci.appveyor.com/api/projects/status/twc6ovqb6cc8s184?svg=true)](https://ci.appveyor.com/project/EoflaOE/readline-reboot)
 
-It is cross platform and runs anywhere .NET is supported, targeting `netstandard1.3` means that it can be used with .NET Core as well as the full .NET Framework.
+ReadLine.Reboot is a reboot of Toni Solarin-Sodara's original ReadLine that is discontinued. It's a [GNU Readline](https://en.wikipedia.org/wiki/GNU_Readline) like library built in pure C#. It can serve as a drop in replacement for the inbuilt `Console.ReadLine()` and brings along with it some of the terminal goodness you get from Unix shells, like command history navigation and tab auto completion.
+
+It is cross platform and runs anywhere .NET is supported, targeting `netstandard2.1` means that it can be used with the modern .NET and the classic .NET Framework.
 
 ## Shortcut Guide
 
 | Shortcut                       | Comment                           |
-| ------------------------------ | --------------------------------- |
+|:-------------------------------|:----------------------------------|
 | `Ctrl`+`A` / `HOME`            | Beginning of line                 |
 | `Ctrl`+`B` / `←`               | Backward one character            |
 | `Ctrl`+`C`                     | Send EOF                          |
@@ -31,23 +29,21 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Backspace`                    | Delete previous character         |
 | `Ctrl` + `D` / `Delete`        | Delete succeeding character       |
 
-
 ## Installation
 
-Available on [NuGet](https://www.nuget.org/packages/ReadLine/)
+Available on [NuGet](https://www.nuget.org/packages/ReadLine.Reboot/)
 
 Visual Studio:
 
 ```powershell
-PM> Install-Package ReadLine
+PM> Install-Package ReadLine.Reboot
 ```
 
 .NET Core CLI:
 
 ```bash
-dotnet add package ReadLine
+dotnet add package ReadLine.Reboot
 ```
-
 
 ## Usage
 
@@ -107,14 +103,36 @@ ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 
 _Note: If no "AutoCompletionHandler" is set, tab autocompletion will be disabled_
 
-## Contributing
+## Credits
 
-Contributions are highly welcome. If you have found a bug or if you have a feature request, please report them at this repository issues section.
-
-Things you can help with:
-* Achieve better command parity with [GNU Readline](https://en.wikipedia.org/wiki/GNU_Readline).
-* Add more test cases.
+| Author              | For                                                      |
+|:--------------------|:---------------------------------------------------------|
+| Toni Solarin-Sodara | [Original ReadLine](https://github.com/tonerdo/readline) |
+| EoflaOE             | Rebooting the ReadLine project                           |
 
 ## License
 
-This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more info.
+```
+MIT License
+
+Copyright (c) 2017 Toni Solarin-Sodara
+Copyright (c) 2022 EoflaOE and its companies
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

@@ -3,18 +3,46 @@
   <PropertyGroup>
     <AssemblyTitle>ReadLine</AssemblyTitle>
     <AssemblyDescription>A GNU-Readline like library for .NET/.NET Core</AssemblyDescription>
-    <AssemblyVersion>2.0.1</AssemblyVersion>
-    <Authors>Toni Solarin-Sodara</Authors>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <Authors>Toni Solarin-Sodara,EoflaOE</Authors>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <DebugType>portable</DebugType>
-    <AssemblyName>ReadLine</AssemblyName>
-    <PackageId>ReadLine</PackageId>
+    <AssemblyName>ReadLine.Reboot</AssemblyName>
+    <PackageId>ReadLine.Reboot</PackageId>
     <PackageVersion>$(AssemblyVersion)</PackageVersion>
     <PackageTags>readline;gnu;console;shell;cui</PackageTags>
-    <PackageProjectUrl>https://github.com/tonerdo/readline</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/tonerdo/readline/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/EoflaOE/ReadLine.Reboot</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/tonerdo/readline</RepositoryUrl>
+    <RepositoryUrl>https://github.com/EoflaOE/ReadLine.Reboot</RepositoryUrl>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>3.0.0</Version>
+    <Company>EoflaOE</Company>
+    <Copyright>Copyright (c) 2022 EoflaOE and its companies.</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Description></Description>
+    <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
+    <PackageIcon>OfficialAppIcon-ReadLineReboot-512.png</PackageIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="OfficialAppIcon-ReadLineReboot.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="OfficialAppIcon-ReadLineReboot-512.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
