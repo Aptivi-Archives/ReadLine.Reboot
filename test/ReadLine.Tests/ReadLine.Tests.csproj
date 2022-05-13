@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <DebugType>portable</DebugType>
-    <AssemblyName>ReadLine.Tests</AssemblyName>
+    <AssemblyName>ReadLine.Reboot.Tests</AssemblyName>
     <PackageId>ReadLine.Tests</PackageId>
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
   </PropertyGroup>

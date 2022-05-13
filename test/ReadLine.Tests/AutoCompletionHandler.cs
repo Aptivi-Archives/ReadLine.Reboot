@@ -1,4 +1,4 @@
-﻿/*
+/*
  * MIT License
  *
  * Copyright (c) 2017 Toni Solarin-Sodara
@@ -25,48 +25,15 @@
  */
 
 using System;
-using System.Linq;
-using Xunit;
-
-using static System.ReadLine;
 
 namespace ReadLine.Tests
 {
-    public class ReadLineTests : IDisposable
+    /// <summary>
+    /// An example class of auto completion handler used for tests.
+    /// </summary>
+    class AutoCompletionHandler : IAutoCompleteHandler
     {
-        public ReadLineTests()
-        {
-            string[] history = new string[] { "ls -a", "dotnet run", "git init" };
-            AddHistory(history);
-        }
-
-        [Fact]
-        public void TestNoInitialHistory() 
-        {
-            Assert.Equal(3, GetHistory().Count);
-        }
-
-        [Fact]
-        public void TestUpdatesHistory() 
-        {
-            AddHistory("mkdir");
-            Assert.Equal(4, GetHistory().Count);
-            Assert.Equal("mkdir", GetHistory().Last());
-        }
-
-        [Fact]
-        public void TestGetCorrectHistory() 
-        {
-            Assert.Equal("ls -a", GetHistory()[0]);
-            Assert.Equal("dotnet run", GetHistory()[1]);
-            Assert.Equal("git init", GetHistory()[2]);
-        }
-
-        public void Dispose()
-        {
-            // If all above tests pass
-            // clear history works
-            ClearHistory();
-        }
+        public char[] Separators { get; set; } = new char[] { ' ', '.', '/', '\\', ':' };
+        public string[] GetSuggestions(string text, int index) => new string[] { "World", "Angel", "Love" };
     }
 }

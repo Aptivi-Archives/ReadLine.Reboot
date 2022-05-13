@@ -30,56 +30,100 @@ using System.Collections.Generic;
 
 namespace System
 {
+    /// <summary>
+    /// The initial read line module
+    /// </summary>
     public static class ReadLine
     {
-        private static List<string> _history;
-
-        static ReadLine()
-        {
-            _history = new List<string>();
-        }
-
-        public static void AddHistory(params string[] text) => _history.AddRange(text);
-        public static List<string> GetHistory() => _history;
-        public static void ClearHistory() => _history = new List<string>();
+        // Variables
+        /// <summary>
+        /// Whether the history is enabled. Currently false.
+        /// </summary>
         public static bool HistoryEnabled { get; set; }
+
+        /// <summary>
+        /// The auto completion handler. You need to make a class that implements <see cref="IAutoCompleteHandler"/>
+        /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }
 
-        public static string Read(string prompt = "", string @default = "")
+        private static readonly List<string> _history = new List<string>();
+
+        /// <summary>
+        /// Adds a text or an array of texts to the history
+        /// </summary>
+        /// <param name="texts">The strings to add to the history</param>
+        public static void AddHistory(params string[] texts) => _history.AddRange(texts);
+
+        /// <summary>
+        /// Gets the current history
+        /// </summary>
+        public static List<string> GetHistory() => _history;
+
+        /// <summary>
+        /// Clears the history
+        /// </summary>
+        public static void ClearHistory() => _history.Clear();
+
+        /// <summary>
+        /// Writes the prompt and reads the input
+        /// </summary>
+        /// <param name="prompt">The prompt to write</param>
+        /// <param name="defaultText">The default text to write if nothing is written</param>
+        /// <returns>The written text if anything is input from the user, or the default text if nothing if printed</returns>
+        public static string Read(string prompt = "", string defaultText = "")
         {
+            // Prepare the prompt
             Console.Write(prompt);
-            KeyHandler keyHandler = new KeyHandler(new Console2(), _history, AutoCompletionHandler);
+            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
+
+            // Get the written text
             string text = GetText(keyHandler);
 
-            if (String.IsNullOrWhiteSpace(text) && !String.IsNullOrWhiteSpace(@default))
+            // Add the text to the history if the text is written
+            if (string.IsNullOrWhiteSpace(text) && !string.IsNullOrWhiteSpace(defaultText))
             {
-                text = @default;
+                // User didn't input any text. Therefore, set the text to the default value
+                text = defaultText;
             }
             else
             {
+                // If the history is enabled, add the text to the history
                 if (HistoryEnabled)
-                    _history.Add(text);
+                    AddHistory(text);
             }
 
             return text;
         }
 
+        /// <summary>
+        /// Writes the prompt and reads the input while masking the written input
+        /// </summary>
+        /// <param name="prompt">The prompt to write</param>
+        /// <returns>The written text</returns>
         public static string ReadPassword(string prompt = "")
         {
+            // Prepare the prompt
             Console.Write(prompt);
-            KeyHandler keyHandler = new KeyHandler(new Console2() { PasswordMode = true }, null, null);
+            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true }, null, null);
+
+            // Get the written text
             return GetText(keyHandler);
         }
 
         private static string GetText(KeyHandler keyHandler)
         {
+            // Get the key
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+            // Stop handling keys if Enter is pressed
             while (keyInfo.Key != ConsoleKey.Enter)
             {
+                // Handle the key as appropriate
                 keyHandler.Handle(keyInfo);
                 keyInfo = Console.ReadKey(true);
             }
 
+            // Write a new line and get the text
             Console.WriteLine();
             return keyHandler.Text;
         }

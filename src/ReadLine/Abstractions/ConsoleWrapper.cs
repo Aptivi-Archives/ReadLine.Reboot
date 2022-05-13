@@ -28,7 +28,7 @@ using System;
 
 namespace Internal.ReadLine.Abstractions
 {
-    internal class Console2 : IConsole
+    internal class ConsoleWrapper : IConsole
     {
         public int CursorLeft => Console.CursorLeft;
 
@@ -38,6 +38,9 @@ namespace Internal.ReadLine.Abstractions
 
         public int BufferHeight => Console.BufferHeight;
 
+        /// <summary>
+        /// Whether we're in the password mode
+        /// </summary>
         public bool PasswordMode { get; set; }
 
         public void SetBufferSize(int width, int height) => Console.SetBufferSize(width, height);
@@ -50,8 +53,10 @@ namespace Internal.ReadLine.Abstractions
 
         public void Write(string value)
         {
+            // If we're in the password mode, mask the rendered string
+            // TODO: Custom masks used in Kernel Simulator must be transferred to here
             if (PasswordMode)
-                value = new String(default(char), value.Length);
+                value = new string(default, value.Length);
 
             Console.Write(value);
         }

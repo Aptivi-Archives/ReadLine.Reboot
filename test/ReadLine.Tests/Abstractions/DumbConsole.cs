@@ -28,7 +28,7 @@ using Internal.ReadLine.Abstractions;
 
 namespace ReadLine.Tests.Abstractions
 {
-    internal class Console2 : IConsole
+    internal class DumbConsole : IConsole
     {
         public int CursorLeft => _cursorLeft;
 
@@ -43,7 +43,7 @@ namespace ReadLine.Tests.Abstractions
         private int _bufferWidth;
         private int _bufferHeight;
 
-        public Console2()
+        public DumbConsole()
         {
             _cursorLeft = 0;
             _cursorTop = 0;

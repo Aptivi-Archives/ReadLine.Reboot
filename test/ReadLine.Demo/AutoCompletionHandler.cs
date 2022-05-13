@@ -1,4 +1,4 @@
-/*
+﻿/*
  * MIT License
  *
  * Copyright (c) 2017 Toni Solarin-Sodara
@@ -26,11 +26,20 @@
 
 using System;
 
-namespace ReadLine.Tests
+namespace ReadLineDemo
 {
-    class AutoCompleteHandler : IAutoCompleteHandler
+    /// <summary>
+    /// An example class of auto completion handler.
+    /// </summary>
+    class AutoCompletionHandler : IAutoCompleteHandler
     {
         public char[] Separators { get; set; } = new char[] { ' ', '.', '/', '\\', ':' };
-        public string[] GetSuggestions(string text, int index) => new string[] { "World", "Angel", "Love" };
+        public string[] GetSuggestions(string text, int index)
+        {
+            if (text.StartsWith("git "))
+                return new string[] { "init", "clone", "pull", "push" };
+            else
+                return null;
+        }
     }
 }

@@ -26,9 +26,22 @@
 
 namespace System
 {
+    /// <summary>
+    /// The auto completion handler interface. You must make a base class that implements this interface in order to enable auto completion.
+    /// </summary>
     public interface IAutoCompleteHandler
     {
+        /// <summary>
+        /// Separator characters. If any of these are encountered, the auto-completion will trigger
+        /// </summary>
         char[] Separators { get; set; }
+
+        /// <summary>
+        /// Gets the suggestions based on current text and current index
+        /// </summary>
+        /// <param name="text">The current text entered in the console</param>
+        /// <param name="index">The index of the terminal cursor where the auto-completion is triggered</param>
+        /// <returns></returns>
         string[] GetSuggestions(string text, int index);
     }
 }

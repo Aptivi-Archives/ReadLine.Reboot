@@ -26,38 +26,35 @@
 
 using System;
 
-namespace ConsoleApplication
+namespace ReadLineDemo
 {
     public class Program
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("ReadLine Library Demo");
-            Console.WriteLine("---------------------");
+            // Show the header
+            Console.WriteLine("ReadLine Reboot Demo");
+            Console.WriteLine("====================");
             Console.WriteLine();
 
+            // Initialize the history
             string[] history = new string[] { "ls -a", "dotnet run", "git init" };
             ReadLine.AddHistory(history);
 
+            // Initialize the auto completion handler
             ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 
+            // Enter the prompt
             string input = ReadLine.Read("(prompt)> ");
             Console.WriteLine(input);
 
-            input = ReadLine.ReadPassword("Enter Password> ");
-            Console.WriteLine(input);
-        }
-    }
+            // Enter the prompt with default
+            string input2 = ReadLine.Read("(prompt2)> [def] ", "def");
+            Console.WriteLine(input2);
 
-    class AutoCompletionHandler : IAutoCompleteHandler
-    {
-        public char[] Separators { get; set; } = new char[] { ' ', '.', '/', '\\', ':' };
-        public string[] GetSuggestions(string text, int index)
-        {
-            if (text.StartsWith("git "))
-                return new string[] { "init", "clone", "pull", "push" };
-            else
-                return null;
+            // Enter the masked prompt
+            string input3 = ReadLine.ReadPassword("Enter Password> ");
+            Console.WriteLine(input3);
         }
     }
 }

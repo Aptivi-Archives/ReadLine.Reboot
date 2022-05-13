@@ -31,9 +31,11 @@ namespace ReadLine.Tests
 {
     public static class CharExtensions
     {
+        // The actual characters used in test
         public const char ExclamationPoint = '!';
         public const char Space = ' ';
 
+        // The control sequence used in ReadLine.Reboot
         public const char CtrlA = '\u0001';
         public const char CtrlB = '\u0002';
         public const char CtrlD = '\u0004';
@@ -48,10 +50,17 @@ namespace ReadLine.Tests
         public const char CtrlU = '\u0015';
         public const char CtrlW = '\u0017';
 
-        private static readonly Dictionary<char, Tuple<ConsoleKey, ConsoleModifiers>> specialKeyCharMap = new Dictionary<char, Tuple<ConsoleKey, ConsoleModifiers>>() 
+        // No modifiers
+        private const ConsoleModifiers NoModifiers = 0;
+
+        // The special key character
+        private static readonly Dictionary<char, Tuple<ConsoleKey, ConsoleModifiers>> specialKeyCharMap = new()
         {
-            {ExclamationPoint, Tuple.Create(ConsoleKey.D0, NoModifiers())},
-            {Space, Tuple.Create(ConsoleKey.Spacebar,  NoModifiers())},
+            // The actual characters used in test
+            {ExclamationPoint, Tuple.Create(ConsoleKey.D0, NoModifiers)},
+            {Space, Tuple.Create(ConsoleKey.Spacebar,  NoModifiers)},
+
+            // The control sequence used in ReadLine.Reboot
             {CtrlA, Tuple.Create(ConsoleKey.A, ConsoleModifiers.Control)},
             {CtrlB, Tuple.Create(ConsoleKey.B, ConsoleModifiers.Control)},
             {CtrlD, Tuple.Create(ConsoleKey.D, ConsoleModifiers.Control)},
@@ -67,36 +76,44 @@ namespace ReadLine.Tests
             {CtrlW, Tuple.Create(ConsoleKey.W, ConsoleModifiers.Control)}
         };
 
+        /// <summary>
+        /// Converts the character to the instance of ConsoleKeyInfo
+        /// </summary>
+        /// <param name="c">The character</param>
         public static ConsoleKeyInfo ToConsoleKeyInfo(this char c)
         {
+            // Parse the key information
             var (key, modifiers) = c.ParseKeyInfo();
 
-            var ctrl = modifiers.HasFlag(ConsoleModifiers.Control);
-            var shift = modifiers.HasFlag(ConsoleModifiers.Shift);
-            var alt = modifiers.HasFlag(ConsoleModifiers.Alt);
+            // Check to see if any modifiers are pressed
+            bool ctrl = modifiers.HasFlag(ConsoleModifiers.Control);
+            bool shift = modifiers.HasFlag(ConsoleModifiers.Shift);
+            bool alt = modifiers.HasFlag(ConsoleModifiers.Alt);
 
+            // Return the new instance
             return new ConsoleKeyInfo(c, key, shift, alt, ctrl);
         }
 
+        /// <summary>
+        /// Parses the key information
+        /// </summary>
+        /// <param name="c">Character to parse</param>
         private static Tuple<ConsoleKey, ConsoleModifiers> ParseKeyInfo(this char c) 
         {
+            // Try to get the ConsoleKey from the character
             {
-                var success = Enum.TryParse<ConsoleKey>(c.ToString().ToUpper(), out ConsoleKey result);
-                if (success) {return Tuple.Create(result, NoModifiers());}
+                bool success = Enum.TryParse(c.ToString().ToUpper(), out ConsoleKey result);
+                if (success) { return Tuple.Create(result, NoModifiers); }
             }
             
+            // Try to get the tuple of the special key character from the character map defined
             {
-                var success = specialKeyCharMap.TryGetValue(c, out Tuple<ConsoleKey, ConsoleModifiers> result);
+                bool success = specialKeyCharMap.TryGetValue(c, out Tuple<ConsoleKey, ConsoleModifiers> result);
                 if (success) { return result; }
             }
 
-            //if all else fails, return whatever the default is
-            return Tuple.Create(default(ConsoleKey), NoModifiers());
-        }
-
-        private static ConsoleModifiers NoModifiers()
-        {
-            return (ConsoleModifiers)0;
+            // If all else fails, return the default
+            return Tuple.Create(default(ConsoleKey), NoModifiers);
         }
     }
 }
