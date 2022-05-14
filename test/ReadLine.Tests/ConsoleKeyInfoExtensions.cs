@@ -41,6 +41,7 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo DownArrow = new('\0', ConsoleKey.DownArrow, false, false, false);
         public static readonly ConsoleKeyInfo Tab = new('\0', ConsoleKey.Tab, false, false, false);
         public static readonly ConsoleKeyInfo ShiftTab = new('\0', ConsoleKey.Tab, true, false, false);
+        public static readonly ConsoleKeyInfo AltD = new('d', ConsoleKey.D, false, true, false);
 
         // The actual characters used in test
         public static readonly ConsoleKeyInfo ExclamationPoint = CharExtensions.ExclamationPoint.ToConsoleKeyInfo();

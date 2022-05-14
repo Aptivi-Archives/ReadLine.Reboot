@@ -26,6 +26,7 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Ctrl`+`P` / `↑`               | Backward in history               |
 | `Ctrl`+`U`                     | Cut text to the start of line     |
 | `Ctrl`+`W`                     | Cut previous word                 |
+| `Alt`+`D`                      | Cut next word                     |
 | `Backspace`                    | Delete previous character         |
 | `Ctrl` + `D` / `Delete`        | Delete succeeding character       |
 

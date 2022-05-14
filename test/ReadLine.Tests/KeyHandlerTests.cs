@@ -232,6 +232,32 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests clearing the line after space is spotted
+        /// </summary>
+        [Fact]
+        public void TestClearLineAfterSpaceWithAltD()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the HOME and ALT + D key
+            new List<ConsoleKeyInfo>() { Home, AltD }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal(" World", _keyHandler.Text);
+
+            // Simulate the user pressing the DELETE and ALT + D keys
+            new List<ConsoleKeyInfo>() { Delete, AltD }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that nothing is there
+            Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tries to swap the two characters
         /// </summary>
         [Fact]

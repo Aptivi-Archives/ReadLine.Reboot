@@ -301,6 +301,15 @@ namespace Internal.ReadLine
                 Backspace();
         }
 
+        /// <summary>
+        /// Clears all characters after the space is spotted
+        /// </summary>
+        private void ClearLineAfterSpace()
+        {
+            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+                Delete();
+        }
+
         // --> Manipulating
 
         /// <summary>
@@ -438,8 +447,9 @@ namespace Internal.ReadLine
         /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
         private string BuildKeyInput()
         {
-            return (_keyInfo.Modifiers != ConsoleModifiers.Control && _keyInfo.Modifiers != ConsoleModifiers.Shift) ?
-                _keyInfo.Key.ToString() : _keyInfo.Modifiers.ToString() + _keyInfo.Key.ToString();
+            return (_keyInfo.Modifiers != ConsoleModifiers.Control && _keyInfo.Modifiers != ConsoleModifiers.Alt && _keyInfo.Modifiers != ConsoleModifiers.Shift) ?
+                    _keyInfo.Key.ToString() : 
+                    _keyInfo.Modifiers.ToString() + _keyInfo.Key.ToString();
         }
 
         /// <summary>
@@ -519,6 +529,7 @@ namespace Internal.ReadLine
                 ["ControlU"] = ClearLineToLeft,
                 ["ControlK"] = ClearLineToRight,
                 ["ControlW"] = ClearLineUntilSpace,
+                ["AltD"] = ClearLineAfterSpace,
 
                 // History manipulation
                 ["UpArrow"] = PrevHistory,
