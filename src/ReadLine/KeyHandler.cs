@@ -237,7 +237,16 @@ namespace Internal.ReadLine
             // Write the resulting string and set the appropriate cursor position
             int left = Console2.CursorLeft;
             int top = Console2.CursorTop;
-            Console2.Write(string.Format("{0} ", replacement));
+            if (Console2.PasswordMode && Console2.PasswordMaskChar != default)
+            {
+                // Write the replacement, but use Console.Write to write the space, because we need to ensure that it really got deleted on render.
+                Console2.Write(replacement);
+                Console.Write(" ");
+            }
+            else
+            {
+                Console2.Write($"{replacement} ");
+            }
             Console2.SetCursorPosition(left, top);
 
             // Sets the cursor limit appropriately

@@ -99,12 +99,13 @@ namespace System
         /// Writes the prompt and reads the input while masking the written input
         /// </summary>
         /// <param name="prompt">The prompt to write</param>
+        /// <param name="mask">Character to use to mask password</param>
         /// <returns>The written text</returns>
-        public static string ReadPassword(string prompt = "")
+        public static string ReadPassword(string prompt = "", char mask = default)
         {
             // Prepare the prompt
             Console.Write(prompt);
-            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true }, null, null);
+            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null);
 
             // Get the written text
             return GetText(keyHandler);

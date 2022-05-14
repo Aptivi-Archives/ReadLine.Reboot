@@ -43,20 +43,24 @@ namespace Internal.ReadLine.Abstractions
         /// </summary>
         public bool PasswordMode { get; set; }
 
+        /// <summary>
+        /// The password mask character
+        /// </summary>
+        public char PasswordMaskChar { get; set; }
+
         public void SetBufferSize(int width, int height) => Console.SetBufferSize(width, height);
 
         public void SetCursorPosition(int left, int top)
         {
-            if (!PasswordMode)
+            if (!PasswordMode || PasswordMaskChar != default)
                 Console.SetCursorPosition(left, top);
         }
 
         public void Write(string value)
         {
             // If we're in the password mode, mask the rendered string
-            // TODO: Custom masks used in Kernel Simulator must be transferred to here
             if (PasswordMode)
-                value = new string(default, value.Length);
+                value = new string(PasswordMaskChar, value.Length);
 
             Console.Write(value);
         }

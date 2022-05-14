@@ -47,21 +47,33 @@ dotnet add package ReadLine.Reboot
 
 ## Usage
 
-### Read input from the console
+This section shows you how to use this library to read the lines and manage history.
+
+### Input
+
+_Note: The `(prompt>)` is  optional_
+
+#### Read input
 
 ```csharp
 string input = ReadLine.Read("(prompt)> ");
 ```
 
-### Read password from the console
+#### Read password
 
 ```csharp
 string password = ReadLine.ReadPassword("(prompt)> ");
 ```
 
-_Note: The `(prompt>)` is  optional_
+#### Read password with password mask
+
+```csharp
+string password = ReadLine.ReadPassword("(prompt)> ", '*');
+```
 
 ### History management
+
+_Note: History information is persisted for an entire application session. Also, calls to `ReadLine.Read()` automatically adds the console input to history_
 
 ```csharp
 // Get command history
@@ -73,13 +85,16 @@ ReadLine.AddHistory("dotnet run");
 // Clear history
 ReadLine.ClearHistory();
 
-// Disable history
+// Disable history (default)
 ReadLine.HistoryEnabled = false;
+
+// Enable history
+ReadLine.HistoryEnabled = true;
 ```
 
-_Note: History information is persisted for an entire application session. Also, calls to `ReadLine.Read()` automatically adds the console input to history_
-
 ### Auto-Completion
+
+_Note: If no "AutoCompletionHandler" is set, tab autocompletion will be disabled_
 
 ```csharp
 class AutoCompletionHandler : IAutoCompleteHandler
@@ -100,8 +115,6 @@ class AutoCompletionHandler : IAutoCompleteHandler
 
 ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 ```
-
-_Note: If no "AutoCompletionHandler" is set, tab autocompletion will be disabled_
 
 ## Credits
 

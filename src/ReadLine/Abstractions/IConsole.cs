@@ -32,6 +32,8 @@ namespace Internal.ReadLine.Abstractions
         int CursorTop { get; }
         int BufferWidth { get; }
         int BufferHeight { get; }
+        bool PasswordMode { get; }
+        char PasswordMaskChar { get; }
         void SetCursorPosition(int left, int top);
         void SetBufferSize(int width, int height);
         void Write(string value);

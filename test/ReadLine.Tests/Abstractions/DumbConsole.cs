@@ -38,6 +38,10 @@ namespace ReadLine.Tests.Abstractions
 
         public int BufferHeight => _bufferHeight;
 
+        public bool PasswordMode { get; set; } = false;
+
+        public char PasswordMaskChar { get; set; } = default;
+
         private int _cursorLeft;
         private int _cursorTop;
         private int _bufferWidth;
@@ -59,8 +63,11 @@ namespace ReadLine.Tests.Abstractions
 
         public void SetCursorPosition(int left, int top)
         {
-            _cursorLeft = left;
-            _cursorTop = top;
+            if (!PasswordMode || PasswordMaskChar != default)
+            {
+                _cursorLeft = left;
+                _cursorTop = top;
+            }
         }
 
         public void Write(string value)

@@ -55,6 +55,10 @@ namespace ReadLineDemo
             // Enter the masked prompt
             string input3 = ReadLine.ReadPassword("Enter Password> ");
             Console.WriteLine(input3);
+
+            // Enter the masked prompt with password mask
+            string input4 = ReadLine.ReadPassword("Enter Password> ", '*');
+            Console.WriteLine(input4);
         }
     }
 }

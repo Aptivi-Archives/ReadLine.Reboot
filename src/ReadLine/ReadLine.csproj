@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyTitle>ReadLine</AssemblyTitle>
-    <AssemblyDescription>A GNU-Readline like library for .NET/.NET Core</AssemblyDescription>
+    <AssemblyTitle>ReadLine.Reboot</AssemblyTitle>
+    <AssemblyDescription>A reboot of tonerdo's ReadLine library for .NET</AssemblyDescription>
     <AssemblyVersion>3.0.0</AssemblyVersion>
     <Authors>Toni Solarin-Sodara,EoflaOE</Authors>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -22,7 +22,6 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <Description></Description>
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
     <PackageIcon>OfficialAppIcon-ReadLineReboot-512.png</PackageIcon>
   </PropertyGroup>
