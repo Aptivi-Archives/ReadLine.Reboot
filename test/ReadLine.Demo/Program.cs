@@ -31,7 +31,7 @@ namespace ReadLineDemo
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main()
         {
             // Show the header
             Console.WriteLine("ReadLine Reboot Demo");
