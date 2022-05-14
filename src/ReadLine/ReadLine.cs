@@ -65,6 +65,15 @@ namespace System
         public static void ClearHistory() => _history.Clear();
 
         /// <summary>
+        /// Sets the history
+        /// </summary>
+        public static void SetHistory(List<string> history)
+        {
+            _history.Clear();
+            _history.AddRange(history);
+        }
+
+        /// <summary>
         /// Writes the prompt and reads the input
         /// </summary>
         /// <param name="prompt">The prompt to write</param>

@@ -85,6 +85,10 @@ ReadLine.AddHistory("dotnet run");
 // Clear history
 ReadLine.ClearHistory();
 
+// Set history
+List<string> newHistory = new() { "apt update", "apt dist-upgrade" };
+ReadLine.SetHistory(newHistory);
+
 // Disable history (default)
 ReadLine.HistoryEnabled = false;
 

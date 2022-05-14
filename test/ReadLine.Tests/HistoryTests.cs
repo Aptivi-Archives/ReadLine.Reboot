@@ -25,6 +25,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using static System.ReadLine;
@@ -55,11 +56,23 @@ namespace ReadLine.Tests
         /// Tests updating the history with the addition of the string to the history
         /// </summary>
         [Fact]
-        public void TestUpdateHistory() 
+        public void TestUpdateHistoryByAddEntry() 
         {
             AddHistory("mkdir");
             Assert.Equal(4, GetHistory().Count);
             Assert.Equal("mkdir", GetHistory().Last());
+        }
+
+        /// <summary>
+        /// Tests updating the history by setting history
+        /// </summary>
+        [Fact]
+        public void TestUpdateHistoryBySetHistory() 
+        {
+            List<string> newHistory = new() { "apt update", "apt dist-upgrade" };
+            SetHistory(newHistory);
+            Assert.Equal(2, GetHistory().Count);
+            Assert.Equal("apt dist-upgrade", GetHistory().Last());
         }
 
         /// <summary>
