@@ -14,6 +14,8 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Ctrl`+`E` / `END`             | End of line                       |
 | `Ctrl`+`B` / `←`               | Backward one character            |
 | `Ctrl`+`F` / `→`               | Forward one character             |
+| `Alt`+`B`                      | Backward one word                 |
+| `Alt`+`F`                      | Forward one word                  |
 | `Ctrl`+`C`                     | Send EOF                          |
 | `Ctrl`+`H` / `Backspace`       | Delete previous character         |
 | `Ctrl`+`D` / `Delete`          | Delete succeeding character       |

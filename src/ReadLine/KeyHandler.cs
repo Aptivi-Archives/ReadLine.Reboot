@@ -138,6 +138,24 @@ namespace Internal.ReadLine
                 MoveCursorRight();
         }
 
+        /// <summary>
+        /// Moves the cursor to the left one word
+        /// </summary>
+        private void MoveCursorWordLeft()
+        {
+            while (!IsStartOfLine() && _text[_cursorPos - 1] != ' ')
+                MoveCursorLeft();
+        }
+
+        /// <summary>
+        /// Moves the cursor to the right one word
+        /// </summary>
+        private void MoveCursorWordRight()
+        {
+            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+                MoveCursorRight();
+        }
+
         // --> Writing
 
         /// <summary>
@@ -508,8 +526,10 @@ namespace Internal.ReadLine
                 // Cursor movement (left and right)
                 ["LeftArrow"] = MoveCursorLeft,
                 ["ControlB"] = MoveCursorLeft,
+                ["AltB"] = MoveCursorWordLeft,
                 ["RightArrow"] = MoveCursorRight,
                 ["ControlF"] = MoveCursorRight,
+                ["AltF"] = MoveCursorWordRight,
 
                 // Cursor movement (home and end)
                 ["Home"] = MoveCursorHome,

@@ -452,6 +452,34 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests moving cursor to the left of the word
+        /// </summary>
+        [Fact]
+        public void TestMoveCursorWordLeft()
+        {
+            // Simulate the user pressing the ALT + B and ! key
+            new List<ConsoleKeyInfo>() { AltB, ExclamationPoint }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that the exclamation mark is there
+            Assert.Equal("!Hello", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests moving cursor to the right of the word
+        /// </summary>
+        [Fact]
+        public void TestMoveCursorWordRight()
+        {
+            // Simulate the user pressing the ALT + B, ALT + F, and ! key
+            new List<ConsoleKeyInfo>() { AltB, AltF, ExclamationPoint }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that the exclamation mark is there
+            Assert.Equal("Hello!", _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests going up to reveal the previous history
         /// </summary>
         [Fact]
