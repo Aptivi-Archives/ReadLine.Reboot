@@ -184,7 +184,11 @@ namespace Internal.ReadLine
                 // Get a part of the string from the cursor position
                 int left = ConsoleWrapper.CursorLeft;
                 int top = ConsoleWrapper.CursorTop;
+#if NETCOREAPP
                 string str = _text.ToString()[_cursorPos..];
+#else
+                string str = _text.ToString().Substring(_cursorPos);
+#endif
 
                 // Inject a character to the main text in the cursor position
                 _text.Insert(_cursorPos, c);
@@ -233,8 +237,12 @@ namespace Internal.ReadLine
             _text.Remove(index, 1);
 
             // Form the result
+#if NETCOREAPP
             string replacement = _text.ToString()[index..];
-            
+#else
+            string replacement = _text.ToString().Substring(index);
+#endif
+
             // Write the resulting string and set the appropriate cursor position
             int left = ConsoleWrapper.CursorLeft;
             int top = ConsoleWrapper.CursorTop;
@@ -442,12 +450,47 @@ namespace Internal.ReadLine
         /// <param name="autoCompleteHandler">Auto completion handler</param>
         public KeyHandler(IConsole console, List<string> history, IAutoCompleteHandler autoCompleteHandler)
         {
+            // Set the console wrapper
             ConsoleWrapper = console;
 
             // Initialize history and text
             _history = history ?? new List<string>();
             _historyIndex = _history.Count;
             _text = new StringBuilder();
+
+            // Assign local functions for Tab actions
+            void DoAutoComplete()
+            {
+                if (IsInAutoCompleteMode())
+                {
+                    NextAutoComplete();
+                }
+                else
+                {
+                    if (autoCompleteHandler == null || !IsEndOfLine())
+                        return;
+
+                    string text = _text.ToString();
+
+                    _completionStart = text.LastIndexOfAny(autoCompleteHandler.Separators);
+                    _completionStart = _completionStart == -1 ? 0 : _completionStart + 1;
+
+                    _completions = autoCompleteHandler.GetSuggestions(text, _completionStart);
+                    _completions = _completions?.Length == 0 ? null : _completions;
+
+                    if (_completions == null)
+                        return;
+
+                    StartAutoComplete();
+                }
+            }
+            void DoReverseAutoComplete()
+            {
+                if (IsInAutoCompleteMode())
+                {
+                    PreviousAutoComplete();
+                }
+            }
 
             // Assign the key actions
             _keyActions = new Dictionary<string, Action>
@@ -487,38 +530,8 @@ namespace Internal.ReadLine
                 ["ControlT"] = TransposeChars,
 
                 // Auto-completion initialization
-                ["Tab"] = () =>
-                {
-                    if (IsInAutoCompleteMode())
-                    {
-                        NextAutoComplete();
-                    }
-                    else
-                    {
-                        if (autoCompleteHandler == null || !IsEndOfLine())
-                            return;
-
-                        string text = _text.ToString();
-
-                        _completionStart = text.LastIndexOfAny(autoCompleteHandler.Separators);
-                        _completionStart = _completionStart == -1 ? 0 : _completionStart + 1;
-
-                        _completions = autoCompleteHandler.GetSuggestions(text, _completionStart);
-                        _completions = _completions?.Length == 0 ? null : _completions;
-
-                        if (_completions == null)
-                            return;
-
-                        StartAutoComplete();
-                    }
-                },
-                ["ShiftTab"] = () =>
-                {
-                    if (IsInAutoCompleteMode())
-                    {
-                        PreviousAutoComplete();
-                    }
-                }
+                ["Tab"] = DoAutoComplete,
+                ["ShiftTab"] = DoReverseAutoComplete
             };
         }
 

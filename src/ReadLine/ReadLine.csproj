@@ -5,7 +5,7 @@
     <AssemblyDescription>A reboot of tonerdo's ReadLine library for .NET</AssemblyDescription>
     <AssemblyVersion>3.0.0</AssemblyVersion>
     <Authors>Toni Solarin-Sodara,EoflaOE</Authors>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>net6.0;netcoreapp3.1;net48</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>ReadLine.Reboot</AssemblyName>
     <PackageId>ReadLine.Reboot</PackageId>
@@ -24,6 +24,7 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
     <PackageIcon>OfficialAppIcon-ReadLineReboot-512.png</PackageIcon>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
