@@ -26,9 +26,10 @@
 
 using Internal.ReadLine;
 using Internal.ReadLine.Abstractions;
+using System;
 using System.Collections.Generic;
 
-namespace System
+namespace ReadLineReboot
 {
     /// <summary>
     /// The initial read line module

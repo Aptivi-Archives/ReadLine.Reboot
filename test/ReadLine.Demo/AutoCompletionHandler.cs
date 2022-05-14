@@ -24,7 +24,7 @@
  * 
  */
 
-using System;
+using ReadLineReboot;
 
 namespace ReadLineDemo
 {

@@ -24,7 +24,7 @@
  * 
  */
 
-namespace System
+namespace ReadLineReboot
 {
     /// <summary>
     /// The auto completion handler interface. You must make a base class that implements this interface in order to enable auto completion.

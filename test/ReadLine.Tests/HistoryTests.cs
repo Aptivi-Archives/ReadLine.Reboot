@@ -28,7 +28,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using static System.ReadLine;
+using static ReadLineReboot.ReadLine;
 
 namespace ReadLine.Tests
 {

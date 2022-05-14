@@ -25,6 +25,7 @@
  */
 
 using Internal.ReadLine.Abstractions;
+using ReadLineReboot;
 using System;
 using System.Collections.Generic;
 using System.Text;

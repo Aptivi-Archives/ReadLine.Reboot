@@ -47,7 +47,11 @@ dotnet add package ReadLine.Reboot
 
 ## Usage
 
-This section shows you how to use this library to read the lines and manage history.
+This section shows you how to use this library to read the lines and manage history. Just add this to the top of the source file you want to use ReadLine.Reboot on:
+
+```csharp
+using ReadLineReboot;
+```
 
 ### Input
 
