@@ -11,24 +11,23 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | Shortcut                       | Comment                           |
 |:-------------------------------|:----------------------------------|
 | `Ctrl`+`A` / `HOME`            | Beginning of line                 |
-| `Ctrl`+`B` / `←`               | Backward one character            |
-| `Ctrl`+`C`                     | Send EOF                          |
 | `Ctrl`+`E` / `END`             | End of line                       |
+| `Ctrl`+`B` / `←`               | Backward one character            |
 | `Ctrl`+`F` / `→`               | Forward one character             |
+| `Ctrl`+`C`                     | Send EOF                          |
 | `Ctrl`+`H` / `Backspace`       | Delete previous character         |
-| `Tab`                          | Command line completion           |
-| `Shift`+`Tab`                  | Backwards command line completion |
-| `Ctrl`+`J` / `Enter`           | Line feed                         |
-| `Ctrl`+`K`                     | Cut text to the end of line       |
+| `Ctrl`+`D` / `Delete`          | Delete succeeding character       |
 | `Ctrl`+`L` / `Esc`             | Clear line                        |
-| `Ctrl`+`M`                     | Same as Enter key                 |
-| `Ctrl`+`N` / `↓`               | Forward in history                |
-| `Ctrl`+`P` / `↑`               | Backward in history               |
 | `Ctrl`+`U`                     | Cut text to the start of line     |
+| `Ctrl`+`K`                     | Cut text to the end of line       |
 | `Ctrl`+`W`                     | Cut previous word                 |
 | `Alt`+`D`                      | Cut next word                     |
-| `Backspace`                    | Delete previous character         |
-| `Ctrl` + `D` / `Delete`        | Delete succeeding character       |
+| `Ctrl`+`J`                     | Append line feed                  |
+| `Enter`                        | End of line                       |
+| `Ctrl`+`N` / `↓`               | Forward in history                |
+| `Ctrl`+`P` / `↑`               | Backward in history               |
+| `Tab`                          | Command line completion           |
+| `Shift`+`Tab`                  | Backwards command line completion |
 
 ## Installation
 
