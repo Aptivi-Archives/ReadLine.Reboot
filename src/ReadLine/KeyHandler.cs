@@ -42,15 +42,15 @@ namespace Internal.ReadLine
         // Private Variables
         private int _cursorPos;
         private int _cursorLimit;
-        private StringBuilder _text;
-        private List<string> _history;
         private int _historyIndex;
         private ConsoleKeyInfo _keyInfo;
-        private Dictionary<string, Action> _keyActions;
         private string[] _completions;
         private int _completionStart;
         private int _completionsIndex;
-        private IConsole Console2;
+        private readonly StringBuilder _text;
+        private readonly List<string> _history;
+        private readonly Dictionary<string, Action> _keyActions;
+        private readonly IConsole ConsoleWrapper;
 
         /// <summary>
         /// Whether we're at the beginning of the line
@@ -65,12 +65,12 @@ namespace Internal.ReadLine
         /// <summary>
         /// Whether we're at the start of the console buffer
         /// </summary>
-        private bool IsStartOfBuffer() => Console2.CursorLeft == 0;
+        private bool IsStartOfBuffer() => ConsoleWrapper.CursorLeft == 0;
 
         /// <summary>
         /// Whether we're at the end of the console buffer
         /// </summary>
-        private bool IsEndOfBuffer() => Console2.CursorLeft == Console2.BufferWidth - 1;
+        private bool IsEndOfBuffer() => ConsoleWrapper.CursorLeft == ConsoleWrapper.BufferWidth - 1;
 
         /// <summary>
         /// Whether we're at the auto-completion mode
@@ -91,10 +91,10 @@ namespace Internal.ReadLine
             // Check to see if we're at the beginning of the console buffer
             if (IsStartOfBuffer())
                 // We're at the beginning of the buffer. Move up and to the rightmost position
-                Console2.SetCursorPosition(Console2.BufferWidth - 1, Console2.CursorTop - 1);
+                ConsoleWrapper.SetCursorPosition(ConsoleWrapper.BufferWidth - 1, ConsoleWrapper.CursorTop - 1);
             else
                 // We're not at the beginning of the console buffer. Move the cursor one step backwards
-                Console2.SetCursorPosition(Console2.CursorLeft - 1, Console2.CursorTop);
+                ConsoleWrapper.SetCursorPosition(ConsoleWrapper.CursorLeft - 1, ConsoleWrapper.CursorTop);
 
             _cursorPos--;
         }
@@ -111,10 +111,10 @@ namespace Internal.ReadLine
             // Check to see if we're at the end of the console buffer
             if (IsEndOfBuffer())
                 // We're at the end of the buffer. Move down and to the leftmost position
-                Console2.SetCursorPosition(0, Console2.CursorTop + 1);
+                ConsoleWrapper.SetCursorPosition(0, ConsoleWrapper.CursorTop + 1);
             else
                 // We're not at the end of the console buffer. Move the cursor one step forward
-                Console2.SetCursorPosition(Console2.CursorLeft + 1, Console2.CursorTop);
+                ConsoleWrapper.SetCursorPosition(ConsoleWrapper.CursorLeft + 1, ConsoleWrapper.CursorTop);
 
             _cursorPos++;
         }
@@ -175,22 +175,22 @@ namespace Internal.ReadLine
             {
                 // Just append the character and write it to the console
                 _text.Append(c);
-                Console2.Write(c.ToString());
+                ConsoleWrapper.Write(c.ToString());
                 _cursorPos++;
             }
             else
             {
                 // Get a part of the string from the cursor position
-                int left = Console2.CursorLeft;
-                int top = Console2.CursorTop;
+                int left = ConsoleWrapper.CursorLeft;
+                int top = ConsoleWrapper.CursorTop;
                 string str = _text.ToString()[_cursorPos..];
 
                 // Inject a character to the main text in the cursor position
                 _text.Insert(_cursorPos, c);
 
                 // Write the result and set the correct console cursor position
-                Console2.Write(c.ToString() + str);
-                Console2.SetCursorPosition(left, top);
+                ConsoleWrapper.Write(c.ToString() + str);
+                ConsoleWrapper.SetCursorPosition(left, top);
 
                 // Move the cursor to the right
                 MoveCursorRight();
@@ -235,19 +235,19 @@ namespace Internal.ReadLine
             string replacement = _text.ToString()[index..];
             
             // Write the resulting string and set the appropriate cursor position
-            int left = Console2.CursorLeft;
-            int top = Console2.CursorTop;
-            if (Console2.PasswordMode && Console2.PasswordMaskChar != default)
+            int left = ConsoleWrapper.CursorLeft;
+            int top = ConsoleWrapper.CursorTop;
+            if (ConsoleWrapper.PasswordMode && ConsoleWrapper.PasswordMaskChar != default)
             {
                 // Write the replacement, but use Console.Write to write the space, because we need to ensure that it really got deleted on render.
-                Console2.Write(replacement);
+                ConsoleWrapper.Write(replacement);
                 Console.Write(" ");
             }
             else
             {
-                Console2.Write($"{replacement} ");
+                ConsoleWrapper.Write($"{replacement} ");
             }
-            Console2.SetCursorPosition(left, top);
+            ConsoleWrapper.SetCursorPosition(left, top);
 
             // Sets the cursor limit appropriately
             _cursorLimit--;
@@ -315,14 +315,14 @@ namespace Internal.ReadLine
             (_text[firstIdx], _text[secondIdx]) = (_text[secondIdx], _text[firstIdx]);
 
             // Get the cursor position of the console
-            int left = incrementIf(almostEndOfLine, Console2.CursorLeft);
+            int left = incrementIf(almostEndOfLine, ConsoleWrapper.CursorLeft);
             int cursorPosition = incrementIf(almostEndOfLine, _cursorPos);
 
             // Write the resulting string
             WriteNewString(_text.ToString());
 
             // Set the cursor position to the appropriate values
-            Console2.SetCursorPosition(left, Console2.CursorTop);
+            ConsoleWrapper.SetCursorPosition(left, ConsoleWrapper.CursorTop);
             _cursorPos = cursorPosition;
 
             // Move the cursor to the right
@@ -441,7 +441,7 @@ namespace Internal.ReadLine
         /// <param name="autoCompleteHandler">Auto completion handler</param>
         public KeyHandler(IConsole console, List<string> history, IAutoCompleteHandler autoCompleteHandler)
         {
-            Console2 = console;
+            ConsoleWrapper = console;
 
             // Initialize history and text
             _history = history ?? new List<string>();
