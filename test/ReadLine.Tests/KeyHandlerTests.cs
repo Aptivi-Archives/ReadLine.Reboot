@@ -653,6 +653,33 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests auto completion with CTRL + I
+        /// </summary>
+        [Fact]
+        public void TestTabWithControlI()
+        {
+            // Simulate the user pressing the CTRL + I key
+            _keyHandler.Handle(CtrlI);
+
+            // Nothing happens when no auto complete handler is set
+            Assert.Equal("Hello", _keyHandler.Text);
+
+            // Let's set one up
+            _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
+
+            // Write this
+            "Hi ".Select(c => c.ToConsoleKeyInfo())
+                 .ToList()
+                 .ForEach(_keyHandler.Handle);
+
+            // Simulate CTRL + I to ensure that auto completion works
+            _completions.ToList().ForEach(completion => {
+                _keyHandler.Handle(CtrlI);
+                Assert.Equal($"Hi {completion}", _keyHandler.Text);
+            });
+        }
+
+        /// <summary>
         /// Tests reverse auto completion
         /// </summary>
         [Fact]

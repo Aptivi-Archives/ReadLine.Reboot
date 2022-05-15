@@ -33,7 +33,7 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Ctrl`+`N` / `↓`               | Forward in history                              |
 | `Ctrl`+`P` / `↑`               | Backward in history                             |
 | `Alt`+`.`                      | Add last argument to current input              |
-| `Tab`                          | Command line completion                         |
+| `Ctrl`+`I` / `Tab`             | Command line completion                         |
 | `Shift`+`Tab`                  | Backwards command line completion               |
 
 ## Installation
