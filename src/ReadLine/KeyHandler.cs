@@ -707,6 +707,7 @@ namespace Internal.ReadLine
                 ["Tab"] = DoAutoComplete,
                 ["ControlI"] = DoAutoComplete,
                 ["ShiftTab"] = DoReverseAutoComplete,
+                ["Shift, ControlI"] = DoReverseAutoComplete,
 
                 // Case manipulation
                 ["AltL"] = LowercaseWord,
@@ -726,7 +727,8 @@ namespace Internal.ReadLine
 
             // Reset the auto completion if we didn't press TAB
             if (IsInAutoCompleteMode() && _keyInfo.Key != ConsoleKey.Tab &&
-                                          _keyInfo.Key != ConsoleKey.I && _keyInfo.Modifiers != ConsoleModifiers.Control)
+                                          _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
+                                                                           !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)))
                 ResetAutoComplete();
 
             // Get the key input and assign it to the action defined in the actions list. Otherwise, write the character.
