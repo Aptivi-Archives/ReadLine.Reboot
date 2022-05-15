@@ -38,6 +38,9 @@ namespace Internal.ReadLine
     internal class KeyHandler
     {
         // Public Variables
+        /// <summary>
+        /// The current text
+        /// </summary>
         public string Text => _text.ToString();
 
         // Private Variables
@@ -53,30 +56,12 @@ namespace Internal.ReadLine
         private readonly Dictionary<string, Action> _keyActions;
         private readonly IConsole ConsoleWrapper;
 
-        /// <summary>
-        /// Whether we're at the beginning of the line
-        /// </summary>
-        private bool IsStartOfLine() => _cursorPos == 0;
-
-        /// <summary>
-        /// Whether we're at the end of the line
-        /// </summary>
-        private bool IsEndOfLine() => _cursorPos == _cursorLimit;
-
-        /// <summary>
-        /// Whether we're at the start of the console buffer
-        /// </summary>
-        private bool IsStartOfBuffer() => ConsoleWrapper.CursorLeft == 0;
-
-        /// <summary>
-        /// Whether we're at the end of the console buffer
-        /// </summary>
-        private bool IsEndOfBuffer() => ConsoleWrapper.CursorLeft == ConsoleWrapper.BufferWidth - 1;
-
-        /// <summary>
-        /// Whether we're at the auto-completion mode
-        /// </summary>
-        private bool IsInAutoCompleteMode() => _completions != null;
+        // Private Properties
+        private bool IsStartOfLine => _cursorPos == 0;
+        private bool IsEndOfLine => _cursorPos == _cursorLimit;
+        private bool IsStartOfBuffer => ConsoleWrapper.CursorLeft == 0;
+        private bool IsEndOfBuffer => ConsoleWrapper.CursorLeft == ConsoleWrapper.BufferWidth - 1;
+        private bool IsInAutoCompleteMode => _completions != null;
 
         // --> Cursor movement
 
@@ -86,11 +71,11 @@ namespace Internal.ReadLine
         private void MoveCursorLeft()
         {
             // If we're in the beginning of the line, do absolutely nothing
-            if (IsStartOfLine())
+            if (IsStartOfLine)
                 return;
 
             // Check to see if we're at the beginning of the console buffer
-            if (IsStartOfBuffer())
+            if (IsStartOfBuffer)
                 // We're at the beginning of the buffer. Move up and to the rightmost position
                 ConsoleWrapper.SetCursorPosition(ConsoleWrapper.BufferWidth - 1, ConsoleWrapper.CursorTop - 1);
             else
@@ -106,11 +91,11 @@ namespace Internal.ReadLine
         private void MoveCursorRight()
         {
             // If we're in the end of the line, do absolutely nothing
-            if (IsEndOfLine())
+            if (IsEndOfLine)
                 return;
 
             // Check to see if we're at the end of the console buffer
-            if (IsEndOfBuffer())
+            if (IsEndOfBuffer)
                 // We're at the end of the buffer. Move down and to the leftmost position
                 ConsoleWrapper.SetCursorPosition(0, ConsoleWrapper.CursorTop + 1);
             else
@@ -125,7 +110,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void MoveCursorHome()
         {
-            while (!IsStartOfLine())
+            while (!IsStartOfLine)
                 MoveCursorLeft();
         }
 
@@ -134,7 +119,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void MoveCursorEnd()
         {
-            while (!IsEndOfLine())
+            while (!IsEndOfLine)
                 MoveCursorRight();
         }
 
@@ -143,7 +128,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void MoveCursorWordLeft()
         {
-            while (!IsStartOfLine() && _text[_cursorPos - 1] != ' ')
+            while (!IsStartOfLine && _text[_cursorPos - 1] != ' ')
                 MoveCursorLeft();
         }
 
@@ -152,7 +137,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void MoveCursorWordRight()
         {
-            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+            while (!IsEndOfLine && _text[_cursorPos] != ' ')
                 MoveCursorRight();
         }
 
@@ -193,7 +178,7 @@ namespace Internal.ReadLine
             if (c != default)
             {
                 // If we're at the end of the line, just write
-                if (IsEndOfLine())
+                if (IsEndOfLine)
                 {
                     // Just append the character and write it to the console
                     _text.Append(c);
@@ -233,7 +218,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void Backspace()
         {
-            if (IsStartOfLine())
+            if (IsStartOfLine)
                 return;
             MoveCursorLeft();
             DeleteChar();
@@ -244,7 +229,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void Delete()
         {
-            if (IsEndOfLine())
+            if (IsEndOfLine)
                 return;
             DeleteChar();
         }
@@ -290,7 +275,7 @@ namespace Internal.ReadLine
         private void ClearLine()
         {
             MoveCursorEnd();
-            while (!IsStartOfLine())
+            while (!IsStartOfLine)
                 Backspace();
         }
 
@@ -299,7 +284,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineToLeft()
         {
-            while (!IsStartOfLine())
+            while (!IsStartOfLine)
                 Backspace();
         }
 
@@ -319,7 +304,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineUntilSpace()
         {
-            while (!IsStartOfLine() && _text[_cursorPos - 1] != ' ')
+            while (!IsStartOfLine && _text[_cursorPos - 1] != ' ')
                 Backspace();
         }
 
@@ -328,7 +313,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineAfterSpace()
         {
-            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+            while (!IsEndOfLine && _text[_cursorPos] != ' ')
                 Delete();
         }
 
@@ -341,11 +326,11 @@ namespace Internal.ReadLine
         {
             // Local helper functions to make life easier
             bool almostEndOfLine() => (_cursorLimit - _cursorPos) == 1;
-            int incrementIf(Func<bool> expression, int index) => expression() ? index + 1 : index;
-            int decrementIf(Func<bool> expression, int index) => expression() ? index - 1 : index;
+            int incrementIf(bool expression, int index) => expression ? index + 1 : index;
+            int decrementIf(bool expression, int index) => expression ? index - 1 : index;
 
             // We can't transpose the characters at the start of the line
-            if (IsStartOfLine()) 
+            if (IsStartOfLine) 
                 return;
 
             // Get the two character indexes
@@ -356,8 +341,8 @@ namespace Internal.ReadLine
             (_text[firstIdx], _text[secondIdx]) = (_text[secondIdx], _text[firstIdx]);
 
             // Get the cursor position of the console
-            int left = incrementIf(almostEndOfLine, ConsoleWrapper.CursorLeft);
-            int cursorPosition = incrementIf(almostEndOfLine, _cursorPos);
+            int left = incrementIf(almostEndOfLine(), ConsoleWrapper.CursorLeft);
+            int cursorPosition = incrementIf(almostEndOfLine(), _cursorPos);
 
             // Write the resulting string
             WriteNewString(_text.ToString());
@@ -558,7 +543,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void LowercaseWord()
         {
-            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+            while (!IsEndOfLine && _text[_cursorPos] != ' ')
             {
                 char Result = char.ToLower(_text[_cursorPos]);
                 DeleteChar();
@@ -571,7 +556,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void UppercaseWord()
         {
-            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+            while (!IsEndOfLine && _text[_cursorPos] != ' ')
             {
                 char Result = char.ToUpper(_text[_cursorPos]);
                 DeleteChar();
@@ -636,7 +621,7 @@ namespace Internal.ReadLine
             {
                 if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
                 {
-                    if (IsInAutoCompleteMode())
+                    if (IsInAutoCompleteMode)
                     {
                         // We're in the middle of auto-completion. Get the next suggestion
                         NextAutoComplete();
@@ -644,7 +629,7 @@ namespace Internal.ReadLine
                     else
                     {
                         // If there is no handler installed or if we're in the middle of the line
-                        if (autoCompleteHandler == null || !IsEndOfLine())
+                        if (autoCompleteHandler == null || !IsEndOfLine)
                             return;
 
                         // Get the initial text
@@ -677,7 +662,7 @@ namespace Internal.ReadLine
             {
                 if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
                 {
-                    if (IsInAutoCompleteMode())
+                    if (IsInAutoCompleteMode)
                     {
                         // We're in the middle of auto-completion. Get the previous suggestion
                         PreviousAutoComplete();
@@ -757,7 +742,7 @@ namespace Internal.ReadLine
             // Reset the auto completion if we didn't press TAB
             if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
             {
-                if (IsInAutoCompleteMode() && _keyInfo.Key != ConsoleKey.Tab &&
+                if (IsInAutoCompleteMode && _keyInfo.Key != ConsoleKey.Tab &&
                                               _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
                                                                                !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)))
                     ResetAutoComplete();
