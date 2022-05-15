@@ -4,7 +4,7 @@
 
 ReadLine.Reboot is a reboot of Toni Solarin-Sodara's original ReadLine that is discontinued. It's a [GNU Readline](https://en.wikipedia.org/wiki/GNU_Readline) like library built in pure C#. It can serve as a drop in replacement for the inbuilt `Console.ReadLine()` and brings along with it some of the terminal goodness you get from Unix shells, like command history navigation and tab auto completion.
 
-It is cross platform and runs anywhere .NET is supported, targeting `netstandard2.1` means that it can be used with the modern .NET and the classic .NET Framework.
+It is cross platform and runs anywhere .NET is supported, as long as they run on .NET Framework 4.8 or at least .NET Core 3.1.
 
 ## Shortcut Guide
 
