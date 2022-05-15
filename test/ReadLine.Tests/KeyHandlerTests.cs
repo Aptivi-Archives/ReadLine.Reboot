@@ -359,6 +359,101 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tries to swap the two words
+        /// </summary>
+        [Fact]
+        public void TestTransposeWordsWithAltT()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the ALT + B, LEFT ARROW, and ALT + T keys
+            new List<ConsoleKeyInfo>() { AltB, LeftArrow, AltT }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that "Hello" and "World" are swapped
+            Assert.Equal("World Hello", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tries to swap the first word in the string with the second one found in the middle
+        /// </summary>
+        [Fact]
+        public void TestTransposeFirstWithSecondWithAltT()
+        {
+            // Write this
+            " Awesome World".Select(c => c.ToConsoleKeyInfo())
+                            .ToList()
+                            .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the HOME, ALT + F, and ALT + T keys
+            new List<ConsoleKeyInfo>() { Home, AltF, AltT }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that "Hello" and "Awesome" are swapped
+            Assert.Equal("Awesome Hello World", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tries to swap the second word in the string with the last one found at the end
+        /// </summary>
+        [Fact]
+        public void TestTransposeSecondWithLastWithAltT()
+        {
+            // Write this
+            " Awesome World".Select(c => c.ToConsoleKeyInfo())
+                            .ToList()
+                            .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the ALT + B, LEFT ARROW, and ALT + T keys
+            new List<ConsoleKeyInfo>() { AltB, LeftArrow, AltT }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that "Hello" and "Awesome" are swapped
+            Assert.Equal("Hello World Awesome", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tries to swap the words found in the middle of the string
+        /// </summary>
+        [Fact]
+        public void TestTransposeMiddlesWithAltT()
+        {
+            // Write this
+            " Amazingly Awesome World".Select(c => c.ToConsoleKeyInfo())
+                                      .ToList()
+                                      .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the HOME, ALT + F, RIGHT ARROW, ALT + F, and ALT + T keys
+            new List<ConsoleKeyInfo>() { Home, AltF, RightArrow, AltF, AltT }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that "Amazingly" and "Awesome" are swapped
+            Assert.Equal("Hello Awesome Amazingly World", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// [Counterexample] Tries to swap the two words when the cursor is in the middle of a word
+        /// </summary>
+        [Fact]
+        public void TestTransposeWordsWithinWordWithAltT()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the LEFT ARROW, and ALT + T keys
+            new List<ConsoleKeyInfo>() { LeftArrow, AltT }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that "Hello" and "World" are not swapped
+            Assert.Equal("Hello World", _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tries to go to the beginning of the line and write a character
         /// </summary>
         [Fact]

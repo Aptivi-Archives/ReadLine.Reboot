@@ -24,6 +24,8 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Ctrl`+`K`                     | Cut text to the end of line                     |
 | `Ctrl`+`W` / `Alt`+`Backspace` | Cut previous word                               |
 | `Alt`+`D`                      | Cut next word                                   |
+| `Ctrl`+`T`                     | Switch two characters                           |
+| `Alt`+`T`                      | Switch two words                                |
 | `Ctrl`+`J`                     | Append line feed                                |
 | `Alt`+`L`                      | Make word lowercase                             |
 | `Alt`+`U`                      | Make word uppercase                             |

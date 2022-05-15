@@ -48,6 +48,7 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo AltU = new('u', ConsoleKey.U, false, true, false);
         public static readonly ConsoleKeyInfo AltC = new('c', ConsoleKey.C, false, true, false);
         public static readonly ConsoleKeyInfo AltV = new('v', ConsoleKey.V, false, true, false);
+        public static readonly ConsoleKeyInfo AltT = new('t', ConsoleKey.T, false, true, false);
         public static readonly ConsoleKeyInfo AltOemPeriod = new('.', ConsoleKey.OemPeriod, false, true, false);
         public static readonly ConsoleKeyInfo AltBackspace = new('\0', ConsoleKey.Backspace, false, true, false);
 

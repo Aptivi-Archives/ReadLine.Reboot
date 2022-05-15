@@ -341,7 +341,8 @@ namespace Internal.ReadLine
             int decrementIf(Func<bool> expression, int index) => expression() ? index - 1 : index;
 
             // We can't transpose the characters at the start of the line
-            if (IsStartOfLine()) { return; }
+            if (IsStartOfLine()) 
+                return;
 
             // Get the two character indexes
             int firstIdx = decrementIf(IsEndOfLine, _cursorPos - 1);
@@ -363,6 +364,80 @@ namespace Internal.ReadLine
 
             // Move the cursor to the right
             MoveCursorRight();
+        }
+
+        /// <summary>
+        /// Transposes the two words in the current position
+        /// </summary>
+        private void TransposeWords()
+        {
+            // We can't transpose the words in the middle of the words
+            if (_text[_cursorPos] != ' ') 
+                return;
+
+            // Build the two words required
+            List<char> wordChars = new List<char>();
+            StringBuilder firstWord = new StringBuilder();
+            StringBuilder secondWord = new StringBuilder();
+            int currentCursorPosition = _cursorPos - 1;
+
+            // Build the first word
+            while (currentCursorPosition >= 0)
+            {
+                if (_text[currentCursorPosition] != ' ')
+                {
+                    // Add the word characters in reverse order
+                    wordChars.Add(_text[currentCursorPosition]);
+                    currentCursorPosition -= 1;
+                }
+                else
+                {
+                    // We've reached the end of word.
+                    break;
+                }
+            }
+            wordChars.Reverse();
+            firstWord.Append(string.Join("", wordChars));
+            wordChars.Clear();
+
+            // Build the second word
+            currentCursorPosition = _cursorPos + 1;
+            while (currentCursorPosition <= _cursorLimit - 1)
+            {
+                if (_text[currentCursorPosition] != ' ')
+                {
+                    // Add the word characters in order
+                    wordChars.Add(_text[currentCursorPosition]);
+                    currentCursorPosition += 1;
+                }
+                else
+                {
+                    // We've reached the end of word.
+                    break;
+                }
+            }
+            secondWord.Append(string.Join("", wordChars));
+            wordChars.Clear();
+
+            // If we managed to get the two words, continue
+            if (firstWord.Length > 0 && secondWord.Length > 0)
+            {
+                // Wipe the two words (the + 1 is to indicate whitespace between the two words)
+                int initialPosition = ConsoleWrapper.CursorLeft;
+                int initialCursorPos = _cursorPos;
+                int charsToDelete = firstWord.Length + secondWord.Length + 1;
+                for (int i = 0; i < firstWord.Length; i++)
+                    MoveCursorLeft();
+                for (int i = 0; i < charsToDelete; i++)
+                    DeleteChar();
+
+                // Actually swap the two words with each other
+                WriteString($"{secondWord} {firstWord}");
+
+                // Set the cursor position to the appropriate values
+                ConsoleWrapper.SetCursorPosition(initialPosition, ConsoleWrapper.CursorTop);
+                _cursorPos = initialCursorPos;
+            }
         }
 
         // --> Auto-completion
@@ -624,8 +699,9 @@ namespace Internal.ReadLine
                 ["ControlN"] = NextHistory,
                 ["AltOemPeriod"] = AddLastArgument,
 
-                // Character transposition
+                // Substitution
                 ["ControlT"] = TransposeChars,
+                ["AltT"] = TransposeWords,
 
                 // Auto-completion initialization
                 ["Tab"] = DoAutoComplete,
