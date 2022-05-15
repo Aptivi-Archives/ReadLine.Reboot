@@ -189,37 +189,41 @@ namespace Internal.ReadLine
         /// <param name="c">A character to be printed</param>
         private void WriteChar(char c)
         {
-            // If we're at the end of the line, just write
-            if (IsEndOfLine())
+            // If the character isn't a null character, go on
+            if (c != default)
             {
-                // Just append the character and write it to the console
-                _text.Append(c);
-                ConsoleWrapper.Write(c.ToString());
-                _cursorPos++;
-            }
-            else
-            {
-                // Get a part of the string from the cursor position
-                int left = ConsoleWrapper.CursorLeft;
-                int top = ConsoleWrapper.CursorTop;
+                // If we're at the end of the line, just write
+                if (IsEndOfLine())
+                {
+                    // Just append the character and write it to the console
+                    _text.Append(c);
+                    ConsoleWrapper.Write(c.ToString());
+                    _cursorPos++;
+                }
+                else
+                {
+                    // Get a part of the string from the cursor position
+                    int left = ConsoleWrapper.CursorLeft;
+                    int top = ConsoleWrapper.CursorTop;
 #if NETCOREAPP
-                string str = _text.ToString()[_cursorPos..];
+                    string str = _text.ToString()[_cursorPos..];
 #else
-                string str = _text.ToString().Substring(_cursorPos);
+                    string str = _text.ToString().Substring(_cursorPos);
 #endif
 
-                // Inject a character to the main text in the cursor position
-                _text.Insert(_cursorPos, c);
+                    // Inject a character to the main text in the cursor position
+                    _text.Insert(_cursorPos, c);
 
-                // Write the result and set the correct console cursor position
-                ConsoleWrapper.Write(c.ToString() + str);
-                ConsoleWrapper.SetCursorPosition(left, top);
+                    // Write the result and set the correct console cursor position
+                    ConsoleWrapper.Write(c.ToString() + str);
+                    ConsoleWrapper.SetCursorPosition(left, top);
 
-                // Move the cursor to the right
-                MoveCursorRight();
+                    // Move the cursor to the right
+                    MoveCursorRight();
+                }
+
+                _cursorLimit++;
             }
-
-            _cursorLimit++;
         }
 
         // --> Clearing
