@@ -8,30 +8,32 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 
 ## Shortcut Guide
 
-| Shortcut                       | Comment                           |
-|:-------------------------------|:----------------------------------|
-| `Ctrl`+`A` / `HOME`            | Beginning of line                 |
-| `Ctrl`+`E` / `END`             | End of line                       |
-| `Ctrl`+`B` / `←`               | Backward one character            |
-| `Ctrl`+`F` / `→`               | Forward one character             |
-| `Alt`+`B`                      | Backward one word                 |
-| `Alt`+`F`                      | Forward one word                  |
-| `Ctrl`+`C`                     | Send EOF                          |
-| `Ctrl`+`H` / `Backspace`       | Delete previous character         |
-| `Ctrl`+`D` / `Delete`          | Delete succeeding character       |
-| `Ctrl`+`L` / `Esc`             | Clear line                        |
-| `Ctrl`+`U`                     | Cut text to the start of line     |
-| `Ctrl`+`K`                     | Cut text to the end of line       |
-| `Ctrl`+`W`                     | Cut previous word                 |
-| `Alt`+`D`                      | Cut next word                     |
-| `Ctrl`+`J`                     | Append line feed                  |
-| `Alt`+`L`                      | Make word lowercase               |
-| `Alt`+`U`                      | Make word uppercase               |
-| `Enter`                        | End of line                       |
-| `Ctrl`+`N` / `↓`               | Forward in history                |
-| `Ctrl`+`P` / `↑`               | Backward in history               |
-| `Tab`                          | Command line completion           |
-| `Shift`+`Tab`                  | Backwards command line completion |
+| Keybinding                     | Action                                          |
+|:-------------------------------|:------------------------------------------------|
+| `Ctrl`+`A` / `HOME`            | Beginning of line                               |
+| `Ctrl`+`E` / `END`             | End of line                                     |
+| `Ctrl`+`B` / `←`               | Backward one character                          |
+| `Ctrl`+`F` / `→`               | Forward one character                           |
+| `Alt`+`B`                      | Backward one word                               |
+| `Alt`+`F`                      | Forward one word                                |
+| `Ctrl`+`C`                     | Send EOF                                        |
+| `Ctrl`+`H` / `Backspace`       | Delete previous character                       |
+| `Ctrl`+`D` / `Delete`          | Delete succeeding character                     |
+| `Ctrl`+`L` / `Esc`             | Clear line                                      |
+| `Ctrl`+`U`                     | Cut text to the start of line                   |
+| `Ctrl`+`K`                     | Cut text to the end of line                     |
+| `Ctrl`+`W`                     | Cut previous word                               |
+| `Alt`+`D`                      | Cut next word                                   |
+| `Ctrl`+`J`                     | Append line feed                                |
+| `Alt`+`L`                      | Make word lowercase                             |
+| `Alt`+`U`                      | Make word uppercase                             |
+| `Alt`+`C`                      | Make char uppercase and move to the end of word |
+| `Alt`+`V`                      | Make char lowercase and move to the end of word |
+| `Enter`                        | End of line                                     |
+| `Ctrl`+`N` / `↓`               | Forward in history                              |
+| `Ctrl`+`P` / `↑`               | Backward in history                             |
+| `Tab`                          | Command line completion                         |
+| `Shift`+`Tab`                  | Backwards command line completion               |
 
 ## Installation
 

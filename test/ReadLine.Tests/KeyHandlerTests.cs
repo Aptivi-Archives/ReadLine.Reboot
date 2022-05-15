@@ -508,6 +508,34 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests making the character UPPERCASE and moving to the end of the word
+        /// </summary>
+        [Fact]
+        public void TestUppercaseCharMoveToEndOfWord()
+        {
+            // Simulate the user pressing the LEFT ARROW (2x) and ALT + C key
+            new List<ConsoleKeyInfo>() { LeftArrow, LeftArrow, AltC }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that the word is all UPPERCASE
+            Assert.Equal("HelLo", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests making the character lowercase and moving to the end of the word
+        /// </summary>
+        [Fact]
+        public void TestLowercaseCharMoveToEndOfWord()
+        {
+            // Simulate the user pressing the HOME and ALT + V key
+            new List<ConsoleKeyInfo>() { Home, AltV }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that the word is all UPPERCASE
+            Assert.Equal("hello", _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests going up to reveal the previous history
         /// </summary>
         [Fact]

@@ -487,6 +487,28 @@ namespace Internal.ReadLine
             }
         }
 
+        /// <summary>
+        /// Makes the character UPPERCASE and move to the end of the word
+        /// </summary>
+        private void UppercaseCharMoveToEndOfWord()
+        {
+            char Result = char.ToUpper(_text[_cursorPos]);
+            DeleteChar();
+            WriteChar(Result);
+            MoveCursorWordRight();
+        }
+
+        /// <summary>
+        /// Makes the character lowercase and move to the end of the word
+        /// </summary>
+        private void LowercaseCharMoveToEndOfWord()
+        {
+            char Result = char.ToLower(_text[_cursorPos]);
+            DeleteChar();
+            WriteChar(Result);
+            MoveCursorWordRight();
+        }
+
         // --> Main logic
 
         /// <summary>
@@ -596,7 +618,9 @@ namespace Internal.ReadLine
 
                 // Case manipulation
                 ["AltL"] = LowercaseWord,
-                ["AltU"] = UppercaseWord
+                ["AltU"] = UppercaseWord,
+                ["AltV"] = LowercaseCharMoveToEndOfWord,
+                ["AltC"] = UppercaseCharMoveToEndOfWord
             };
         }
 
