@@ -47,6 +47,11 @@ namespace ReadLineReboot
         /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }
 
+        /// <summary>
+        /// The prompt writing handler.
+        /// </summary>
+        public static Action<string> WritePrompt { private get; set; } = (prompt) => Console.Write(prompt);
+
         private static readonly List<string> _history = new List<string>();
 
         /// <summary>
@@ -83,7 +88,7 @@ namespace ReadLineReboot
         public static string Read(string prompt = "", string defaultText = "")
         {
             // Prepare the prompt
-            Console.Write(prompt);
+            WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
 
             // Get the written text
@@ -114,7 +119,7 @@ namespace ReadLineReboot
         public static string ReadPassword(string prompt = "", char mask = default)
         {
             // Prepare the prompt
-            Console.Write(prompt);
+            WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null);
 
             // Get the written text

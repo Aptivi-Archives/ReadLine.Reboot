@@ -72,6 +72,19 @@ _Note: The `(prompt>)` is  optional_
 string input = ReadLine.Read("(prompt)> ");
 ```
 
+#### Read input with default
+
+```csharp
+string input = ReadLine.Read("(prompt)> ", "default");
+```
+
+#### Read input with custom prompt handler
+
+```csharp
+ReadLine.WritePrompt = (prompt) => Console.Write($">> {prompt}");
+string input = ReadLine.Read("(prompt)> ", "default");
+```
+
 #### Read password
 
 ```csharp

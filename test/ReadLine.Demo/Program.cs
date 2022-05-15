@@ -50,16 +50,22 @@ namespace ReadLineDemo
             Console.WriteLine(input);
 
             // Enter the prompt with default
-            string input2 = ReadLine.Read("(prompt2)> [def] ", "def");
-            Console.WriteLine(input2);
+            input = ReadLine.Read("(prompt2)> [def] ", "def");
+            Console.WriteLine(input);
+
+            // Enter the prompt with custom prompt handler
+            ReadLine.WritePrompt = (prompt) => Console.Write($">> {prompt}");
+            input = ReadLine.Read("(prompt3)> ");
+            Console.WriteLine(input);
+            ReadLine.WritePrompt = (prompt) => Console.Write(prompt);
 
             // Enter the masked prompt
-            string input3 = ReadLine.ReadPassword("Enter Password> ");
-            Console.WriteLine(input3);
+            input = ReadLine.ReadPassword("Enter Password> ");
+            Console.WriteLine(input);
 
             // Enter the masked prompt with password mask
-            string input4 = ReadLine.ReadPassword("Enter Password> ", '*');
-            Console.WriteLine(input4);
+            input = ReadLine.ReadPassword("Enter Password> ", '*');
+            Console.WriteLine(input);
         }
     }
 }
