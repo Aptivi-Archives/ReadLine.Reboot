@@ -146,6 +146,16 @@ class AutoCompletionHandler : IAutoCompleteHandler
 ReadLine.AutoCompletionHandler = new AutoCompletionHandler();
 ```
 
+You can disable and enable the auto-completion feature below.
+
+```csharp
+// Disable history (default)
+ReadLine.AutoCompletionEnabled = false;
+
+// Enable history
+ReadLine.AutoCompletionEnabled = true;
+```
+
 ## Credits
 
 | Author              | For                                                      |

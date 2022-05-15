@@ -46,6 +46,11 @@ namespace ReadLineReboot
         public static bool HistoryEnabled { get; set; }
 
         /// <summary>
+        /// Whether the auto completion is enabled. Currently true.
+        /// </summary>
+        public static bool AutoCompletionEnabled { get; set; } = true;
+
+        /// <summary>
         /// The auto completion handler. You need to make a class that implements <see cref="IAutoCompleteHandler"/>
         /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }

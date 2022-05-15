@@ -631,36 +631,61 @@ namespace Internal.ReadLine
             _text = new StringBuilder();
 
             // Assign local functions for Tab actions
+            // -> Next suggestion
             void DoAutoComplete()
             {
-                if (IsInAutoCompleteMode())
+                if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
                 {
-                    NextAutoComplete();
+                    if (IsInAutoCompleteMode())
+                    {
+                        // We're in the middle of auto-completion. Get the next suggestion
+                        NextAutoComplete();
+                    }
+                    else
+                    {
+                        // If there is no handler installed or if we're in the middle of the line
+                        if (autoCompleteHandler == null || !IsEndOfLine())
+                            return;
+
+                        // Get the initial text
+                        string text = _text.ToString();
+
+                        // Get the completion start index (get the last index of any of the separators found in the text)
+                        _completionStart = text.LastIndexOfAny(autoCompleteHandler.Separators);
+                        _completionStart = _completionStart == -1 ? 0 : _completionStart + 1;
+
+                        // Get the suggestions based on the current text and the completion start index
+                        _completions = autoCompleteHandler.GetSuggestions(text, _completionStart);
+                        _completions = _completions?.Length == 0 ? null : _completions;
+
+                        // If we have no completions, bail
+                        if (_completions == null)
+                            return;
+
+                        // Start the auto completion
+                        StartAutoComplete();
+                    }
                 }
                 else
                 {
-                    if (autoCompleteHandler == null || !IsEndOfLine())
-                        return;
-
-                    string text = _text.ToString();
-
-                    _completionStart = text.LastIndexOfAny(autoCompleteHandler.Separators);
-                    _completionStart = _completionStart == -1 ? 0 : _completionStart + 1;
-
-                    _completions = autoCompleteHandler.GetSuggestions(text, _completionStart);
-                    _completions = _completions?.Length == 0 ? null : _completions;
-
-                    if (_completions == null)
-                        return;
-
-                    StartAutoComplete();
+                    WriteChar();
                 }
             }
+
+            // -> Previous suggestion
             void DoReverseAutoComplete()
             {
-                if (IsInAutoCompleteMode())
+                if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
                 {
-                    PreviousAutoComplete();
+                    if (IsInAutoCompleteMode())
+                    {
+                        // We're in the middle of auto-completion. Get the previous suggestion
+                        PreviousAutoComplete();
+                    }
+                }
+                else
+                {
+                    WriteChar();
                 }
             }
 
@@ -730,10 +755,13 @@ namespace Internal.ReadLine
             _keyInfo = keyInfo;
 
             // Reset the auto completion if we didn't press TAB
-            if (IsInAutoCompleteMode() && _keyInfo.Key != ConsoleKey.Tab &&
-                                          _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
-                                                                           !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)))
-                ResetAutoComplete();
+            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            {
+                if (IsInAutoCompleteMode() && _keyInfo.Key != ConsoleKey.Tab &&
+                                              _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
+                                                                               !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)))
+                    ResetAutoComplete();
+            }
 
             // Get the key input and assign it to the action defined in the actions list. Otherwise, write the character.
             _keyActions.TryGetValue(BuildKeyInput(), out Action action);

@@ -49,6 +49,12 @@ namespace ReadLineDemo
             string input = ReadLine.Read("(prompt)> ");
             Console.WriteLine(input);
 
+            // Enter the prompt with no autocomplete
+            ReadLine.AutoCompletionEnabled = false;
+            input = ReadLine.Read("(promptnoac)> ");
+            Console.WriteLine(input);
+            ReadLine.AutoCompletionEnabled = true;
+
             // Enter the prompt with default
             input = ReadLine.Read("(prompt2)> [def] ", "def");
             Console.WriteLine(input);
