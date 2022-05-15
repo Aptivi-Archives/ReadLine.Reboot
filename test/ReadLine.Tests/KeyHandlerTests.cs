@@ -232,6 +232,29 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests clearing the line until space is spotted
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceWithAltBackspace()
+        {
+            // Simulate the user pressing the ALT + BACKSPACE key while writing the " World" string
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .Append(AltBackspace)
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal("Hello ", _keyHandler.Text);
+
+            // Simulate the user pressing the BACKSPACE and ALT + BACKSPACE keys
+            new List<ConsoleKeyInfo>() { Backspace, AltBackspace }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that nothing is there
+            Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests clearing the line after space is spotted
         /// </summary>
         [Fact]

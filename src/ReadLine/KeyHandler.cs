@@ -614,6 +614,7 @@ namespace Internal.ReadLine
                 ["ControlU"] = ClearLineToLeft,
                 ["ControlK"] = ClearLineToRight,
                 ["ControlW"] = ClearLineUntilSpace,
+                ["AltBackspace"] = ClearLineUntilSpace,
                 ["AltD"] = ClearLineAfterSpace,
 
                 // History manipulation

@@ -22,7 +22,7 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Ctrl`+`L` / `Esc`             | Clear line                                      |
 | `Ctrl`+`U`                     | Cut text to the start of line                   |
 | `Ctrl`+`K`                     | Cut text to the end of line                     |
-| `Ctrl`+`W`                     | Cut previous word                               |
+| `Ctrl`+`W` / `Alt`+`Backspace` | Cut previous word                               |
 | `Alt`+`D`                      | Cut next word                                   |
 | `Ctrl`+`J`                     | Append line feed                                |
 | `Alt`+`L`                      | Make word lowercase                             |
