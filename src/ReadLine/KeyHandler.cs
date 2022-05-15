@@ -530,9 +530,9 @@ namespace Internal.ReadLine
         /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
         private string BuildKeyInput()
         {
-            return (_keyInfo.Modifiers != ConsoleModifiers.Control && _keyInfo.Modifiers != ConsoleModifiers.Alt && _keyInfo.Modifiers != ConsoleModifiers.Shift) ?
-                    _keyInfo.Key.ToString() : 
-                    _keyInfo.Modifiers.ToString() + _keyInfo.Key.ToString();
+            return (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Alt) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)) ?
+                     _keyInfo.Key.ToString() : 
+                     _keyInfo.Modifiers.ToString() + _keyInfo.Key.ToString();
         }
 
         /// <summary>
