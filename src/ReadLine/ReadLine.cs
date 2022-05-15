@@ -36,6 +36,9 @@ namespace ReadLineReboot
     /// </summary>
     public static class ReadLine
     {
+        // Internal variables
+        private static readonly List<string> _history = new List<string>();
+
         // Variables
         /// <summary>
         /// Whether the history is enabled. Currently false.
@@ -51,8 +54,6 @@ namespace ReadLineReboot
         /// The prompt writing handler.
         /// </summary>
         public static Action<string> WritePrompt { private get; set; } = (prompt) => Console.Write(prompt);
-
-        private static readonly List<string> _history = new List<string>();
 
         /// <summary>
         /// Adds a text or an array of texts to the history
