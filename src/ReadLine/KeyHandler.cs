@@ -459,6 +459,19 @@ namespace Internal.ReadLine
             }
         }
 
+        /// <summary>
+        /// Adds last argument to the current input
+        /// </summary>
+        private void AddLastArgument()
+        {
+            if (_history.Count > 0)
+            {
+                string[] lastHistoryArgs = _history[_history.Count - 1].Split(' ');
+                if (lastHistoryArgs.Length > 0)
+                    WriteString(lastHistoryArgs[lastHistoryArgs.Length - 1]);
+            }
+        }
+
         // --> Case manipulation
 
         /// <summary>
@@ -608,6 +621,7 @@ namespace Internal.ReadLine
                 ["ControlP"] = PrevHistory,
                 ["DownArrow"] = NextHistory,
                 ["ControlN"] = NextHistory,
+                ["AltOemPeriod"] = AddLastArgument,
 
                 // Character transposition
                 ["ControlT"] = TransposeChars,

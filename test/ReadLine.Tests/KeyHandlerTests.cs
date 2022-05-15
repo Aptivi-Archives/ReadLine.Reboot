@@ -607,7 +607,22 @@ namespace ReadLine.Tests
             new List<ConsoleKeyInfo>() { LeftArrow, UpArrow }
                 .ForEach(_keyHandler.Handle);
 
+            // Ensure that we're at the last history entry
             Assert.Equal("clear", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests adding the last argument from the last history entry
+        /// </summary>
+        [Fact]
+        public void TestAddLastArgument()
+        {
+            // Simulate the user pressing the SPACE and PERIOD key
+            new List<ConsoleKeyInfo>() { Space, AltOemPeriod }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've put the last word from the last history
+            Assert.Equal("Hello clear", _keyHandler.Text);
         }
 
         /// <summary>
