@@ -44,6 +44,8 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo AltD = new('d', ConsoleKey.D, false, true, false);
         public static readonly ConsoleKeyInfo AltB = new('b', ConsoleKey.B, false, true, false);
         public static readonly ConsoleKeyInfo AltF = new('f', ConsoleKey.F, false, true, false);
+        public static readonly ConsoleKeyInfo AltL = new('l', ConsoleKey.L, false, true, false);
+        public static readonly ConsoleKeyInfo AltU = new('u', ConsoleKey.U, false, true, false);
 
         // The actual characters used in test
         public static readonly ConsoleKeyInfo ExclamationPoint = CharExtensions.ExclamationPoint.ToConsoleKeyInfo();

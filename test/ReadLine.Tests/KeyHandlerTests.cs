@@ -480,6 +480,34 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests making the word UPPERCASE
+        /// </summary>
+        [Fact]
+        public void TestUppercaseWord()
+        {
+            // Simulate the user pressing the HOME and ALT + U key
+            new List<ConsoleKeyInfo>() { Home, AltU }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that the word is all UPPERCASE
+            Assert.Equal("HELLO", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests making the word lowercase
+        /// </summary>
+        [Fact]
+        public void TestLowercaseWord()
+        {
+            // Simulate the user pressing the HOME and ALT + L key
+            new List<ConsoleKeyInfo>() { Home, AltL }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that the word is all lowercase
+            Assert.Equal("hello", _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests going up to reveal the previous history
         /// </summary>
         [Fact]

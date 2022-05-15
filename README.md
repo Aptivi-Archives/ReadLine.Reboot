@@ -25,6 +25,8 @@ It is cross platform and runs anywhere .NET is supported, targeting `netstandard
 | `Ctrl`+`W`                     | Cut previous word                 |
 | `Alt`+`D`                      | Cut next word                     |
 | `Ctrl`+`J`                     | Append line feed                  |
+| `Alt`+`L`                      | Make word lowercase               |
+| `Alt`+`U`                      | Make word uppercase               |
 | `Enter`                        | End of line                       |
 | `Ctrl`+`N` / `↓`               | Forward in history                |
 | `Ctrl`+`P` / `↑`               | Backward in history               |

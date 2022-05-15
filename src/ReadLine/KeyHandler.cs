@@ -459,6 +459,36 @@ namespace Internal.ReadLine
             }
         }
 
+        // --> Case manipulation
+
+        /// <summary>
+        /// Makes the word lowercase
+        /// </summary>
+        private void LowercaseWord()
+        {
+            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+            {
+                char Result = char.ToLower(_text[_cursorPos]);
+                DeleteChar();
+                WriteChar(Result);
+            }
+        }
+
+        /// <summary>
+        /// Makes the word UPPERCASE
+        /// </summary>
+        private void UppercaseWord()
+        {
+            while (!IsEndOfLine() && _text[_cursorPos] != ' ')
+            {
+                char Result = char.ToUpper(_text[_cursorPos]);
+                DeleteChar();
+                WriteChar(Result);
+            }
+        }
+
+        // --> Main logic
+
         /// <summary>
         /// Builds the key input string
         /// </summary>
@@ -562,7 +592,11 @@ namespace Internal.ReadLine
 
                 // Auto-completion initialization
                 ["Tab"] = DoAutoComplete,
-                ["ShiftTab"] = DoReverseAutoComplete
+                ["ShiftTab"] = DoReverseAutoComplete,
+
+                // Case manipulation
+                ["AltL"] = LowercaseWord,
+                ["AltU"] = UppercaseWord
             };
         }
 
