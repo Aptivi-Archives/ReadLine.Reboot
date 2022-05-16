@@ -304,7 +304,12 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineUntilSpace()
         {
-            while (!IsStartOfLine && _text[_cursorPos - 1] != ' ')
+            // Clear all whitespaces found
+            while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]))
+                Backspace();
+
+            // Now, clear all the letters until we've found a whitespace
+            while (!IsStartOfLine && !char.IsWhiteSpace(_text[_cursorPos - 1]))
                 Backspace();
         }
 
@@ -313,7 +318,12 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineAfterSpace()
         {
-            while (!IsEndOfLine && _text[_cursorPos] != ' ')
+            // Clear all whitespaces found
+            while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+                Delete();
+
+            // Now, clear all the letters until we've found a whitespace
+            while (!IsEndOfLine && !char.IsWhiteSpace(_text[_cursorPos]))
                 Delete();
         }
 
