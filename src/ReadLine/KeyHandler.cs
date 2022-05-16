@@ -604,9 +604,28 @@ namespace Internal.ReadLine
         /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
         private string BuildKeyInput()
         {
-            return (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Alt) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)) ?
-                     _keyInfo.Key.ToString() : 
-                     _keyInfo.Modifiers.ToString() + _keyInfo.Key.ToString();
+            // On Mono Linux, some of the characters (usually Oem*) is actually "0" according to _keyInfo.Key, screwing the shortcut up and causing
+            // it to not work as defined in the below _keyActions, so give such systems special treatment so they work equally to Windows.
+            string initialKey = _keyInfo.Key.ToString();
+            if (_keyInfo.Key == 0)
+            {
+                // Get the affected key from the key character
+                switch (_keyInfo.KeyChar)
+                {
+                    // Add only the affected keys we need to use in _keyActions.
+                    case '.':
+                        initialKey = "OemPeriod";
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // Get the key input name
+            string inputName = (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Alt) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)) ?
+                                 initialKey : 
+                                 _keyInfo.Modifiers.ToString() + initialKey;
+            return inputName;
         }
 
         /// <summary>
@@ -753,8 +772,8 @@ namespace Internal.ReadLine
             if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
             {
                 if (IsInAutoCompleteMode && _keyInfo.Key != ConsoleKey.Tab &&
-                                              _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
-                                                                               !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)))
+                                            _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
+                                                                             !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)))
                     ResetAutoComplete();
             }
 
