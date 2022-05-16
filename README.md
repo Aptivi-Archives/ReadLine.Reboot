@@ -26,12 +26,11 @@ It is cross platform and runs anywhere .NET is supported, as long as they run on
 | `Alt`+`D`                          | Cut next word                                   |
 | `Ctrl`+`T`                         | Switch two characters                           |
 | `Alt`+`T`                          | Switch two words                                |
-| `Ctrl`+`J`                         | Append line feed                                |
 | `Alt`+`L`                          | Make word lowercase                             |
 | `Alt`+`U`                          | Make word uppercase                             |
 | `Alt`+`C`                          | Make char uppercase and move to the end of word |
 | `Alt`+`V`                          | Make char lowercase and move to the end of word |
-| `Enter`                            | End of line                                     |
+| `Ctrl`+`J` / `Enter`               | End of line                                     |
 | `Ctrl`+`N` / `↓`                   | Forward in history                              |
 | `Ctrl`+`P` / `↑`                   | Backward in history                             |
 | `Alt`+`.`                          | Add last argument to current input              |

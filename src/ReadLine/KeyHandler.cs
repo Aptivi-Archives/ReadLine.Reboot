@@ -62,6 +62,7 @@ namespace Internal.ReadLine
         private bool IsStartOfBuffer => ConsoleWrapper.CursorLeft == 0;
         private bool IsEndOfBuffer => ConsoleWrapper.CursorLeft == ConsoleWrapper.BufferWidth - 1;
         private bool IsInAutoCompleteMode => _completions != null;
+        internal static ConsoleKeyInfo SimulatedEnter => new ConsoleKeyInfo('\u000A', ConsoleKey.J, false, false, true);
 
         // --> Cursor movement
 
