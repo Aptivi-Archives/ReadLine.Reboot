@@ -554,6 +554,11 @@ namespace Internal.ReadLine
         /// </summary>
         private void LowercaseWord()
         {
+            // Skip all whitespaces found
+            while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+                MoveCursorRight();
+
+            // Now, lowercase the entire word
             while (!IsEndOfLine && _text[_cursorPos] != ' ')
             {
                 char Result = char.ToLower(_text[_cursorPos]);
@@ -567,6 +572,11 @@ namespace Internal.ReadLine
         /// </summary>
         private void UppercaseWord()
         {
+            // Skip all whitespaces found
+            while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+                MoveCursorRight();
+
+            // Now, UPPERCASE the entire word
             while (!IsEndOfLine && _text[_cursorPos] != ' ')
             {
                 char Result = char.ToUpper(_text[_cursorPos]);
