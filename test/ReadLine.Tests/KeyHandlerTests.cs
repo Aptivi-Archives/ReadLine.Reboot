@@ -232,6 +232,28 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests clearing the line until space is spotted while wiping all whitespaces
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceWithControlWWipeWhitespace()
+        {
+            // Simulate the user pressing the CTRL + W key while writing the " World" string
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .Append(CtrlW)
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal("Hello ", _keyHandler.Text);
+
+            // Simulate the user pressing the CTRL + W key
+            _keyHandler.Handle(CtrlW);
+
+            // Ensure that nothing is there
+            Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests clearing the line until space is spotted
         /// </summary>
         [Fact]
@@ -249,6 +271,28 @@ namespace ReadLine.Tests
             // Simulate the user pressing the BACKSPACE and ALT + BACKSPACE keys
             new List<ConsoleKeyInfo>() { Backspace, AltBackspace }
                 .ForEach(_keyHandler.Handle);
+
+            // Ensure that nothing is there
+            Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line until space is spotted while wiping all whitespaces
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceWithAltBackspaceWipeWhitespace()
+        {
+            // Simulate the user pressing the ALT + BACKSPACE key while writing the " World" string
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .Append(AltBackspace)
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal("Hello ", _keyHandler.Text);
+
+            // Simulate the user pressing the ALT + BACKSPACE key
+            _keyHandler.Handle(AltBackspace);
 
             // Ensure that nothing is there
             Assert.Equal(string.Empty, _keyHandler.Text);
@@ -275,6 +319,31 @@ namespace ReadLine.Tests
             // Simulate the user pressing the DELETE and ALT + D keys
             new List<ConsoleKeyInfo>() { Delete, AltD }
                 .ForEach(_keyHandler.Handle);
+
+            // Ensure that nothing is there
+            Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line after space is spotted while wiping all whitespaces
+        /// </summary>
+        [Fact]
+        public void TestClearLineAfterSpaceWithAltDWipeWhitespace()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo())
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the HOME and ALT + D key
+            new List<ConsoleKeyInfo>() { Home, AltD }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal(" World", _keyHandler.Text);
+
+            // Simulate the user pressing the ALT + D key
+            _keyHandler.Handle(AltD);
 
             // Ensure that nothing is there
             Assert.Equal(string.Empty, _keyHandler.Text);
