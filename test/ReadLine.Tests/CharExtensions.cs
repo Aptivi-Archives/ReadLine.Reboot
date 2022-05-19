@@ -55,7 +55,7 @@ namespace ReadLine.Tests
         private const ConsoleModifiers NoModifiers = 0;
 
         // The special key character
-        private static readonly Dictionary<char, Tuple<ConsoleKey, ConsoleModifiers>> specialKeyCharMap = new()
+        internal static readonly Dictionary<char, Tuple<ConsoleKey, ConsoleModifiers>> specialKeyCharMap = new()
         {
             // The actual characters used in test
             {ExclamationPoint, Tuple.Create(ConsoleKey.D0, NoModifiers)},
@@ -77,45 +77,5 @@ namespace ReadLine.Tests
             {CtrlU, Tuple.Create(ConsoleKey.U, ConsoleModifiers.Control)},
             {CtrlW, Tuple.Create(ConsoleKey.W, ConsoleModifiers.Control)}
         };
-
-        /// <summary>
-        /// Converts the character to the instance of ConsoleKeyInfo
-        /// </summary>
-        /// <param name="c">The character</param>
-        public static ConsoleKeyInfo ToConsoleKeyInfo(this char c)
-        {
-            // Parse the key information
-            var (key, modifiers) = c.ParseKeyInfo();
-
-            // Check to see if any modifiers are pressed
-            bool ctrl = modifiers.HasFlag(ConsoleModifiers.Control);
-            bool shift = modifiers.HasFlag(ConsoleModifiers.Shift);
-            bool alt = modifiers.HasFlag(ConsoleModifiers.Alt);
-
-            // Return the new instance
-            return new ConsoleKeyInfo(c, key, shift, alt, ctrl);
-        }
-
-        /// <summary>
-        /// Parses the key information
-        /// </summary>
-        /// <param name="c">Character to parse</param>
-        private static Tuple<ConsoleKey, ConsoleModifiers> ParseKeyInfo(this char c) 
-        {
-            // Try to get the ConsoleKey from the character
-            {
-                bool success = Enum.TryParse(c.ToString().ToUpper(), out ConsoleKey result);
-                if (success) { return Tuple.Create(result, NoModifiers); }
-            }
-            
-            // Try to get the tuple of the special key character from the character map defined
-            {
-                bool success = specialKeyCharMap.TryGetValue(c, out Tuple<ConsoleKey, ConsoleModifiers> result);
-                if (success) { return result; }
-            }
-
-            // If all else fails, return the default
-            return Tuple.Create(default(ConsoleKey), NoModifiers);
-        }
     }
 }

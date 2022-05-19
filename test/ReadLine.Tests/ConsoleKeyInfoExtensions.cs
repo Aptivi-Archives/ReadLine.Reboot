@@ -24,7 +24,9 @@
  * 
  */
 
+using Extensification.CharExts;
 using System;
+using static ReadLine.Tests.CharExtensions;
 
 namespace ReadLine.Tests
 {
@@ -53,23 +55,23 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo AltBackspace = new('\0', ConsoleKey.Backspace, false, true, false);
 
         // The actual characters used in test
-        public static readonly ConsoleKeyInfo ExclamationPoint = CharExtensions.ExclamationPoint.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo Space = CharExtensions.Space.ToConsoleKeyInfo();
+        public static readonly ConsoleKeyInfo ExclamationPoint = CharExtensions.ExclamationPoint.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo Space = CharExtensions.Space.ToConsoleKeyInfo(specialKeyCharMap);
 
         // The control sequence used in ReadLine.Reboot
-        public static readonly ConsoleKeyInfo CtrlA = CharExtensions.CtrlA.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlB = CharExtensions.CtrlB.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlD = CharExtensions.CtrlD.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlE = CharExtensions.CtrlE.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlF = CharExtensions.CtrlF.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlH = CharExtensions.CtrlH.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlI = CharExtensions.CtrlI.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlK = CharExtensions.CtrlK.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlL = CharExtensions.CtrlL.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlN = CharExtensions.CtrlN.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlP = CharExtensions.CtrlP.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlT = CharExtensions.CtrlT.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlU = CharExtensions.CtrlU.ToConsoleKeyInfo();
-        public static readonly ConsoleKeyInfo CtrlW = CharExtensions.CtrlW.ToConsoleKeyInfo();
+        public static readonly ConsoleKeyInfo CtrlA = CharExtensions.CtrlA.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlB = CharExtensions.CtrlB.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlD = CharExtensions.CtrlD.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlE = CharExtensions.CtrlE.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlF = CharExtensions.CtrlF.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlH = CharExtensions.CtrlH.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlI = CharExtensions.CtrlI.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlK = CharExtensions.CtrlK.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlL = CharExtensions.CtrlL.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlN = CharExtensions.CtrlN.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlP = CharExtensions.CtrlP.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlT = CharExtensions.CtrlT.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlU = CharExtensions.CtrlU.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlW = CharExtensions.CtrlW.ToConsoleKeyInfo(specialKeyCharMap);
     }
 }
