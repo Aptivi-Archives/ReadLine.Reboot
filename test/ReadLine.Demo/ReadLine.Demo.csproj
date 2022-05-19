@@ -7,6 +7,7 @@
     <OutputType>Exe</OutputType>
     <PackageId>ReadLine.Demo</PackageId>
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
+    <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

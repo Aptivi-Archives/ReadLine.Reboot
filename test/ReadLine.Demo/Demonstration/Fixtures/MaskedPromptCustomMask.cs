@@ -25,21 +25,22 @@
  */
 
 using ReadLineReboot;
+using System;
 
-namespace ReadLineDemo
+namespace ReadLineDemo.Demonstration.Fixtures
 {
-    /// <summary>
-    /// An example class of auto completion handler.
-    /// </summary>
-    class AutoCompletionHandler : IAutoCompleteHandler
+    internal class MaskedPromptCustomMask : BaseFixture, IFixture
     {
-        public char[] Separators { get; set; } = new char[] { ' ', '.', '/', '\\', ':' };
-        public string[] GetSuggestions(string text, int index)
+        public override void RunFixture()
         {
-            if (text.StartsWith("git "))
-                return new string[] { "init", "clone", "pull", "push" };
-            else
-                return null;
+            string input = "";
+            while (input != "exit")
+            {
+                // WARNING: Don't use this value to store passwords in memory as plain-text in production environment; always use the strongest
+                //          encryption algorithm possible.
+                input = ReadLine.ReadPassword("(pass)> ", '*');
+                Console.WriteLine($"<< {input}");
+            }
         }
     }
 }
