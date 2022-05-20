@@ -175,6 +175,12 @@ namespace Internal.ReadLine
         /// <param name="c">A character to be printed</param>
         private void WriteChar(char c)
         {
+            // If we have tabs, convert the character to eight spaces
+            string finalChar = c.ToString();
+            int tabLength = 8 - ConsoleWrapper.CursorLeft % 8;
+            if (c == '\t')
+                finalChar = new string(' ', tabLength);
+
             // If the character isn't a null character, go on
             if (c != default)
             {
@@ -182,9 +188,12 @@ namespace Internal.ReadLine
                 if (IsEndOfLine)
                 {
                     // Just append the character and write it to the console
-                    _text.Append(c);
-                    ConsoleWrapper.Write(c.ToString());
-                    _cursorPos++;
+                    _text.Append(finalChar);
+                    ConsoleWrapper.Write(finalChar);
+                    _cursorPos += finalChar.Length;
+
+                    // Increase the cursor limit
+                    _cursorLimit += finalChar.Length;
                 }
                 else
                 {
@@ -198,17 +207,19 @@ namespace Internal.ReadLine
 #endif
 
                     // Inject a character to the main text in the cursor position
-                    _text.Insert(_cursorPos, c);
+                    _text.Insert(_cursorPos, finalChar);
 
                     // Write the result and set the correct console cursor position
-                    ConsoleWrapper.Write(c.ToString() + str);
+                    ConsoleWrapper.Write(finalChar + str);
                     ConsoleWrapper.SetCursorPosition(left, top);
 
-                    // Move the cursor to the right
-                    MoveCursorRight();
-                }
+                    // Increase the cursor limit
+                    _cursorLimit += finalChar.Length;
 
-                _cursorLimit++;
+                    // Move the cursor to the right
+                    for (int i = 0; i < finalChar.Length; i++)
+                        MoveCursorRight();
+                }
             }
         }
 
