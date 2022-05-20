@@ -67,6 +67,7 @@ namespace ReadLine.Tests
                    .ForEach(_keyHandler.Handle);
         }
 
+#region Writing
         /// <summary>
         /// Tests writing the characters
         /// </summary>
@@ -84,7 +85,9 @@ namespace ReadLine.Tests
             // Confirm that everything works
             Assert.Equal("Hello World", _keyHandler.Text);
         }
+        #endregion
 
+        #region Deletion
         /// <summary>
         /// Tests deleting a character
         /// </summary>
@@ -465,7 +468,9 @@ namespace ReadLine.Tests
             // Ensure that everything is back to what they were
             Assert.Equal("Hello World", _keyHandler.Text);
         }
+        #endregion
 
+        #region Transposition
         /// <summary>
         /// Tries to swap the two characters
         /// </summary>
@@ -638,7 +643,9 @@ namespace ReadLine.Tests
             // Ensure that "Hello" and "World" are not swapped
             Assert.Equal("Hello World", _keyHandler.Text);
         }
+        #endregion
 
+        #region Movement
         /// <summary>
         /// Tries to go to the beginning of the line and write a character
         /// </summary>
@@ -782,7 +789,9 @@ namespace ReadLine.Tests
             // Ensure that the exclamation mark is there
             Assert.Equal("Hello!", _keyHandler.Text);
         }
+        #endregion
 
+        #region Case Manipulation
         /// <summary>
         /// Tests making the word UPPERCASE
         /// </summary>
@@ -838,7 +847,9 @@ namespace ReadLine.Tests
             // Ensure that the word is all UPPERCASE
             Assert.Equal("hello", _keyHandler.Text);
         }
+        #endregion
 
+        #region History Manipulation
         /// <summary>
         /// Tests going up to reveal the previous history
         /// </summary>
@@ -928,7 +939,9 @@ namespace ReadLine.Tests
             // Ensure that we've put the last word from the last history
             Assert.Equal("Hello clear", _keyHandler.Text);
         }
+        #endregion
 
+        #region Automatic Completion
         /// <summary>
         /// Tests auto completion
         /// </summary>
@@ -1012,5 +1025,6 @@ namespace ReadLine.Tests
                 Assert.Equal($"Hi {completion}", _keyHandler.Text);
             });
         }
+        #endregion
     }
 }
