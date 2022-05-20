@@ -812,59 +812,59 @@ namespace Internal.ReadLine
             _keyActions = new Dictionary<string, Action>
             {
                 // Cursor movement (left and right)
-                ["LeftArrow"] = MoveCursorLeft,
-                ["ControlB"] = MoveCursorLeft,
-                ["AltB"] = MoveCursorWordLeft,
-                ["RightArrow"] = MoveCursorRight,
-                ["ControlF"] = MoveCursorRight,
-                ["AltF"] = MoveCursorWordRight,
+                ["LeftArrow"] =       MoveCursorLeft,
+                ["ControlB"] =        MoveCursorLeft,
+                ["AltB"] =            MoveCursorWordLeft,
+                ["RightArrow"] =      MoveCursorRight,
+                ["ControlF"] =        MoveCursorRight,
+                ["AltF"] =            MoveCursorWordRight,
 
                 // Cursor movement (home and end)
-                ["Home"] = MoveCursorHome,
-                ["ControlA"] = MoveCursorHome,
-                ["End"] = MoveCursorEnd,
-                ["ControlE"] = MoveCursorEnd,
+                ["Home"] =            MoveCursorHome,
+                ["ControlA"] =        MoveCursorHome,
+                ["End"] =             MoveCursorEnd,
+                ["ControlE"] =        MoveCursorEnd,
 
                 // Deletion of one character
-                ["Backspace"] = Backspace,
-                ["ControlH"] = Backspace,
-                ["Delete"] = Delete,
-                ["ControlD"] = Delete,
+                ["Backspace"] =       Backspace,
+                ["ControlH"] =        Backspace,
+                ["Delete"] =          Delete,
+                ["ControlD"] =        Delete,
 
                 // Deletion of whole line
-                ["Escape"] = ClearLine,
-                ["ControlL"] = ClearLine,
-                ["ControlU"] = ClearLineToLeft,
-                ["ControlK"] = ClearLineToRight,
-                ["ControlW"] = ClearLineUntilSpace,
-                ["AltBackspace"] = ClearLineUntilSpace,
-                ["AltD"] = ClearLineAfterSpace,
+                ["Escape"] =          ClearLine,
+                ["ControlL"] =        ClearLine,
+                ["ControlU"] =        ClearLineToLeft,
+                ["ControlK"] =        ClearLineToRight,
+                ["ControlW"] =        ClearLineUntilSpace,
+                ["AltBackspace"] =    ClearLineUntilSpace,
+                ["AltD"] =            ClearLineAfterSpace,
 
                 // History manipulation
-                ["UpArrow"] = PrevHistory,
-                ["ControlP"] = PrevHistory,
-                ["DownArrow"] = NextHistory,
-                ["ControlN"] = NextHistory,
-                ["AltOemPeriod"] = AddLastArgument,
+                ["UpArrow"] =         PrevHistory,
+                ["ControlP"] =        PrevHistory,
+                ["DownArrow"] =       NextHistory,
+                ["ControlN"] =        NextHistory,
+                ["AltOemPeriod"] =    AddLastArgument,
 
                 // Substitution
-                ["ControlT"] = TransposeChars,
-                ["AltT"] = TransposeWords,
+                ["ControlT"] =        TransposeChars,
+                ["AltT"] =            TransposeWords,
 
                 // Auto-completion initialization
-                ["Tab"] = DoAutoComplete,
-                ["ControlI"] = DoAutoComplete,
-                ["ShiftTab"] = DoReverseAutoComplete,
+                ["Tab"] =             DoAutoComplete,
+                ["ControlI"] =        DoAutoComplete,
+                ["ShiftTab"] =        DoReverseAutoComplete,
                 ["Shift, ControlI"] = DoReverseAutoComplete,
 
                 // Case manipulation
-                ["AltL"] = LowercaseWord,
-                ["AltU"] = UppercaseWord,
-                ["AltV"] = LowercaseCharMoveToEndOfWord,
-                ["AltC"] = UppercaseCharMoveToEndOfWord,
+                ["AltL"] =            LowercaseWord,
+                ["AltU"] =            UppercaseWord,
+                ["AltV"] =            LowercaseCharMoveToEndOfWord,
+                ["AltC"] =            UppercaseCharMoveToEndOfWord,
 
                 // Clipboard manipulation
-                ["ControlY"] = Yank
+                ["ControlY"] =        Yank
             };
         }
 
