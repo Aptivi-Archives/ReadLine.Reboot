@@ -375,6 +375,20 @@ namespace Internal.ReadLine
         }
 
         /// <summary>
+        /// Clears all horizontal space
+        /// </summary>
+        private void ClearHorizontalSpace()
+        {
+            // Clear all whitespaces found to the right
+            while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+                Delete();
+
+            // Clear all whitespaces found to the left
+            while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]))
+                Backspace();
+        }
+
+        /// <summary>
         /// Clears all characters after the space is spotted
         /// </summary>
         private void ClearLineAfterSpace()
@@ -720,6 +734,9 @@ namespace Internal.ReadLine
                     case '.':
                         initialKey = "OemPeriod";
                         break;
+                    case '\\':
+                        initialKey = "Oem5";
+                        break;
                     default:
                         break;
                 }
@@ -839,6 +856,7 @@ namespace Internal.ReadLine
                 ["ControlW"] =        ClearLineUntilSpace,
                 ["AltBackspace"] =    ClearLineUntilSpace,
                 ["AltD"] =            ClearLineAfterSpace,
+                ["AltOem5"] =         ClearHorizontalSpace,
 
                 // History manipulation
                 ["UpArrow"] =         PrevHistory,

@@ -101,6 +101,7 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo AltV =         new('v',  ConsoleKey.V,          false, true,  false);
         public static readonly ConsoleKeyInfo AltT =         new('t',  ConsoleKey.T,          false, true,  false);
         public static readonly ConsoleKeyInfo AltOemPeriod = new('.',  ConsoleKey.OemPeriod,  false, true,  false);
+        public static readonly ConsoleKeyInfo AltOem5 =      new('\\', ConsoleKey.Oem5,       false, true,  false);
         public static readonly ConsoleKeyInfo AltBackspace = new('\0', ConsoleKey.Backspace,  false, true,  false);
 
         // The actual characters used in test
