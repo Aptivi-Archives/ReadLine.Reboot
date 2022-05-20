@@ -50,6 +50,7 @@ namespace ReadLine.Tests
         public const char CtrlT = '\u0014';
         public const char CtrlU = '\u0015';
         public const char CtrlW = '\u0017';
+        public const char CtrlY = '\u0019';
 
         // No modifiers
         private const ConsoleModifiers NoModifiers = 0;
@@ -75,7 +76,8 @@ namespace ReadLine.Tests
             {CtrlP, Tuple.Create(ConsoleKey.P, ConsoleModifiers.Control)},
             {CtrlT, Tuple.Create(ConsoleKey.T, ConsoleModifiers.Control)},
             {CtrlU, Tuple.Create(ConsoleKey.U, ConsoleModifiers.Control)},
-            {CtrlW, Tuple.Create(ConsoleKey.W, ConsoleModifiers.Control)}
+            {CtrlW, Tuple.Create(ConsoleKey.W, ConsoleModifiers.Control)},
+            {CtrlY, Tuple.Create(ConsoleKey.Y, ConsoleModifiers.Control)}
         };
     }
 }

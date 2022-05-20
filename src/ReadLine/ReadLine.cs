@@ -51,6 +51,11 @@ namespace ReadLineReboot
         public static bool AutoCompletionEnabled { get; set; } = true;
 
         /// <summary>
+        /// Whether the clipboard (kill buffer) is enabled. Currently true.
+        /// </summary>
+        public static bool ClipboardEnabled { get; set; } = true;
+
+        /// <summary>
         /// The auto completion handler. You need to make a class that implements <see cref="IAutoCompleteHandler"/>
         /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }

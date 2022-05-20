@@ -24,6 +24,7 @@ It is cross platform and runs anywhere .NET is supported, as long as they run on
 | `Ctrl`+`K`                         | Cut text to the end of line                     |
 | `Ctrl`+`W` / `Alt`+`Backspace`     | Cut previous word                               |
 | `Alt`+`D`                          | Cut next word                                   |
+| `Ctrl`+`Y`                         | Yank (paste the cut content)                    |
 | `Ctrl`+`T`                         | Switch two characters                           |
 | `Alt`+`T`                          | Switch two words                                |
 | `Alt`+`L`                          | Make word lowercase                             |

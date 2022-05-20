@@ -189,6 +189,28 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests clearing the line to the left and yanking
+        /// </summary>
+        [Fact]
+        public void TestClearLineToLeftWithControlUAndYanking()
+        {
+            // Simulate the user pressing the LEFT ARROW + CTRL + U keys
+            new List<ConsoleKeyInfo>() { LeftArrow, CtrlU }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we wiped all the characters from the position before the "o" character, and that the deleted content are all copied to the
+            // clipboard (kill buffer)
+            Assert.Equal("o", _keyHandler.Text);
+            Assert.Equal("Hell", _keyHandler.KillBuffer);
+
+            // Simulate the user pressing the CTRL + Y key
+            _keyHandler.Handle(CtrlY);
+
+            // Ensure that everything is back to what they were
+            Assert.Equal("Hello", _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests clearing the line to the current position
         /// </summary>
         [Fact]
@@ -207,6 +229,28 @@ namespace ReadLine.Tests
 
             // Ensure that nothing is there
             Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line to the current position
+        /// </summary>
+        [Fact]
+        public void TestClearLineToRightWithControlKAndYanking()
+        {
+            // Simulate the user pressing the LEFT ARROW and CTRL + K keys
+            new List<ConsoleKeyInfo>() { LeftArrow, CtrlK }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've removed all the characters to the current position, and that the deleted content are all copied to the clipboard
+            // (kill buffer)
+            Assert.Equal("Hell", _keyHandler.Text);
+            Assert.Equal("o", _keyHandler.KillBuffer);
+
+            // Simulate the user pressing the CTRL + Y key
+            _keyHandler.Handle(CtrlY);
+
+            // Ensure that everything is back to what they were
+            Assert.Equal("Hello", _keyHandler.Text);
         }
 
         /// <summary>
@@ -255,6 +299,29 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
+        /// Tests clearing the line until space is spotted and yanking
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceWithControlWAndYanking()
+        {
+            // Simulate the user pressing the CTRL + W key while writing the " World" string
+            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+                    .Append(CtrlW)
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal("Hello ", _keyHandler.Text);
+            Assert.Equal("World", _keyHandler.KillBuffer);
+
+            // Simulate the user pressing the CTRL + Y key
+            _keyHandler.Handle(CtrlY);
+
+            // Ensure that everything is back to what they were
+            Assert.Equal("Hello World", _keyHandler.Text);
+        }
+
+        /// <summary>
         /// Tests clearing the line until space is spotted
         /// </summary>
         [Fact]
@@ -297,6 +364,29 @@ namespace ReadLine.Tests
 
             // Ensure that nothing is there
             Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line until space is spotted and yanking
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceWithAltBackspaceAndYanking()
+        {
+            // Simulate the user pressing the ALT + BACKSPACE key while writing the " World" string
+            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+                    .Append(AltBackspace)
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal("Hello ", _keyHandler.Text);
+            Assert.Equal("World", _keyHandler.KillBuffer);
+
+            // Simulate the user pressing the CTRL + Y key
+            _keyHandler.Handle(CtrlY);
+
+            // Ensure that everything is back to what they were
+            Assert.Equal("Hello World", _keyHandler.Text);
         }
 
         /// <summary>
@@ -348,6 +438,32 @@ namespace ReadLine.Tests
 
             // Ensure that nothing is there
             Assert.Equal(string.Empty, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line after space is spotted and yanking
+        /// </summary>
+        [Fact]
+        public void TestClearLineAfterSpaceWithAltDAndYanking()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the HOME and ALT + D key
+            new List<ConsoleKeyInfo>() { Home, AltD }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the space is spotted
+            Assert.Equal(" World", _keyHandler.Text);
+            Assert.Equal("Hello", _keyHandler.KillBuffer);
+
+            // Simulate the user pressing the CTRL + Y key
+            _keyHandler.Handle(CtrlY);
+
+            // Ensure that everything is back to what they were
+            Assert.Equal("Hello World", _keyHandler.Text);
         }
 
         /// <summary>

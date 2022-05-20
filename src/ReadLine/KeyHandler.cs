@@ -43,6 +43,11 @@ namespace Internal.ReadLine
         /// </summary>
         public string Text => _text.ToString();
 
+        /// <summary>
+        /// The current console clipboard content for use with CTRL + Y (Yank)
+        /// </summary>
+        public string KillBuffer => _killBuffer.ToString();
+
         // Private Variables
         private int _cursorPos;
         private int _cursorLimit;
@@ -51,7 +56,9 @@ namespace Internal.ReadLine
         private string[] _completions;
         private int _completionStart;
         private int _completionsIndex;
+        private string _lastHandler;
         private readonly StringBuilder _text;
+        private readonly StringBuilder _killBuffer;
         private readonly List<string> _history;
         private readonly Dictionary<string, Action> _keyActions;
         private readonly IConsole ConsoleWrapper;
@@ -62,6 +69,7 @@ namespace Internal.ReadLine
         private bool IsStartOfBuffer => ConsoleWrapper.CursorLeft == 0;
         private bool IsEndOfBuffer => ConsoleWrapper.CursorLeft == ConsoleWrapper.BufferWidth - 1;
         private bool IsInAutoCompleteMode => _completions != null;
+        private bool IsKillBufferEmpty => _killBuffer.Length == 0;
         internal static ConsoleKeyInfo SimulatedEnter => new ConsoleKeyInfo('\u000A', ConsoleKey.J, false, false, true);
 
         // --> Cursor movement
@@ -296,8 +304,21 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineToLeft()
         {
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(ClearLineToLeft))
+                _killBuffer.Clear();
+
+            // Now, do the job
             while (!IsStartOfLine)
+            {
+                chars.Add(_text[_cursorPos - 1]);
                 Backspace();
+            }
+
+            // Append the wiped characters to the kill buffer
+            chars.Reverse();
+            _killBuffer.Append(string.Join("", chars));
         }
 
         /// <summary>
@@ -305,10 +326,23 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineToRight()
         {
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(ClearLineToRight))
+                _killBuffer.Clear();
+
+            // Now, do the job
             int pos = _cursorPos;
             MoveCursorEnd();
             while (_cursorPos > pos)
+            {
+                chars.Add(_text[_cursorPos - 1]);
                 Backspace();
+            }
+
+            // Append the wiped characters to the kill buffer
+            chars.Reverse();
+            _killBuffer.Append(string.Join("", chars));
         }
 
         /// <summary>
@@ -316,13 +350,28 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineUntilSpace()
         {
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(ClearLineUntilSpace))
+                _killBuffer.Clear();
+
             // Clear all whitespaces found
             while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]))
+            {
+                chars.Add(_text[_cursorPos - 1]);
                 Backspace();
+            }
 
             // Now, clear all the letters until we've found a whitespace
             while (!IsStartOfLine && !char.IsWhiteSpace(_text[_cursorPos - 1]))
+            {
+                chars.Add(_text[_cursorPos - 1]);
                 Backspace();
+            }
+
+            // Append the wiped characters to the kill buffer
+            chars.Reverse();
+            _killBuffer.Append(string.Join("", chars));
         }
 
         /// <summary>
@@ -330,13 +379,27 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineAfterSpace()
         {
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(ClearLineAfterSpace))
+                _killBuffer.Clear();
+
             // Clear all whitespaces found
             while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+            {
+                chars.Add(_text[_cursorPos]);
                 Delete();
+            }
 
             // Now, clear all the letters until we've found a whitespace
             while (!IsEndOfLine && !char.IsWhiteSpace(_text[_cursorPos]))
+            {
+                chars.Add(_text[_cursorPos]);
                 Delete();
+            }
+
+            // Append the wiped characters to the kill buffer
+            _killBuffer.Append(string.Join("", chars));
         }
 
         // --> Manipulating
@@ -618,6 +681,25 @@ namespace Internal.ReadLine
             MoveCursorWordRight();
         }
 
+        // --> Clipboard manipulation
+
+        /// <summary>
+        /// Pastes the content of console clipboard (kill buffer)
+        /// </summary>
+        private void Yank()
+        {
+            if (ReadLineReboot.ReadLine.ClipboardEnabled)
+            {
+                // Write the kill buffer content
+                if (_killBuffer.Length > 0)
+                    WriteString(_killBuffer.ToString());
+            }
+            else
+            {
+                WriteChar();
+            }
+        }
+
         // --> Main logic
 
         /// <summary>
@@ -665,6 +747,7 @@ namespace Internal.ReadLine
             _history = history ?? new List<string>();
             _historyIndex = _history.Count;
             _text = new StringBuilder();
+            _killBuffer = new StringBuilder();
 
             // Assign local functions for Tab actions
             // -> Next suggestion
@@ -778,7 +861,10 @@ namespace Internal.ReadLine
                 ["AltL"] = LowercaseWord,
                 ["AltU"] = UppercaseWord,
                 ["AltV"] = LowercaseCharMoveToEndOfWord,
-                ["AltC"] = UppercaseCharMoveToEndOfWord
+                ["AltC"] = UppercaseCharMoveToEndOfWord,
+
+                // Clipboard manipulation
+                ["ControlY"] = Yank
             };
         }
 
@@ -803,6 +889,7 @@ namespace Internal.ReadLine
             _keyActions.TryGetValue(BuildKeyInput(), out Action action);
             action ??= WriteChar;
             action.Invoke();
+            _lastHandler = action.Method.Name;
         }
     }
 }

@@ -73,5 +73,6 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo CtrlT = CharExtensions.CtrlT.ToConsoleKeyInfo(specialKeyCharMap);
         public static readonly ConsoleKeyInfo CtrlU = CharExtensions.CtrlU.ToConsoleKeyInfo(specialKeyCharMap);
         public static readonly ConsoleKeyInfo CtrlW = CharExtensions.CtrlW.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlY = CharExtensions.CtrlY.ToConsoleKeyInfo(specialKeyCharMap);
     }
 }
