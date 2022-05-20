@@ -32,7 +32,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
-using static ReadLine.Tests.ConsoleKeyInfoExtensions;
+using static ReadLine.Tests.CharSequences;
 
 namespace ReadLine.Tests
 {
@@ -62,7 +62,7 @@ namespace ReadLine.Tests
             _keyHandler = new KeyHandler(_console, _history, null);
 
             // Initial writing
-            "Hello".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            "Hello".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                    .ToList()
                    .ForEach(_keyHandler.Handle);
         }
@@ -78,7 +78,7 @@ namespace ReadLine.Tests
             Assert.Equal("Hello", _keyHandler.Text);
             
             // Write this
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .ToList()
                     .ForEach(_keyHandler.Handle);
             
@@ -263,7 +263,7 @@ namespace ReadLine.Tests
         public void TestClearLineUntilSpaceWithControlW()
         {
             // Simulate the user pressing the CTRL + W key while writing the " World" string
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .Append(CtrlW)
                     .ToList()
                     .ForEach(_keyHandler.Handle);
@@ -286,7 +286,7 @@ namespace ReadLine.Tests
         public void TestClearLineUntilSpaceWithControlWWipeWhitespace()
         {
             // Simulate the user pressing the CTRL + W key while writing the " World" string
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .Append(CtrlW)
                     .ToList()
                     .ForEach(_keyHandler.Handle);
@@ -308,7 +308,7 @@ namespace ReadLine.Tests
         public void TestClearLineUntilSpaceWithControlWAndYanking()
         {
             // Simulate the user pressing the CTRL + W key while writing the " World" string
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .Append(CtrlW)
                     .ToList()
                     .ForEach(_keyHandler.Handle);
@@ -331,7 +331,7 @@ namespace ReadLine.Tests
         public void TestClearLineUntilSpaceWithAltBackspace()
         {
             // Simulate the user pressing the ALT + BACKSPACE key while writing the " World" string
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .Append(AltBackspace)
                     .ToList()
                     .ForEach(_keyHandler.Handle);
@@ -354,7 +354,7 @@ namespace ReadLine.Tests
         public void TestClearLineUntilSpaceWithAltBackspaceWipeWhitespace()
         {
             // Simulate the user pressing the ALT + BACKSPACE key while writing the " World" string
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .Append(AltBackspace)
                     .ToList()
                     .ForEach(_keyHandler.Handle);
@@ -376,7 +376,7 @@ namespace ReadLine.Tests
         public void TestClearLineUntilSpaceWithAltBackspaceAndYanking()
         {
             // Simulate the user pressing the ALT + BACKSPACE key while writing the " World" string
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .Append(AltBackspace)
                     .ToList()
                     .ForEach(_keyHandler.Handle);
@@ -399,7 +399,7 @@ namespace ReadLine.Tests
         public void TestClearLineAfterSpaceWithAltD()
         {
             // Write this
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .ToList()
                     .ForEach(_keyHandler.Handle);
 
@@ -425,7 +425,7 @@ namespace ReadLine.Tests
         public void TestClearLineAfterSpaceWithAltDWipeWhitespace()
         {
             // Write this
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .ToList()
                     .ForEach(_keyHandler.Handle);
 
@@ -450,7 +450,7 @@ namespace ReadLine.Tests
         public void TestClearLineAfterSpaceWithAltDAndYanking()
         {
             // Write this
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .ToList()
                     .ForEach(_keyHandler.Handle);
 
@@ -556,7 +556,7 @@ namespace ReadLine.Tests
         public void TestTransposeWordsWithAltT()
         {
             // Write this
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .ToList()
                     .ForEach(_keyHandler.Handle);
 
@@ -575,7 +575,7 @@ namespace ReadLine.Tests
         public void TestTransposeFirstWithSecondWithAltT()
         {
             // Write this
-            " Awesome World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " Awesome World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                             .ToList()
                             .ForEach(_keyHandler.Handle);
 
@@ -594,7 +594,7 @@ namespace ReadLine.Tests
         public void TestTransposeSecondWithLastWithAltT()
         {
             // Write this
-            " Awesome World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " Awesome World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                             .ToList()
                             .ForEach(_keyHandler.Handle);
 
@@ -613,7 +613,7 @@ namespace ReadLine.Tests
         public void TestTransposeMiddlesWithAltT()
         {
             // Write this
-            " Amazingly Awesome World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " Amazingly Awesome World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                                       .ToList()
                                       .ForEach(_keyHandler.Handle);
 
@@ -632,7 +632,7 @@ namespace ReadLine.Tests
         public void TestTransposeWordsWithinWordWithAltT()
         {
             // Write this
-            " World".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " World".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                     .ToList()
                     .ForEach(_keyHandler.Handle);
 
@@ -653,7 +653,7 @@ namespace ReadLine.Tests
         public void TestHome()
         {
             // Simulate the user pressing the HOME and S keys
-            new List<ConsoleKeyInfo>() { Home, 'S'.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap) }
+            new List<ConsoleKeyInfo>() { Home, 'S'.ToConsoleKeyInfo(CharSequences.specialKeyCharMap) }
                 .ForEach(_keyHandler.Handle);
 
             // Ensure that the S is at the beginning
@@ -667,7 +667,7 @@ namespace ReadLine.Tests
         public void TestHomeWithControlA()
         {
             // Simulate the user pressing the CTRL + A and S keys
-            new List<ConsoleKeyInfo>() { CtrlA, 'S'.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap) }
+            new List<ConsoleKeyInfo>() { CtrlA, 'S'.ToConsoleKeyInfo(CharSequences.specialKeyCharMap) }
                 .ForEach(_keyHandler.Handle);
 
             // Ensure that the S is at the beginning
@@ -709,7 +709,7 @@ namespace ReadLine.Tests
         public void TestLeftArrow()
         {
             // Simulate the user pressing the LEFT ARROW key while writing the " N" string
-            " N".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " N".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                 .Prepend(LeftArrow)
                 .ToList()
                 .ForEach(_keyHandler.Handle);
@@ -725,7 +725,7 @@ namespace ReadLine.Tests
         public void TestLeftArrowWithControlB()
         {
             // Simulate the user pressing the CTRL + B key while writing the " N" string
-            " N".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            " N".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                 .Prepend(CtrlB)
                 .ToList()
                 .ForEach(_keyHandler.Handle);
@@ -958,7 +958,7 @@ namespace ReadLine.Tests
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
 
             // Write this
-            "Hi ".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            "Hi ".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                  .ToList()
                  .ForEach(_keyHandler.Handle);
 
@@ -985,7 +985,7 @@ namespace ReadLine.Tests
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
 
             // Write this
-            "Hi ".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            "Hi ".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                  .ToList()
                  .ForEach(_keyHandler.Handle);
 
@@ -1012,7 +1012,7 @@ namespace ReadLine.Tests
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
 
             // Write this
-            "Hi ".Select(c => c.ToConsoleKeyInfo(CharExtensions.specialKeyCharMap))
+            "Hi ".Select(c => c.ToConsoleKeyInfo(CharSequences.specialKeyCharMap))
                  .ToList()
                  .ForEach(_keyHandler.Handle);
 
