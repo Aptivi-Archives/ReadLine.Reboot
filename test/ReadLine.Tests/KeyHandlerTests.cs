@@ -965,6 +965,20 @@ namespace ReadLine.Tests
             // Ensure that we've put the last word from the last history
             Assert.Equal("Hello clear", _keyHandler.Text);
         }
+
+        /// <summary>
+        /// Tests going to the first history
+        /// </summary>
+        [Fact]
+        public void TestFirstHistory()
+        {
+            // Simulate the user pressing the ALT + SHIFT + < key
+            new List<ConsoleKeyInfo>() { AltShiftOemComma }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've put the first history
+            Assert.Equal(_history[0], _keyHandler.Text);
+        }
         #endregion
 
         #region Automatic Completion

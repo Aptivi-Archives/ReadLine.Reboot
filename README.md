@@ -35,6 +35,7 @@ It is cross platform and runs anywhere .NET is supported, as long as they run on
 | `Ctrl`+`J` / `Enter`               | End of line                                     |
 | `Ctrl`+`N` / `↓`                   | Forward in history                              |
 | `Ctrl`+`P` / `↑`                   | Backward in history                             |
+| `Shift`+`Alt`+`<`                  | First history                                   |
 | `Alt`+`.`                          | Add last argument to current input              |
 | `Ctrl`+`I` / `Tab`                 | Command line completion                         |
 | `Shift`+`Ctrl`+`I` / `Shift`+`Tab` | Backwards command line completion               |

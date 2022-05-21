@@ -634,6 +634,18 @@ namespace Internal.ReadLine
                     WriteString(lastHistoryArgs[lastHistoryArgs.Length - 1]);
             }
         }
+
+        /// <summary>
+        /// Gets the first history
+        /// </summary>
+        private void FirstHistory()
+        {
+            if (_history.Count > 0)
+            {
+                _historyIndex = 0;
+                WriteNewString(_history[_historyIndex]);
+            }
+        }
         #endregion
 
         #region Case manipulation
@@ -725,6 +737,7 @@ namespace Internal.ReadLine
             // On Mono Linux, some of the characters (usually Oem*) is actually "0" according to _keyInfo.Key, screwing the shortcut up and causing
             // it to not work as defined in the below _keyActions, so give such systems special treatment so they work equally to Windows.
             string initialKey = _keyInfo.Key.ToString();
+            ConsoleModifiers initialModifiers = _keyInfo.Modifiers;
             if (_keyInfo.Key == 0)
             {
                 // Get the affected key from the key character
@@ -732,7 +745,16 @@ namespace Internal.ReadLine
                 {
                     // Add only the affected keys we need to use in _keyActions.
                     case '.':
+                    case '>':
                         initialKey = "OemPeriod";
+                        if (_keyInfo.KeyChar == '>')
+                            initialModifiers |= ConsoleModifiers.Shift;
+                        break;
+                    case ',':
+                    case '<':
+                        initialKey = "OemComma";
+                        if (_keyInfo.KeyChar == '<')
+                            initialModifiers |= ConsoleModifiers.Shift;
                         break;
                     case '\\':
                         initialKey = "Oem5";
@@ -743,9 +765,9 @@ namespace Internal.ReadLine
             }
 
             // Get the key input name
-            string inputName = (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Alt) && !_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift)) ?
-                                 initialKey : 
-                                 _keyInfo.Modifiers.ToString() + initialKey;
+            string inputName = (!initialModifiers.HasFlag(ConsoleModifiers.Control) && !initialModifiers.HasFlag(ConsoleModifiers.Alt) && !initialModifiers.HasFlag(ConsoleModifiers.Shift)) ?
+                                 initialKey :
+                                 initialModifiers.ToString() + initialKey;
             return inputName;
         }
 
@@ -829,60 +851,61 @@ namespace Internal.ReadLine
             _keyActions = new Dictionary<string, Action>
             {
                 // Cursor movement (left and right)
-                ["LeftArrow"] =       MoveCursorLeft,
-                ["ControlB"] =        MoveCursorLeft,
-                ["AltB"] =            MoveCursorWordLeft,
-                ["RightArrow"] =      MoveCursorRight,
-                ["ControlF"] =        MoveCursorRight,
-                ["AltF"] =            MoveCursorWordRight,
+                ["LeftArrow"] =             MoveCursorLeft,
+                ["ControlB"] =              MoveCursorLeft,
+                ["AltB"] =                  MoveCursorWordLeft,
+                ["RightArrow"] =            MoveCursorRight,
+                ["ControlF"] =              MoveCursorRight,
+                ["AltF"] =                  MoveCursorWordRight,
 
                 // Cursor movement (home and end)
-                ["Home"] =            MoveCursorHome,
-                ["ControlA"] =        MoveCursorHome,
-                ["End"] =             MoveCursorEnd,
-                ["ControlE"] =        MoveCursorEnd,
+                ["Home"] =                  MoveCursorHome,
+                ["ControlA"] =              MoveCursorHome,
+                ["End"] =                   MoveCursorEnd,
+                ["ControlE"] =              MoveCursorEnd,
 
                 // Deletion of one character
-                ["Backspace"] =       Backspace,
-                ["ControlH"] =        Backspace,
-                ["Delete"] =          Delete,
-                ["ControlD"] =        Delete,
+                ["Backspace"] =             Backspace,
+                ["ControlH"] =              Backspace,
+                ["Delete"] =                Delete,
+                ["ControlD"] =              Delete,
 
                 // Deletion of whole line
-                ["Escape"] =          ClearLine,
-                ["ControlL"] =        ClearLine,
-                ["ControlU"] =        ClearLineToLeft,
-                ["ControlK"] =        ClearLineToRight,
-                ["ControlW"] =        ClearLineUntilSpace,
-                ["AltBackspace"] =    ClearLineUntilSpace,
-                ["AltD"] =            ClearLineAfterSpace,
-                ["AltOem5"] =         ClearHorizontalSpace,
+                ["Escape"] =                ClearLine,
+                ["ControlL"] =              ClearLine,
+                ["ControlU"] =              ClearLineToLeft,
+                ["ControlK"] =              ClearLineToRight,
+                ["ControlW"] =              ClearLineUntilSpace,
+                ["AltBackspace"] =          ClearLineUntilSpace,
+                ["AltD"] =                  ClearLineAfterSpace,
+                ["AltOem5"] =               ClearHorizontalSpace,
 
                 // History manipulation
-                ["UpArrow"] =         PrevHistory,
-                ["ControlP"] =        PrevHistory,
-                ["DownArrow"] =       NextHistory,
-                ["ControlN"] =        NextHistory,
-                ["AltOemPeriod"] =    AddLastArgument,
+                ["UpArrow"] =               PrevHistory,
+                ["ControlP"] =              PrevHistory,
+                ["DownArrow"] =             NextHistory,
+                ["ControlN"] =              NextHistory,
+                ["AltOemPeriod"] =          AddLastArgument,
+                ["Alt, ShiftOemComma"] =    FirstHistory,
 
                 // Substitution
-                ["ControlT"] =        TransposeChars,
-                ["AltT"] =            TransposeWords,
+                ["ControlT"] =              TransposeChars,
+                ["AltT"] =                  TransposeWords,
 
                 // Auto-completion initialization
-                ["Tab"] =             DoAutoComplete,
-                ["ControlI"] =        DoAutoComplete,
-                ["ShiftTab"] =        DoReverseAutoComplete,
-                ["Shift, ControlI"] = DoReverseAutoComplete,
+                ["Tab"] =                   DoAutoComplete,
+                ["ControlI"] =              DoAutoComplete,
+                ["ShiftTab"] =              DoReverseAutoComplete,
+                ["Shift, ControlI"] =       DoReverseAutoComplete,
 
                 // Case manipulation
-                ["AltL"] =            LowercaseWord,
-                ["AltU"] =            UppercaseWord,
-                ["AltV"] =            LowercaseCharMoveToEndOfWord,
-                ["AltC"] =            UppercaseCharMoveToEndOfWord,
+                ["AltL"] =                  LowercaseWord,
+                ["AltU"] =                  UppercaseWord,
+                ["AltV"] =                  LowercaseCharMoveToEndOfWord,
+                ["AltC"] =                  UppercaseCharMoveToEndOfWord,
 
                 // Clipboard manipulation
-                ["ControlY"] =        Yank
+                ["ControlY"] =              Yank
             };
         }
 
