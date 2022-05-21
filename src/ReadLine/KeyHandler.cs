@@ -680,8 +680,10 @@ namespace Internal.ReadLine
             {
                 _historyIndex++;
                 if (_historyIndex == _history.Count)
-                    // We're at the end of the history. Clear the line.
-                    ClearLine();
+                {
+                    _historyIndex = _history.Count;
+                    WriteNewString(_currentLine.ToString());
+                }
                 else
                     WriteNewString(_history[_historyIndex]);
             }
