@@ -249,6 +249,36 @@ namespace Internal.ReadLine
             ConsoleWrapper.SetCursorPosition(initialConsoleLeft, ConsoleWrapper.CursorTop);
             _cursorPos = initialCursorLeft;
         }
+
+        /// <summary>
+        /// Inserts the home directory by replacing the tilde
+        /// </summary>
+        private void InsertHomeDirectory()
+        {
+            char onCursor = _cursorPos != _cursorLimit ? _text[_cursorPos] : ' ';
+            char behindCursor = _cursorPos == 0 ? _text[_cursorPos] : _text[_cursorPos - 1];
+            bool canBackspace = _cursorPos != 0;
+
+            // Get the home directory based on platform
+            bool isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
+            string homeDir = isOnWindows ? Environment.GetEnvironmentVariable("USERPROFILE") : Environment.GetEnvironmentVariable("HOME");
+
+            // Delete the tilde to replace it with the home directory
+            if (onCursor == '~')
+            {
+                DeleteChar();
+            }
+            else if (behindCursor == '~')
+            {
+                if (canBackspace)
+                    Backspace();
+                else
+                    DeleteChar();
+            }
+
+            // Now, do the job!
+            WriteString(homeDir);
+        }
         #endregion
 
         #region Clearing
@@ -794,6 +824,10 @@ namespace Internal.ReadLine
                         initialKey = "D3";
                         initialModifiers |= ConsoleModifiers.Shift;
                         break;
+                    case '&':
+                        initialKey = "D7";
+                        initialModifiers |= ConsoleModifiers.Shift;
+                        break;
                     default:
                         break;
                 }
@@ -944,7 +978,8 @@ namespace Internal.ReadLine
                 ["ControlY"] =              Yank,
 
                 // Insertion
-                ["Alt, ShiftD3"] =          InsertComment
+                ["Alt, ShiftD3"] =          InsertComment,
+                ["Alt, ShiftD7"] =          InsertHomeDirectory
             };
         }
 

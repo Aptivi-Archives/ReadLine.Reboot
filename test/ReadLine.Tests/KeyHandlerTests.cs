@@ -44,6 +44,8 @@ namespace ReadLine.Tests
         private readonly AutoCompletionHandler _autoCompleteHandler;
         private readonly string[] _completions;
         private readonly IConsole _console;
+        private readonly bool _isOnWindows;
+        private readonly string _homeDir;
 
         /// <summary>
         /// Initialize the variables
@@ -60,6 +62,10 @@ namespace ReadLine.Tests
             // Initialize the key handler
             _console = new DumbConsole();
             _keyHandler = new KeyHandler(_console, _history, null);
+
+            // Initialize platform variables
+            _isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
+            _homeDir = _isOnWindows ? Environment.GetEnvironmentVariable("USERPROFILE") : Environment.GetEnvironmentVariable("HOME");
 
             // Initial writing
             "Hello".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
@@ -97,6 +103,120 @@ namespace ReadLine.Tests
             
             // Confirm that the hashtag is there
             Assert.Equal("#Hello", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests inserting the home directory behind the cursor at the end of the line
+        /// </summary>
+        [Fact]
+        public void TestInsertHomeDirectoryBehindCursorAtEndOfLine()
+        {
+            // Write this
+            " World~".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                     .ToList()
+                     .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the SHIFT + ALT + & key
+            _keyHandler.Handle(AltShiftD7);
+
+            // Confirm that everything works
+            Assert.Equal("Hello World" + _homeDir, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests inserting the home directory on the cursor at the end of the line
+        /// </summary>
+        [Fact]
+        public void TestInsertHomeDirectoryOnCursorAtEndOfLine()
+        {
+            // Write this
+            " World~".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                     .ToList()
+                     .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the LEFT ARROW and SHIFT + ALT + & key
+            new List<ConsoleKeyInfo>() { LeftArrow, AltShiftD7 }
+                .ForEach(_keyHandler.Handle);
+
+            // Confirm that everything works
+            Assert.Equal("Hello World" + _homeDir, _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests inserting the home directory behind the cursor at the middle of the line
+        /// </summary>
+        [Fact]
+        public void TestInsertHomeDirectoryBehindCursorAtMiddleOfLine()
+        {
+            // Write this
+            "~World".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the LEFT ARROW (5x) and SHIFT + ALT + & key
+            Enumerable.Repeat(LeftArrow, 5)
+                      .Append(AltShiftD7)
+                      .ToList()
+                      .ForEach(_keyHandler.Handle);
+
+            // Confirm that everything works
+            Assert.Equal("Hello" + _homeDir + "World", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests inserting the home directory on the cursor at the middle of the line
+        /// </summary>
+        [Fact]
+        public void TestInsertHomeDirectoryOnCursorAtMiddleOfLine()
+        {
+            // Write this
+            "~World".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the LEFT ARROW (5x) and SHIFT + ALT + & key
+            Enumerable.Repeat(LeftArrow, 6)
+                      .Append(AltShiftD7)
+                      .ToList()
+                      .ForEach(_keyHandler.Handle);
+
+            // Confirm that everything works
+            Assert.Equal("Hello" + _homeDir + "World", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests inserting the home directory behind the cursor at the beginning of the line
+        /// </summary>
+        [Fact]
+        public void TestInsertHomeDirectoryBehindCursorAtBeginningOfLine()
+        {
+            // Simulate the user pressing the HOME and ~ key
+            new List<ConsoleKeyInfo>() { Home, '~'.ToConsoleKeyInfo() }
+                .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the SHIFT + ALT + & key
+            _keyHandler.Handle(AltShiftD7);
+
+            // Confirm that everything works
+            Assert.Equal(_homeDir + "Hello", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests inserting the home directory on the cursor at the beginning of the line
+        /// </summary>
+        [Fact]
+        public void TestInsertHomeDirectoryOnCursorAtBeginningOfLine()
+        {
+            // Simulate the user pressing the HOME and ~ key
+            new List<ConsoleKeyInfo>() { Home, '~'.ToConsoleKeyInfo() }
+                .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the SHIFT + ALT + & key
+            new List<ConsoleKeyInfo>() { LeftArrow, AltShiftD7 }
+                .ForEach(_keyHandler.Handle);
+
+            // Confirm that everything works
+            Assert.Equal(_homeDir + "Hello", _keyHandler.Text);
         }
         #endregion
 

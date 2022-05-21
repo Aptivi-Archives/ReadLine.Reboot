@@ -33,6 +33,7 @@ It is cross platform and runs anywhere .NET is supported, as long as they run on
 | `Alt`+`C`                          | Make char uppercase and move to the end of word |
 | `Alt`+`V`                          | Make char lowercase and move to the end of word |
 | `Shift`+`Alt`+`#`                  | Add comment `#` to the beginning of the line    |
+| `Shift`+`Alt`+`&`                  | Perform tilde expansion                         |
 | `Ctrl`+`J` / `Enter`               | End of line                                     |
 | `Ctrl`+`N` / `↓`                   | Forward in history                              |
 | `Ctrl`+`P` / `↑`                   | Backward in history                             |
