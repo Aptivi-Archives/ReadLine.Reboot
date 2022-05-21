@@ -646,6 +646,18 @@ namespace Internal.ReadLine
                 WriteNewString(_history[_historyIndex]);
             }
         }
+
+        /// <summary>
+        /// Goes back to the current line
+        /// </summary>
+        private void GoBackToCurrentLine()
+        {
+            if (_history.Count > 0)
+            {
+                // TODO: Actually implement this after we define a variable that stores the current line info
+                ClearLine();
+            }
+        }
         #endregion
 
         #region Case manipulation
@@ -887,6 +899,7 @@ namespace Internal.ReadLine
                 ["ControlN"] =              NextHistory,
                 ["AltOemPeriod"] =          AddLastArgument,
                 ["Alt, ShiftOemComma"] =    FirstHistory,
+                ["Alt, ShiftOemPeriod"] =   GoBackToCurrentLine,
 
                 // Substitution
                 ["ControlT"] =              TransposeChars,
