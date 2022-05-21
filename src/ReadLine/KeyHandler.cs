@@ -44,6 +44,11 @@ namespace Internal.ReadLine
         public string Text => _text.ToString();
 
         /// <summary>
+        /// The current line
+        /// </summary>
+        public string CurrentLine => _currentLine.ToString();
+
+        /// <summary>
         /// The current console clipboard content for use with CTRL + Y (Yank)
         /// </summary>
         public string KillBuffer => _killBuffer.ToString();
@@ -57,8 +62,11 @@ namespace Internal.ReadLine
         private int _completionStart;
         private int _completionsIndex;
         private string _lastHandler;
+        private string _currentHandler;
+        private bool _updateCurrentLine = true;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
+        private readonly StringBuilder _currentLine;
         private readonly List<string> _history;
         private readonly Dictionary<string, Action> _keyActions;
         private readonly IConsole ConsoleWrapper;
@@ -197,6 +205,7 @@ namespace Internal.ReadLine
                 {
                     // Just append the character and write it to the console
                     _text.Append(finalChar);
+                    UpdateCurrentLine();
                     ConsoleWrapper.Write(finalChar);
                     _cursorPos += finalChar.Length;
 
@@ -216,6 +225,7 @@ namespace Internal.ReadLine
 
                     // Inject a character to the main text in the cursor position
                     _text.Insert(_cursorPos, finalChar);
+                    UpdateCurrentLine();
 
                     // Write the result and set the correct console cursor position
                     ConsoleWrapper.Write(finalChar + str);
@@ -311,6 +321,7 @@ namespace Internal.ReadLine
             // Remove a character from the main text
             int index = _cursorPos;
             _text.Remove(index, 1);
+            UpdateCurrentLine();
 
             // Form the result
 #if NETCOREAPP
@@ -584,6 +595,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void StartAutoComplete()
         {
+            _updateCurrentLine = false;
             while (_cursorPos > _completionStart)
                 Backspace();
 
@@ -599,6 +611,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void NextAutoComplete()
         {
+            _updateCurrentLine = false;
             while (_cursorPos > _completionStart)
                 Backspace();
 
@@ -618,6 +631,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void PreviousAutoComplete()
         {
+            _updateCurrentLine = false;
             while (_cursorPos > _completionStart)
                 Backspace();
 
@@ -648,6 +662,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void PrevHistory()
         {
+            _updateCurrentLine = false;
             if (_historyIndex > 0)
             {
                 _historyIndex--;
@@ -660,6 +675,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void NextHistory()
         {
+            _updateCurrentLine = false;
             if (_historyIndex < _history.Count)
             {
                 _historyIndex++;
@@ -689,6 +705,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void FirstHistory()
         {
+            _updateCurrentLine = false;
             if (_history.Count > 0)
             {
                 _historyIndex = 0;
@@ -790,6 +807,18 @@ namespace Internal.ReadLine
 
         #region Main logic
         /// <summary>
+        /// Updates the current line variable
+        /// </summary>
+        private void UpdateCurrentLine()
+        {
+            if (_updateCurrentLine)
+            {
+                _currentLine.Clear();
+                _currentLine.Append(_text.ToString());
+            }
+        }
+
+        /// <summary>
         /// Builds the key input string
         /// </summary>
         /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
@@ -855,6 +884,7 @@ namespace Internal.ReadLine
             _history = history ?? new List<string>();
             _historyIndex = _history.Count;
             _text = new StringBuilder();
+            _currentLine = new StringBuilder();
             _killBuffer = new StringBuilder();
 
             // Assign local functions for Tab actions
@@ -1003,8 +1033,12 @@ namespace Internal.ReadLine
             // Get the key input and assign it to the action defined in the actions list. Otherwise, write the character.
             _keyActions.TryGetValue(BuildKeyInput(), out Action action);
             action ??= WriteChar;
+
+            // Invoke it!
+            _currentHandler = action.Method.Name;
             action.Invoke();
             _lastHandler = action.Method.Name;
+            _updateCurrentLine = true;
         }
         #endregion
     }
