@@ -720,8 +720,8 @@ namespace Internal.ReadLine
         {
             if (_history.Count > 0)
             {
-                // TODO: Actually implement this after we define a variable that stores the current line info
-                ClearLine();
+                _historyIndex = _history.Count;
+                WriteNewString(_currentLine.ToString());
             }
         }
         #endregion
