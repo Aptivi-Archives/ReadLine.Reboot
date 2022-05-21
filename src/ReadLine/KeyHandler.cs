@@ -230,6 +230,25 @@ namespace Internal.ReadLine
                 }
             }
         }
+
+        /// <summary>
+        /// Inserts the comment to the current command
+        /// </summary>
+        private void InsertComment()
+        {
+            int initialConsoleLeft = ConsoleWrapper.CursorLeft + 1;
+            int initialCursorLeft = _cursorPos + 1;
+
+            // Drag the cursor to the beginning of the line
+            MoveCursorHome();
+
+            // Add the comment
+            WriteChar('#');
+
+            // Restore the current position
+            ConsoleWrapper.SetCursorPosition(initialConsoleLeft, ConsoleWrapper.CursorTop);
+            _cursorPos = initialCursorLeft;
+        }
         #endregion
 
         #region Clearing
@@ -771,6 +790,10 @@ namespace Internal.ReadLine
                     case '\\':
                         initialKey = "Oem5";
                         break;
+                    case '#':
+                        initialKey = "D3";
+                        initialModifiers |= ConsoleModifiers.Shift;
+                        break;
                     default:
                         break;
                 }
@@ -918,7 +941,10 @@ namespace Internal.ReadLine
                 ["AltC"] =                  UppercaseCharMoveToEndOfWord,
 
                 // Clipboard manipulation
-                ["ControlY"] =              Yank
+                ["ControlY"] =              Yank,
+
+                // Insertion
+                ["Alt, ShiftD3"] =          InsertComment
             };
         }
 

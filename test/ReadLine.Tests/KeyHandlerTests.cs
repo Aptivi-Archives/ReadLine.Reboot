@@ -85,6 +85,19 @@ namespace ReadLine.Tests
             // Confirm that everything works
             Assert.Equal("Hello World", _keyHandler.Text);
         }
+
+        /// <summary>
+        /// Tests inserting the comment
+        /// </summary>
+        [Fact]
+        public void TestInsertComment()
+        {
+            // Simulate the user pressing the SHIFT + ALT + # key
+            _keyHandler.Handle(AltShiftD3);
+            
+            // Confirm that the hashtag is there
+            Assert.Equal("#Hello", _keyHandler.Text);
+        }
         #endregion
 
         #region Deletion
