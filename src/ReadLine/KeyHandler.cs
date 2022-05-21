@@ -72,7 +72,7 @@ namespace Internal.ReadLine
         private bool IsKillBufferEmpty => _killBuffer.Length == 0;
         internal static ConsoleKeyInfo SimulatedEnter => new ConsoleKeyInfo('\u000A', ConsoleKey.J, false, false, true);
 
-        // --> Cursor movement
+        #region Cursor Movement
 
         /// <summary>
         /// Moves the cursor to the left
@@ -149,9 +149,9 @@ namespace Internal.ReadLine
             while (!IsEndOfLine && _text[_cursorPos] != ' ')
                 MoveCursorRight();
         }
+        #endregion
 
-        // --> Writing
-
+        #region Writing
         /// <summary>
         /// Writes the string to the console, clearing the line beforehand
         /// </summary>
@@ -230,9 +230,9 @@ namespace Internal.ReadLine
                 }
             }
         }
+        #endregion
 
-        // --> Clearing
-
+        #region Clearing
         /// <summary>
         /// Erases the last letter. Simulates the backspace key.
         /// </summary>
@@ -415,9 +415,9 @@ namespace Internal.ReadLine
             // Append the wiped characters to the kill buffer
             _killBuffer.Append(string.Join("", chars));
         }
+        #endregion
 
-        // --> Manipulating
-
+        #region Manipulating
         /// <summary>
         /// Transposes the two characters in the current position
         /// </summary>
@@ -527,9 +527,9 @@ namespace Internal.ReadLine
                 _cursorPos = initialCursorPos;
             }
         }
+        #endregion
 
-        // --> Auto-completion
-
+        #region Auto-completion
         /// <summary>
         /// Starts the auto-completion, showing the first suggestion
         /// </summary>
@@ -591,9 +591,9 @@ namespace Internal.ReadLine
             _completions = null;
             _completionsIndex = 0;
         }
+        #endregion
 
-        // --> Command history
-
+        #region Command history
         /// <summary>
         /// Shows the previous history
         /// </summary>
@@ -634,9 +634,9 @@ namespace Internal.ReadLine
                     WriteString(lastHistoryArgs[lastHistoryArgs.Length - 1]);
             }
         }
+        #endregion
 
-        // --> Case manipulation
-
+        #region Case manipulation
         /// <summary>
         /// Makes the word lowercase
         /// </summary>
@@ -694,9 +694,9 @@ namespace Internal.ReadLine
             WriteChar(Result);
             MoveCursorWordRight();
         }
+        #endregion
 
-        // --> Clipboard manipulation
-
+        #region Clipboard manipulation
         /// <summary>
         /// Pastes the content of console clipboard (kill buffer)
         /// </summary>
@@ -713,9 +713,9 @@ namespace Internal.ReadLine
                 WriteChar();
             }
         }
+        #endregion
 
-        // --> Main logic
-
+        #region Main logic
         /// <summary>
         /// Builds the key input string
         /// </summary>
@@ -909,5 +909,6 @@ namespace Internal.ReadLine
             action.Invoke();
             _lastHandler = action.Method.Name;
         }
+        #endregion
     }
 }
