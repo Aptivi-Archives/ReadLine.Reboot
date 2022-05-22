@@ -37,13 +37,14 @@ namespace ReadLineDemo
         // All fixtures here
         private static readonly Dictionary<string, BaseFixture> fixtures = new()
         { 
-            { "NormalPrompt", new NormalPrompt() },
+            { "NormalPrompt",               new NormalPrompt() },
             { "NormalPromptHistoryEnabled", new NormalPromptHistoryEnabled() } ,
             { "NormalPromptNoAutoComplete", new NormalPromptNoAutoComplete() } ,
-            { "NormalPromptDefault", new NormalPromptDefault() } ,
-            { "NormalPromptCustomPrompt", new NormalPromptCustomPrompt() } ,
-            { "MaskedPrompt", new MaskedPrompt() } ,
-            { "MaskedPromptCustomMask", new MaskedPromptCustomMask() } 
+            { "NormalPromptDefault",        new NormalPromptDefault() } ,
+            { "NormalPromptCustomPrompt",   new NormalPromptCustomPrompt() } ,
+            { "NormalPromptNoYank",         new NormalPromptNoYank() } ,
+            { "MaskedPrompt",               new MaskedPrompt() } ,
+            { "MaskedPromptCustomMask",     new MaskedPromptCustomMask() } 
         };
 
         public static void Main(string[] args)
