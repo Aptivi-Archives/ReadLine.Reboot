@@ -78,6 +78,7 @@ namespace Internal.ReadLine
         private bool IsInAutoCompleteMode => _completions != null;
         private bool IsKillBufferEmpty => _killBuffer.Length == 0;
         internal static ConsoleKeyInfo SimulatedEnter => new ConsoleKeyInfo('\u000A', ConsoleKey.J, false, false, true);
+        internal static ConsoleKeyInfo SimulatedEnterAlt => new ConsoleKeyInfo('\u0004', ConsoleKey.D, false, false, true);
 
         #region Cursor Movement
 

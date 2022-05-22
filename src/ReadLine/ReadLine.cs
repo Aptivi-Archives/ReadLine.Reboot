@@ -143,7 +143,7 @@ namespace ReadLineReboot
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
             // Stop handling keys if Enter is pressed
-            while (keyInfo.Key != ConsoleKey.Enter && !keyInfo.Equals(KeyHandler.SimulatedEnter))
+            while (keyInfo.Key != ConsoleKey.Enter && !keyInfo.Equals(KeyHandler.SimulatedEnter) && !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0))
             {
                 // Handle the key as appropriate
                 keyHandler.Handle(keyInfo);
