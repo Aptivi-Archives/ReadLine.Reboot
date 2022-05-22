@@ -62,7 +62,6 @@ namespace Internal.ReadLine
         private int _completionStart;
         private int _completionsIndex;
         private string _lastHandler;
-        private string _currentHandler;
         private bool _updateCurrentLine = true;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
@@ -797,7 +796,7 @@ namespace Internal.ReadLine
             if (ReadLineReboot.ReadLine.ClipboardEnabled)
             {
                 // Write the kill buffer content
-                if (_killBuffer.Length > 0)
+                if (!IsKillBufferEmpty)
                     WriteString(_killBuffer.ToString());
             }
             else
@@ -1037,7 +1036,6 @@ namespace Internal.ReadLine
             action ??= WriteChar;
 
             // Invoke it!
-            _currentHandler = action.Method.Name;
             action.Invoke();
             _lastHandler = action.Method.Name;
             _updateCurrentLine = true;
