@@ -218,6 +218,27 @@ namespace ReadLine.Tests
             // Confirm that everything works
             Assert.Equal(_homeDir + "Hello", _keyHandler.Text);
         }
+
+        /// <summary>
+        /// Tests writing the tab character verbatim
+        /// </summary>
+        [Fact]
+        public void TestWriteTab()
+        {
+            // Simulate the user pressing the ALT + TAB key
+            _keyHandler.Handle(AltTab);
+
+            // Confirm that we've added three spaces
+            Assert.Equal("Hello   ", _keyHandler.Text);
+            Assert.Equal(8, _keyHandler.Text.Length);
+
+            // Simulate the user pressing the ALT + TAB key
+            _keyHandler.Handle(AltTab);
+
+            // Confirm that we've added eight more spaces
+            Assert.Equal("Hello           ", _keyHandler.Text);
+            Assert.Equal(16, _keyHandler.Text.Length);
+        }
         #endregion
 
         #region Deletion

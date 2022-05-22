@@ -1011,7 +1011,8 @@ namespace Internal.ReadLine
 
                 // Insertion
                 ["Alt, ShiftD3"] =          InsertComment,
-                ["Alt, ShiftD7"] =          InsertHomeDirectory
+                ["Alt, ShiftD7"] =          InsertHomeDirectory,
+                ["AltTab"] =                WriteChar
             };
         }
 

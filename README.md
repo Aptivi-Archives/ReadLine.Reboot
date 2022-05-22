@@ -33,15 +33,18 @@ It is cross platform and runs anywhere .NET is supported, as long as they run on
 | `Alt`+`C`                          | Make char uppercase and move to the end of word      |
 | `Alt`+`V`                          | Make char lowercase and move to the end of word      |
 | `Shift`+`Alt`+`#`                  | Add comment `#` to the beginning of the line         |
+| `Alt`+`Tab`                        | Insert the TAB character verbatim *                  |
 | `Shift`+`Alt`+`&`                  | Perform tilde expansion                              |
 | `Ctrl`+`J` / `Enter`               | End of line                                          |
 | `Ctrl`+`N` / `↓`                   | Forward in history                                   |
 | `Ctrl`+`P` / `↑`                   | Backward in history                                  |
 | `Shift`+`Alt`+`<`                  | First history                                        |
-| `Shift`+`Alt`+`>`                  | Go back to current line                              |
+| `Shift`+`Alt`+`>`                  | Last history (Go back to current line)               |
 | `Alt`+`.`                          | Add last argument to current input                   |
 | `Ctrl`+`I` / `Tab`                 | Command line completion                              |
 | `Shift`+`Ctrl`+`I` / `Shift`+`Tab` | Backwards command line completion                    |
+
+`*`: Conflicts with `Alt`+`Tab` on Windows.
 
 ## Installation
 
