@@ -822,15 +822,16 @@ namespace Internal.ReadLine
         }
 
         /// <summary>
-        /// Builds the key input string
+        /// Corrects the key enumerator on some systems
         /// </summary>
-        /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
-        private string BuildKeyInput()
+        /// <param name="initialKey">The key name</param>
+        /// <param name="initialModifiers">The modifiers pressed at the time of check</param>
+        private void CorrectKeyChar(out string initialKey, out ConsoleModifiers initialModifiers)
         {
-            // On Mono Linux, some of the characters (usually Oem*) is actually "0" according to _keyInfo.Key, screwing the shortcut up and causing
-            // it to not work as defined in the below _keyActions, so give such systems special treatment so they work equally to Windows.
-            string initialKey = _keyInfo.Key.ToString();
-            ConsoleModifiers initialModifiers = _keyInfo.Modifiers;
+            initialKey = _keyInfo.Key.ToString();
+            initialModifiers = _keyInfo.Modifiers;
+
+            // Correct the character if Key is 0
             if (_keyInfo.Key == 0)
             {
                 // Get the affected key from the key character
@@ -864,6 +865,17 @@ namespace Internal.ReadLine
                         break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Builds the key input string
+        /// </summary>
+        /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
+        private string BuildKeyInput()
+        {
+            // On Mono Linux, some of the characters (usually Oem*) is actually "0" according to _keyInfo.Key, screwing the shortcut up and causing
+            // it to not work as defined in the below _keyActions, so give such systems special treatment so they work equally to Windows.
+            CorrectKeyChar(out string initialKey, out ConsoleModifiers initialModifiers);
 
             // Get the key input name
             string inputName = (!initialModifiers.HasFlag(ConsoleModifiers.Control) && !initialModifiers.HasFlag(ConsoleModifiers.Alt) && !initialModifiers.HasFlag(ConsoleModifiers.Shift)) ?
