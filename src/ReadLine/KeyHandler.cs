@@ -272,11 +272,13 @@ namespace Internal.ReadLine
             // Get the home directory based on platform
             bool isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
             string homeDir = isOnWindows ? Environment.GetEnvironmentVariable("USERPROFILE") : Environment.GetEnvironmentVariable("HOME");
+            bool writeHomeDir = false;
 
             // Delete the tilde to replace it with the home directory
             if (onCursor == '~')
             {
                 DeleteChar();
+                writeHomeDir = true;
             }
             else if (behindCursor == '~')
             {
@@ -284,10 +286,12 @@ namespace Internal.ReadLine
                     Backspace();
                 else
                     DeleteChar();
+                writeHomeDir = true;
             }
 
             // Now, do the job!
-            WriteString(homeDir);
+            if (writeHomeDir)
+                WriteString(homeDir);
         }
         #endregion
 
