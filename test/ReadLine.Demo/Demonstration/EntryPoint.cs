@@ -44,7 +44,8 @@ namespace ReadLineDemo
             { "NormalPromptCustomPrompt",   new NormalPromptCustomPrompt() } ,
             { "NormalPromptNoYank",         new NormalPromptNoYank() } ,
             { "MaskedPrompt",               new MaskedPrompt() } ,
-            { "MaskedPromptCustomMask",     new MaskedPromptCustomMask() } 
+            { "MaskedPromptCustomMask",     new MaskedPromptCustomMask() } ,
+            { "CharDebug",                  new CharDebug() } 
         };
 
         public static void Main(string[] args)
