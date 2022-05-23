@@ -519,8 +519,12 @@ namespace Internal.ReadLine
         /// </summary>
         private void TransposeWords()
         {
+            // We can't do this at the end of the line
+            if (IsEndOfLine)
+                return;
+
             // We can't transpose the words in the middle of the words
-            if (_text[_cursorPos] != ' ') 
+            if (_text[_cursorPos] != ' ')
                 return;
 
             // Build the two words required
