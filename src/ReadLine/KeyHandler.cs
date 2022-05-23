@@ -265,6 +265,11 @@ namespace Internal.ReadLine
         /// </summary>
         private void InsertHomeDirectory()
         {
+            // We can't do this when the text is empty
+            if (_text.Length == 0)
+                return;
+
+            // Get the characters on and behind the cursor
             char onCursor = _cursorPos != _cursorLimit ? _text[_cursorPos] : ' ';
             char behindCursor = _cursorPos == 0 ? _text[_cursorPos] : _text[_cursorPos - 1];
             bool canBackspace = _cursorPos != 0;
