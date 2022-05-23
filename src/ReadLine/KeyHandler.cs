@@ -599,7 +599,6 @@ namespace Internal.ReadLine
         /// </summary>
         private void StartAutoComplete()
         {
-            _updateCurrentLine = false;
             while (_cursorPos > _completionStart)
                 Backspace();
 
@@ -615,7 +614,6 @@ namespace Internal.ReadLine
         /// </summary>
         private void NextAutoComplete()
         {
-            _updateCurrentLine = false;
             while (_cursorPos > _completionStart)
                 Backspace();
 
@@ -635,7 +633,6 @@ namespace Internal.ReadLine
         /// </summary>
         private void PreviousAutoComplete()
         {
-            _updateCurrentLine = false;
             while (_cursorPos > _completionStart)
                 Backspace();
 
