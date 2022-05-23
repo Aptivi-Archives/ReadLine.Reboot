@@ -8,6 +8,8 @@ It is cross platform and runs anywhere .NET is supported, as long as they run on
 
 ## Shortcut Guide
 
+_Note: Some keys conflict with terminal emulator keybindings._
+
 | Keybinding                         | Action                                               |
 |:-----------------------------------|:-----------------------------------------------------|
 | `Ctrl`+`A` / `HOME`                | Beginning of line                                    |
@@ -72,7 +74,7 @@ using ReadLineReboot;
 
 ### Input
 
-_Note: The `(prompt>)` is  optional_
+_Note: The `(prompt>)` is optional_
 
 #### Read input
 
