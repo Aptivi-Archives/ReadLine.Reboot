@@ -1237,8 +1237,21 @@ namespace ReadLine.Tests
             // Simulate the user pressing the CTRL + SHIFT + _ key
             _keyHandler.Handle(CtrlShiftMinus);
 
-            // Confirm that the hashtag is there
+            // Confirm that the "World" is there
             Assert.Equal("Hello World", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests undoing all the actions
+        /// </summary>
+        [Fact]
+        public void TestUndoAll()
+        {
+            // Simulate the user pressing the ALT + R key
+            _keyHandler.Handle(AltR);
+
+            // Confirm that nothing is there
+            Assert.Equal("", _keyHandler.Text);
         }
         #endregion
     }

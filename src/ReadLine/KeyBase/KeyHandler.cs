@@ -65,6 +65,8 @@ namespace Internal.ReadLine
         private bool _updateCurrentLine = true;
         private bool _updateCurrentLineHistory = true;
         private bool _middleOfWriteNewString;
+        private bool _middleOfUndoAll;
+        private bool _middleOfUndo;
         private readonly List<string> _currentLineEditHistory;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
@@ -889,12 +891,35 @@ namespace Internal.ReadLine
         {
             if (ReadLineReboot.ReadLine.UndoEnabled)
             {
+                _middleOfUndo = true;
+
                 if (_currentLineEditHistory.Count > 1)
                 {
                     WriteNewString(_currentLineEditHistory[_currentLineEditHistory.Count - 2]);
-                    _currentLineEditHistory.RemoveAt(_currentLineEditHistory.Count - 2);
                     _currentLineEditHistory.RemoveAt(_currentLineEditHistory.Count - 1);
                 }
+                else
+                {
+                    ClearLine();
+                    if (_currentLineEditHistory.Count == 1)
+                        _currentLineEditHistory.RemoveAt(0);
+                }
+
+                _middleOfUndo = false;
+            }
+        }
+
+        /// <summary>
+        /// Undos all the edits done to the current line
+        /// </summary>
+        private void UndoAll()
+        {
+            if (ReadLineReboot.ReadLine.UndoEnabled)
+            {
+                _middleOfUndoAll = true;
+                while (_currentLineEditHistory.Count > 0)
+                    Undo();
+                _middleOfUndoAll = false;
             }
         }
         #endregion
@@ -909,7 +934,7 @@ namespace Internal.ReadLine
             {
                 _currentLine.Clear();
                 _currentLine.Append(_text.ToString());
-                if (_updateCurrentLineHistory && !_middleOfWriteNewString)
+                if (_updateCurrentLineHistory && !_middleOfWriteNewString && !_middleOfUndo && !_middleOfUndoAll)
                     _currentLineEditHistory.Add(_currentLine.ToString());
             }
         }
@@ -1061,7 +1086,8 @@ namespace Internal.ReadLine
                 ["AltTab"] =                    WriteChar,
 
                 // Undoing
-                ["Shift, ControlOemMinus"] =    Undo
+                ["Shift, ControlOemMinus"] =    Undo,
+                ["AltR"] =                      UndoAll
             };
         }
 

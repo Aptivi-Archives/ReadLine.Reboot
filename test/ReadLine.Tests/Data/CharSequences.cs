@@ -98,6 +98,7 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo AltB =                new('b',  ConsoleKey.B,          false, true,  false);
         public static readonly ConsoleKeyInfo AltF =                new('f',  ConsoleKey.F,          false, true,  false);
         public static readonly ConsoleKeyInfo AltL =                new('l',  ConsoleKey.L,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltR =                new('r',  ConsoleKey.R,          false, true,  false);
         public static readonly ConsoleKeyInfo AltU =                new('u',  ConsoleKey.U,          false, true,  false);
         public static readonly ConsoleKeyInfo AltC =                new('c',  ConsoleKey.C,          false, true,  false);
         public static readonly ConsoleKeyInfo AltV =                new('v',  ConsoleKey.V,          false, true,  false);

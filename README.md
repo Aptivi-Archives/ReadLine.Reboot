@@ -38,7 +38,8 @@ _Note: Some keys conflict with terminal emulator keybindings._
 | `Alt`+`Tab`                        | Insert the TAB character verbatim *                  |
 | `Shift`+`Alt`+`&`                  | Perform tilde expansion                              |
 | `Ctrl`+`J` / `Enter`               | End of line                                          |
-| `Ctrl`+`Shift`+`_`                 | Undo the last change                                 |
+| `Ctrl`+`Shift`+`_`                 | Undo the last change **                              |
+| `Alt`+`R`                          | Undos all the changes                                |
 | `Ctrl`+`N` / `↓`                   | Forward in history                                   |
 | `Ctrl`+`P` / `↑`                   | Backward in history                                  |
 | `Shift`+`Alt`+`<`                  | First history                                        |
@@ -47,7 +48,8 @@ _Note: Some keys conflict with terminal emulator keybindings._
 | `Ctrl`+`I` / `Tab`                 | Command line completion                              |
 | `Shift`+`Ctrl`+`I` / `Shift`+`Tab` | Backwards command line completion                    |
 
-`*`: Conflicts with `Alt`+`Tab` on Windows.
+- `*`: Conflicts with `Alt`+`Tab` on Windows.
+- `**`: Conflicts with `Ctrl`+`Shift`+`_` on Windows Command Prompt
 
 ## Installation
 
