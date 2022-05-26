@@ -899,7 +899,7 @@ namespace Internal.ReadLine
         }
         #endregion
 
-        #region Main logic
+        #region Other logic
         /// <summary>
         /// Updates the current line variable
         /// </summary>
@@ -913,76 +913,9 @@ namespace Internal.ReadLine
                     _currentLineEditHistory.Add(_currentLine.ToString());
             }
         }
+        #endregion
 
-        /// <summary>
-        /// Corrects the key enumerator on some systems
-        /// </summary>
-        /// <param name="initialKey">The key name</param>
-        /// <param name="initialModifiers">The modifiers pressed at the time of check</param>
-        private void CorrectKeyChar(out string initialKey, out ConsoleModifiers initialModifiers)
-        {
-            initialKey = _keyInfo.Key.ToString();
-            initialModifiers = _keyInfo.Modifiers;
-
-            // Correct the character if Key is 0
-            if (_keyInfo.Key == 0)
-            {
-                // Get the affected key from the key character
-                switch (_keyInfo.KeyChar)
-                {
-                    // Add only the affected keys we need to use in _keyActions.
-                    case '.':
-                    case '>':
-                        initialKey = "OemPeriod";
-                        if (_keyInfo.KeyChar == '>')
-                            initialModifiers |= ConsoleModifiers.Shift;
-                        break;
-                    case ',':
-                    case '<':
-                        initialKey = "OemComma";
-                        if (_keyInfo.KeyChar == '<')
-                            initialModifiers |= ConsoleModifiers.Shift;
-                        break;
-                    case '-':
-                    case '_':
-                        initialKey = "OemMinus";
-                        if (_keyInfo.KeyChar == '_')
-                            initialModifiers |= ConsoleModifiers.Shift;
-                        break;
-                    case '\\':
-                        initialKey = "Oem5";
-                        break;
-                    case '#':
-                        initialKey = "D3";
-                        initialModifiers |= ConsoleModifiers.Shift;
-                        break;
-                    case '&':
-                        initialKey = "D7";
-                        initialModifiers |= ConsoleModifiers.Shift;
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Builds the key input string
-        /// </summary>
-        /// <returns>The key (for ex. B), or the pressed modifier and the key (for ex. ControlB)</returns>
-        private string BuildKeyInput()
-        {
-            // On Mono Linux, some of the characters (usually Oem*) is actually "0" according to _keyInfo.Key, screwing the shortcut up and causing
-            // it to not work as defined in the below _keyActions, so give such systems special treatment so they work equally to Windows.
-            CorrectKeyChar(out string initialKey, out ConsoleModifiers initialModifiers);
-
-            // Get the key input name
-            string inputName = (!initialModifiers.HasFlag(ConsoleModifiers.Control) && !initialModifiers.HasFlag(ConsoleModifiers.Alt) && !initialModifiers.HasFlag(ConsoleModifiers.Shift)) ?
-                                 initialKey :
-                                 initialModifiers.ToString() + initialKey;
-            return inputName;
-        }
-
+        #region Main logic
         /// <summary>
         /// Initializes the new instance of the key handler class
         /// </summary>
@@ -1150,7 +1083,8 @@ namespace Internal.ReadLine
             }
 
             // Get the key input and assign it to the action defined in the actions list. Otherwise, write the character.
-            _keyActions.TryGetValue(BuildKeyInput(), out Action action);
+            string KeyInputName = KeyTools.BuildKeyInput(keyInfo);
+            _keyActions.TryGetValue(KeyInputName, out Action action);
             action ??= WriteChar;
 
             // Invoke it!
