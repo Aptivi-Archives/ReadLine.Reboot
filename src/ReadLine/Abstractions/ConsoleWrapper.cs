@@ -36,8 +36,6 @@ namespace Internal.ReadLine.Abstractions
 
         public int BufferWidth => Console.BufferWidth;
 
-        public int BufferHeight => Console.BufferHeight;
-
         /// <summary>
         /// Whether we're in the password mode
         /// </summary>
@@ -47,8 +45,6 @@ namespace Internal.ReadLine.Abstractions
         /// The password mask character
         /// </summary>
         public char PasswordMaskChar { get; set; }
-
-        public void SetBufferSize(int width, int height) => Console.SetBufferSize(width, height);
 
         public void SetCursorPosition(int left, int top)
         {
@@ -64,7 +60,5 @@ namespace Internal.ReadLine.Abstractions
 
             Console.Write(value);
         }
-
-        public void WriteLine(string value) => Console.WriteLine(value);
     }
 }
