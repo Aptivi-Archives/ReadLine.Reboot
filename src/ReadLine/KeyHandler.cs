@@ -63,6 +63,8 @@ namespace Internal.ReadLine
         private int _completionsIndex;
         private string _lastHandler;
         private bool _updateCurrentLine = true;
+        private bool _updateCurrentLineHistory = true;
+        private readonly List<string> _currentLineHistory;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
         private readonly StringBuilder _currentLine;
@@ -673,6 +675,7 @@ namespace Internal.ReadLine
         private void PrevHistory()
         {
             _updateCurrentLine = false;
+            _updateCurrentLineHistory = false;
             if (_historyIndex > 0)
             {
                 _historyIndex--;
@@ -686,6 +689,7 @@ namespace Internal.ReadLine
         private void NextHistory()
         {
             _updateCurrentLine = false;
+            _updateCurrentLineHistory = false;
             if (_historyIndex < _history.Count)
             {
                 _historyIndex++;
@@ -718,6 +722,7 @@ namespace Internal.ReadLine
         private void FirstHistory()
         {
             _updateCurrentLine = false;
+            _updateCurrentLineHistory = false;
             if (_history.Count > 0)
             {
                 _historyIndex = 0;
@@ -827,6 +832,8 @@ namespace Internal.ReadLine
             {
                 _currentLine.Clear();
                 _currentLine.Append(_text.ToString());
+                if (_updateCurrentLineHistory)
+                    _currentLineHistory.Add(_currentLine.ToString());
             }
         }
 
@@ -906,6 +913,7 @@ namespace Internal.ReadLine
 
             // Initialize history and text
             _history = history ?? new List<string>();
+            _currentLineHistory = new List<string>();
             _historyIndex = _history.Count;
             _text = new StringBuilder();
             _currentLine = new StringBuilder();
@@ -1063,6 +1071,7 @@ namespace Internal.ReadLine
             action.Invoke();
             _lastHandler = action.Method.Name;
             _updateCurrentLine = true;
+            _updateCurrentLineHistory = true;
         }
         #endregion
     }
