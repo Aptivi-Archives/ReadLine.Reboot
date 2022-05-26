@@ -37,21 +37,22 @@ namespace ReadLine.Tests
         public const char SpaceChar            = ' ';
 
         // The control sequence used in ReadLine.Reboot
-        public const char CtrlAChar = '\u0001';
-        public const char CtrlBChar = '\u0002';
-        public const char CtrlDChar = '\u0004';
-        public const char CtrlEChar = '\u0005';
-        public const char CtrlFChar = '\u0006';
-        public const char CtrlHChar = '\u0008';
-        public const char CtrlIChar = '\u0009';
-        public const char CtrlKChar = '\u000B';
-        public const char CtrlLChar = '\u000C';
-        public const char CtrlNChar = '\u000E';
-        public const char CtrlPChar = '\u0010';
-        public const char CtrlTChar = '\u0014';
-        public const char CtrlUChar = '\u0015';
-        public const char CtrlWChar = '\u0017';
-        public const char CtrlYChar = '\u0019';
+        public const char CtrlAChar =       '\u0001';
+        public const char CtrlBChar =       '\u0002';
+        public const char CtrlDChar =       '\u0004';
+        public const char CtrlEChar =       '\u0005';
+        public const char CtrlFChar =       '\u0006';
+        public const char CtrlHChar =       '\u0008';
+        public const char CtrlIChar =       '\u0009';
+        public const char CtrlKChar =       '\u000B';
+        public const char CtrlLChar =       '\u000C';
+        public const char CtrlNChar =       '\u000E';
+        public const char CtrlPChar =       '\u0010';
+        public const char CtrlTChar =       '\u0014';
+        public const char CtrlUChar =       '\u0015';
+        public const char CtrlWChar =       '\u0017';
+        public const char CtrlYChar =       '\u0019';
+        public const char CtrlSMinusChar =  '\u001f';
 
         // No modifiers
         private const ConsoleModifiers NoModifiers = 0;
@@ -64,21 +65,22 @@ namespace ReadLine.Tests
             { SpaceChar,            Tuple.Create(ConsoleKey.Spacebar,  NoModifiers) },
 
             // The control sequence used in ReadLine.Reboot
-            { CtrlAChar, Tuple.Create(ConsoleKey.A, ConsoleModifiers.Control) },
-            { CtrlBChar, Tuple.Create(ConsoleKey.B, ConsoleModifiers.Control) },
-            { CtrlDChar, Tuple.Create(ConsoleKey.D, ConsoleModifiers.Control) },
-            { CtrlEChar, Tuple.Create(ConsoleKey.E, ConsoleModifiers.Control) },
-            { CtrlFChar, Tuple.Create(ConsoleKey.F, ConsoleModifiers.Control) },
-            { CtrlHChar, Tuple.Create(ConsoleKey.H, ConsoleModifiers.Control) },
-            { CtrlIChar, Tuple.Create(ConsoleKey.I, ConsoleModifiers.Control) },
-            { CtrlKChar, Tuple.Create(ConsoleKey.K, ConsoleModifiers.Control) },
-            { CtrlLChar, Tuple.Create(ConsoleKey.L, ConsoleModifiers.Control) },
-            { CtrlNChar, Tuple.Create(ConsoleKey.N, ConsoleModifiers.Control) },
-            { CtrlPChar, Tuple.Create(ConsoleKey.P, ConsoleModifiers.Control) },
-            { CtrlTChar, Tuple.Create(ConsoleKey.T, ConsoleModifiers.Control) },
-            { CtrlUChar, Tuple.Create(ConsoleKey.U, ConsoleModifiers.Control) },
-            { CtrlWChar, Tuple.Create(ConsoleKey.W, ConsoleModifiers.Control) },
-            { CtrlYChar, Tuple.Create(ConsoleKey.Y, ConsoleModifiers.Control) }
+            { CtrlAChar,        Tuple.Create(ConsoleKey.A,          ConsoleModifiers.Control) },
+            { CtrlBChar,        Tuple.Create(ConsoleKey.B,          ConsoleModifiers.Control) },
+            { CtrlDChar,        Tuple.Create(ConsoleKey.D,          ConsoleModifiers.Control) },
+            { CtrlEChar,        Tuple.Create(ConsoleKey.E,          ConsoleModifiers.Control) },
+            { CtrlFChar,        Tuple.Create(ConsoleKey.F,          ConsoleModifiers.Control) },
+            { CtrlHChar,        Tuple.Create(ConsoleKey.H,          ConsoleModifiers.Control) },
+            { CtrlIChar,        Tuple.Create(ConsoleKey.I,          ConsoleModifiers.Control) },
+            { CtrlKChar,        Tuple.Create(ConsoleKey.K,          ConsoleModifiers.Control) },
+            { CtrlLChar,        Tuple.Create(ConsoleKey.L,          ConsoleModifiers.Control) },
+            { CtrlNChar,        Tuple.Create(ConsoleKey.N,          ConsoleModifiers.Control) },
+            { CtrlPChar,        Tuple.Create(ConsoleKey.P,          ConsoleModifiers.Control) },
+            { CtrlTChar,        Tuple.Create(ConsoleKey.T,          ConsoleModifiers.Control) },
+            { CtrlUChar,        Tuple.Create(ConsoleKey.U,          ConsoleModifiers.Control) },
+            { CtrlWChar,        Tuple.Create(ConsoleKey.W,          ConsoleModifiers.Control) },
+            { CtrlYChar,        Tuple.Create(ConsoleKey.Y,          ConsoleModifiers.Control) },
+            { CtrlSMinusChar,   Tuple.Create(ConsoleKey.OemMinus,   ConsoleModifiers.Control | ConsoleModifiers.Shift) }
         };
 
         // Normal control characters used in ReadLine.Reboot
@@ -113,20 +115,21 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo Space =            SpaceChar.ToConsoleKeyInfo(specialKeyCharMap);
 
         // The control sequence used in ReadLine.Reboot
-        public static readonly ConsoleKeyInfo CtrlA = CtrlAChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlB = CtrlBChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlD = CtrlDChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlE = CtrlEChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlF = CtrlFChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlH = CtrlHChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlI = CtrlIChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlK = CtrlKChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlL = CtrlLChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlN = CtrlNChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlP = CtrlPChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlT = CtrlTChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlU = CtrlUChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlW = CtrlWChar.ToConsoleKeyInfo(specialKeyCharMap);
-        public static readonly ConsoleKeyInfo CtrlY = CtrlYChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlA =            CtrlAChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlB =            CtrlBChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlD =            CtrlDChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlE =            CtrlEChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlF =            CtrlFChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlH =            CtrlHChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlI =            CtrlIChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlK =            CtrlKChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlL =            CtrlLChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlN =            CtrlNChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlP =            CtrlPChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlT =            CtrlTChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlU =            CtrlUChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlW =            CtrlWChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlY =            CtrlYChar.ToConsoleKeyInfo(specialKeyCharMap);
+        public static readonly ConsoleKeyInfo CtrlShiftMinus =   CtrlSMinusChar.ToConsoleKeyInfo(specialKeyCharMap);
     }
 }

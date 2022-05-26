@@ -56,6 +56,11 @@ namespace ReadLineReboot
         public static bool ClipboardEnabled { get; set; } = true;
 
         /// <summary>
+        /// Whether the undo feature is enabled. Currently true.
+        /// </summary>
+        public static bool UndoEnabled { get; set; } = true;
+
+        /// <summary>
         /// The auto completion handler. You need to make a class that implements <see cref="IAutoCompleteHandler"/>
         /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }

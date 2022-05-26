@@ -64,7 +64,8 @@ namespace Internal.ReadLine
         private string _lastHandler;
         private bool _updateCurrentLine = true;
         private bool _updateCurrentLineHistory = true;
-        private readonly List<string> _currentLineHistory;
+        private bool _middleOfWriteNewString;
+        private readonly List<string> _currentLineEditHistory;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
         private readonly StringBuilder _currentLine;
@@ -168,8 +169,16 @@ namespace Internal.ReadLine
         /// <param name="str">The text to be printed</param>
         private void WriteNewString(string str)
         {
+            // We're in the middle of the job
+            _middleOfWriteNewString = true;
+
+            // Write the text after clearing the line
             ClearLine();
             WriteString(str);
+
+            // Update the current line history
+            _middleOfWriteNewString = false;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -178,8 +187,15 @@ namespace Internal.ReadLine
         /// <param name="str">The text to be printed</param>
         private void WriteString(string str)
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
             foreach (char character in str)
                 WriteChar(character);
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -365,9 +381,17 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLine()
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
+            // Clear the line
             MoveCursorEnd();
             while (!IsStartOfLine)
                 Backspace();
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -375,6 +399,9 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineToLeft()
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
             // Clear the kill buffer if the last handler is not this command
             List<char> chars = new List<char>();
             if (_lastHandler != nameof(ClearLineToLeft))
@@ -390,6 +417,10 @@ namespace Internal.ReadLine
             // Append the wiped characters to the kill buffer
             chars.Reverse();
             _killBuffer.Append(string.Join("", chars));
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -397,6 +428,9 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineToRight()
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
             // Clear the kill buffer if the last handler is not this command
             List<char> chars = new List<char>();
             if (_lastHandler != nameof(ClearLineToRight))
@@ -414,6 +448,10 @@ namespace Internal.ReadLine
             // Append the wiped characters to the kill buffer
             chars.Reverse();
             _killBuffer.Append(string.Join("", chars));
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -421,6 +459,9 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineUntilSpace()
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
             // Clear the kill buffer if the last handler is not this command
             List<char> chars = new List<char>();
             if (_lastHandler != nameof(ClearLineUntilSpace))
@@ -443,6 +484,10 @@ namespace Internal.ReadLine
             // Append the wiped characters to the kill buffer
             chars.Reverse();
             _killBuffer.Append(string.Join("", chars));
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -450,6 +495,9 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearHorizontalSpace()
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
             // Clear all whitespaces found to the right
             while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
                 Delete();
@@ -457,6 +505,10 @@ namespace Internal.ReadLine
             // Clear all whitespaces found to the left
             while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]))
                 Backspace();
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
 
         /// <summary>
@@ -464,6 +516,9 @@ namespace Internal.ReadLine
         /// </summary>
         private void ClearLineAfterSpace()
         {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
             // Clear the kill buffer if the last handler is not this command
             List<char> chars = new List<char>();
             if (_lastHandler != nameof(ClearLineAfterSpace))
@@ -485,6 +540,10 @@ namespace Internal.ReadLine
 
             // Append the wiped characters to the kill buffer
             _killBuffer.Append(string.Join("", chars));
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
         }
         #endregion
 
@@ -822,6 +881,24 @@ namespace Internal.ReadLine
         }
         #endregion
 
+        #region Current line history
+        /// <summary>
+        /// Undos the last edit done to the current line
+        /// </summary>
+        private void Undo()
+        {
+            if (ReadLineReboot.ReadLine.UndoEnabled)
+            {
+                if (_currentLineEditHistory.Count > 1)
+                {
+                    WriteNewString(_currentLineEditHistory[_currentLineEditHistory.Count - 2]);
+                    _currentLineEditHistory.RemoveAt(_currentLineEditHistory.Count - 2);
+                    _currentLineEditHistory.RemoveAt(_currentLineEditHistory.Count - 1);
+                }
+            }
+        }
+        #endregion
+
         #region Main logic
         /// <summary>
         /// Updates the current line variable
@@ -832,8 +909,8 @@ namespace Internal.ReadLine
             {
                 _currentLine.Clear();
                 _currentLine.Append(_text.ToString());
-                if (_updateCurrentLineHistory)
-                    _currentLineHistory.Add(_currentLine.ToString());
+                if (_updateCurrentLineHistory && !_middleOfWriteNewString)
+                    _currentLineEditHistory.Add(_currentLine.ToString());
             }
         }
 
@@ -864,6 +941,12 @@ namespace Internal.ReadLine
                     case '<':
                         initialKey = "OemComma";
                         if (_keyInfo.KeyChar == '<')
+                            initialModifiers |= ConsoleModifiers.Shift;
+                        break;
+                    case '-':
+                    case '_':
+                        initialKey = "OemMinus";
+                        if (_keyInfo.KeyChar == '_')
                             initialModifiers |= ConsoleModifiers.Shift;
                         break;
                     case '\\':
@@ -913,7 +996,7 @@ namespace Internal.ReadLine
 
             // Initialize history and text
             _history = history ?? new List<string>();
-            _currentLineHistory = new List<string>();
+            _currentLineEditHistory = new List<string>();
             _historyIndex = _history.Count;
             _text = new StringBuilder();
             _currentLine = new StringBuilder();
@@ -982,67 +1065,70 @@ namespace Internal.ReadLine
             _keyActions = new Dictionary<string, Action>
             {
                 // Cursor movement (left and right)
-                ["LeftArrow"] =             MoveCursorLeft,
-                ["ControlB"] =              MoveCursorLeft,
-                ["AltB"] =                  MoveCursorWordLeft,
-                ["RightArrow"] =            MoveCursorRight,
-                ["ControlF"] =              MoveCursorRight,
-                ["AltF"] =                  MoveCursorWordRight,
+                ["LeftArrow"] =                 MoveCursorLeft,
+                ["ControlB"] =                  MoveCursorLeft,
+                ["AltB"] =                      MoveCursorWordLeft,
+                ["RightArrow"] =                MoveCursorRight,
+                ["ControlF"] =                  MoveCursorRight,
+                ["AltF"] =                      MoveCursorWordRight,
 
                 // Cursor movement (home and end)
-                ["Home"] =                  MoveCursorHome,
-                ["ControlA"] =              MoveCursorHome,
-                ["End"] =                   MoveCursorEnd,
-                ["ControlE"] =              MoveCursorEnd,
+                ["Home"] =                      MoveCursorHome,
+                ["ControlA"] =                  MoveCursorHome,
+                ["End"] =                       MoveCursorEnd,
+                ["ControlE"] =                  MoveCursorEnd,
 
                 // Deletion of one character
-                ["Backspace"] =             Backspace,
-                ["ControlH"] =              Backspace,
-                ["Delete"] =                Delete,
-                ["ControlD"] =              Delete,
+                ["Backspace"] =                 Backspace,
+                ["ControlH"] =                  Backspace,
+                ["Delete"] =                    Delete,
+                ["ControlD"] =                  Delete,
 
                 // Deletion of whole line
-                ["Escape"] =                ClearLine,
-                ["ControlL"] =              ClearLine,
-                ["ControlU"] =              ClearLineToLeft,
-                ["ControlK"] =              ClearLineToRight,
-                ["ControlW"] =              ClearLineUntilSpace,
-                ["AltBackspace"] =          ClearLineUntilSpace,
-                ["AltD"] =                  ClearLineAfterSpace,
-                ["AltOem5"] =               ClearHorizontalSpace,
+                ["Escape"] =                    ClearLine,
+                ["ControlL"] =                  ClearLine,
+                ["ControlU"] =                  ClearLineToLeft,
+                ["ControlK"] =                  ClearLineToRight,
+                ["ControlW"] =                  ClearLineUntilSpace,
+                ["AltBackspace"] =              ClearLineUntilSpace,
+                ["AltD"] =                      ClearLineAfterSpace,
+                ["AltOem5"] =                   ClearHorizontalSpace,
 
                 // History manipulation
-                ["UpArrow"] =               PrevHistory,
-                ["ControlP"] =              PrevHistory,
-                ["DownArrow"] =             NextHistory,
-                ["ControlN"] =              NextHistory,
-                ["AltOemPeriod"] =          AddLastArgument,
-                ["Alt, ShiftOemComma"] =    FirstHistory,
-                ["Alt, ShiftOemPeriod"] =   GoBackToCurrentLine,
+                ["UpArrow"] =                   PrevHistory,
+                ["ControlP"] =                  PrevHistory,
+                ["DownArrow"] =                 NextHistory,
+                ["ControlN"] =                  NextHistory,
+                ["AltOemPeriod"] =              AddLastArgument,
+                ["Alt, ShiftOemComma"] =        FirstHistory,
+                ["Alt, ShiftOemPeriod"] =       GoBackToCurrentLine,
 
                 // Substitution
-                ["ControlT"] =              TransposeChars,
-                ["AltT"] =                  TransposeWords,
+                ["ControlT"] =                  TransposeChars,
+                ["AltT"] =                      TransposeWords,
 
                 // Auto-completion initialization
-                ["Tab"] =                   DoAutoComplete,
-                ["ControlI"] =              DoAutoComplete,
-                ["ShiftTab"] =              DoReverseAutoComplete,
-                ["Shift, ControlI"] =       DoReverseAutoComplete,
+                ["Tab"] =                       DoAutoComplete,
+                ["ControlI"] =                  DoAutoComplete,
+                ["ShiftTab"] =                  DoReverseAutoComplete,
+                ["Shift, ControlI"] =           DoReverseAutoComplete,
 
                 // Case manipulation
-                ["AltL"] =                  LowercaseWord,
-                ["AltU"] =                  UppercaseWord,
-                ["AltV"] =                  LowercaseCharMoveToEndOfWord,
-                ["AltC"] =                  UppercaseCharMoveToEndOfWord,
+                ["AltL"] =                      LowercaseWord,
+                ["AltU"] =                      UppercaseWord,
+                ["AltV"] =                      LowercaseCharMoveToEndOfWord,
+                ["AltC"] =                      UppercaseCharMoveToEndOfWord,
 
                 // Clipboard manipulation
-                ["ControlY"] =              Yank,
+                ["ControlY"] =                  Yank,
 
                 // Insertion
-                ["Alt, ShiftD3"] =          InsertComment,
-                ["Alt, ShiftD7"] =          InsertHomeDirectory,
-                ["AltTab"] =                WriteChar
+                ["Alt, ShiftD3"] =              InsertComment,
+                ["Alt, ShiftD7"] =              InsertHomeDirectory,
+                ["AltTab"] =                    WriteChar,
+
+                // Undoing
+                ["Shift, ControlOemMinus"] =    Undo
             };
         }
 

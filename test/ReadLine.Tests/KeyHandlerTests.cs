@@ -1220,5 +1220,26 @@ namespace ReadLine.Tests
             });
         }
         #endregion
+
+        #region Current line history
+        /// <summary>
+        /// Tests undoing the action
+        /// </summary>
+        [Fact]
+        public void TestUndo()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                    .Append(CtrlW)
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the CTRL + SHIFT + _ key
+            _keyHandler.Handle(CtrlShiftMinus);
+
+            // Confirm that the hashtag is there
+            Assert.Equal("Hello World", _keyHandler.Text);
+        }
+        #endregion
     }
 }

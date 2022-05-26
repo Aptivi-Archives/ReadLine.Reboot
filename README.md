@@ -38,6 +38,7 @@ _Note: Some keys conflict with terminal emulator keybindings._
 | `Alt`+`Tab`                        | Insert the TAB character verbatim *                  |
 | `Shift`+`Alt`+`&`                  | Perform tilde expansion                              |
 | `Ctrl`+`J` / `Enter`               | End of line                                          |
+| `Ctrl`+`Shift`+`_`                 | Undo the last change                                 |
 | `Ctrl`+`N` / `↓`                   | Forward in history                                   |
 | `Ctrl`+`P` / `↑`                   | Backward in history                                  |
 | `Shift`+`Alt`+`<`                  | First history                                        |
