@@ -38,6 +38,7 @@ namespace ReadLineDemo.Demonstration.Fixtures
                 ConsoleKeyInfo key = Console.ReadKey(true);
                 Console.WriteLine();
                 Console.WriteLine("KeyChar:   " + key.KeyChar);
+                Console.WriteLine("KeyNum:    " + Convert.ToInt32(key.KeyChar));
                 Console.WriteLine("Key:       " + key.Key.ToString());
                 Console.WriteLine("Modifiers: " + key.Modifiers.ToString());
             }
