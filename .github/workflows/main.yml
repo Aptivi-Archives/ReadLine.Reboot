@@ -27,7 +27,7 @@ jobs:
       run: nuget setApiKey ${{ secrets.NUGET_APIKEY }}
     - name: Package Publication
       run: |
-        $path = "src\ReadLine\bin\Release"
+        $path = "ReadLine.Reboot\bin\Release"
         $FileName = Get-ChildItem -Path $path -Name -Filter "ReadLine.Reboot.*"
         nuget push "$path\$FileName" -source "nuget.org"
         

@@ -27,6 +27,6 @@ jobs:
       run: msbuild "ReadLine.Reboot.sln" /p:Configuration=Release
     - name: Package Publication
       run: |
-        $path = "src\ReadLine\bin\Release"
+        $path = "ReadLine.Reboot\bin\Release"
         $FileName = Get-ChildItem -Path $path -Name -Filter "ReadLine.Reboot.*"
         curl -vX PUT -u "EoflaOE:${{ secrets.G_APIKEY }}" -F package="@$path\$FileName" https://nuget.pkg.github.com/EoflaOE/
