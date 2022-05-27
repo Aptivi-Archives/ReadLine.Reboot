@@ -30,6 +30,8 @@ namespace Internal.ReadLineReboot
 {
     internal static class KeyTools
     {
+        private const char CtrlSMinusChar = '\u001f';
+
         /// <summary>
         /// Corrects the key enumerator on some systems
         /// </summary>
@@ -60,11 +62,14 @@ namespace Internal.ReadLineReboot
                         if (keyInfo.KeyChar == '<')
                             initialModifiers |= ConsoleModifiers.Shift;
                         break;
-                    case '-':
                     case '_':
                         initialKey = "OemMinus";
-                        if (keyInfo.KeyChar == '_')
-                            initialModifiers |= ConsoleModifiers.Shift;
+                        initialModifiers |= ConsoleModifiers.Shift;
+                        break;
+                    case CtrlSMinusChar:
+                        initialKey = "OemMinus";
+                        initialModifiers |= ConsoleModifiers.Shift;
+                        initialModifiers |= ConsoleModifiers.Control;
                         break;
                     case '\\':
                         initialKey = "Oem5";
