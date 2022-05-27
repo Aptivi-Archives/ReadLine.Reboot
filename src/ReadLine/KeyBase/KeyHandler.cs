@@ -62,6 +62,7 @@ namespace Internal.ReadLine
         private int _completionStart;
         private int _completionsIndex;
         private string _lastHandler;
+        private string _currentHandler;
         private bool _updateCurrentLine = true;
         private bool _updateCurrentLineHistory = true;
         private bool _middleOfWriteNewString;
@@ -701,7 +702,8 @@ namespace Internal.ReadLine
                         return;
 
                     // Start the auto completion
-                    StartAutoComplete();
+                    if (_currentHandler != nameof(InsertCompletions))
+                        StartAutoComplete();
                 }
             }
             else
@@ -780,6 +782,24 @@ namespace Internal.ReadLine
 
             // Write the suggestion
             WriteString(_completions[_completionsIndex]);
+        }
+
+        /// <summary>
+        /// Inserts available completions
+        /// </summary>
+        private void InsertCompletions()
+        {
+            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            {
+                // Initialize suggestions
+                DoAutoComplete();
+
+                // Dump all the suggestions
+                WriteString(string.Join(" ", _completions));
+
+                // Finalize suggestions
+                ResetAutoComplete();
+            }
         }
 
         /// <summary>
@@ -1075,6 +1095,7 @@ namespace Internal.ReadLine
                 ["ControlI"] =                  DoAutoComplete,
                 ["ShiftTab"] =                  DoReverseAutoComplete,
                 ["Shift, ControlI"] =           DoReverseAutoComplete,
+                ["Alt, ShiftD8"] =              InsertCompletions,
 
                 // Case manipulation
                 ["AltL"] =                      LowercaseWord,
@@ -1119,6 +1140,7 @@ namespace Internal.ReadLine
             action ??= WriteChar;
 
             // Invoke it!
+            _currentHandler = action.Method.Name;
             action.Invoke();
             _lastHandler = action.Method.Name;
             _updateCurrentLine = true;

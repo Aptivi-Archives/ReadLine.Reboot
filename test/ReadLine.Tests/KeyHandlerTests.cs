@@ -1219,6 +1219,27 @@ namespace ReadLine.Tests
                 Assert.Equal($"Hi {completion}", _keyHandler.Text);
             });
         }
+
+        /// <summary>
+        /// Tests inserting completions
+        /// </summary>
+        [Fact]
+        public void TestInsertCompletions()
+        {
+            // Let's set one up
+            _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
+
+            // Write this
+            "Hi ".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                 .ToList()
+                 .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the ALT + SHIFT + * key
+            _keyHandler.Handle(AltShiftD8);
+
+            // Ensure that everything is written
+            Assert.Equal("Hi World Angel Love", _keyHandler.Text);
+        }
         #endregion
 
         #region Current line history

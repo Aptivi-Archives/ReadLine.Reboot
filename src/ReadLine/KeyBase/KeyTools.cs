@@ -77,6 +77,10 @@ namespace Internal.ReadLine
                         initialKey = "D7";
                         initialModifiers |= ConsoleModifiers.Shift;
                         break;
+                    case '*':
+                        initialKey = "D8";
+                        initialModifiers |= ConsoleModifiers.Shift;
+                        break;
                     default:
                         break;
                 }
