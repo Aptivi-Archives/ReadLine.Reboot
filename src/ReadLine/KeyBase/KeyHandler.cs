@@ -73,6 +73,7 @@ namespace Internal.ReadLine
         private readonly StringBuilder _currentLine;
         private readonly List<string> _history;
         private readonly Dictionary<string, Action> _keyActions;
+        private readonly IAutoCompleteHandler _autoCompleteHandler;
         private readonly IConsole ConsoleWrapper;
 
         // Private Properties
@@ -667,6 +668,68 @@ namespace Internal.ReadLine
 
         #region Auto-completion
         /// <summary>
+        /// Initialize auto-complete initially
+        /// </summary>
+        private void DoAutoComplete()
+        {
+            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            {
+                if (IsInAutoCompleteMode)
+                {
+                    // We're in the middle of auto-completion. Get the next suggestion
+                    NextAutoComplete();
+                }
+                else
+                {
+                    // If there is no handler installed or if we're in the middle of the line
+                    if (_autoCompleteHandler == null || !IsEndOfLine)
+                        return;
+
+                    // Get the initial text
+                    string text = _text.ToString();
+
+                    // Get the completion start index (get the last index of any of the separators found in the text)
+                    _completionStart = text.LastIndexOfAny(_autoCompleteHandler.Separators);
+                    _completionStart = _completionStart == -1 ? 0 : _completionStart + 1;
+
+                    // Get the suggestions based on the current text and the completion start index
+                    _completions = _autoCompleteHandler.GetSuggestions(text, _completionStart);
+                    _completions = _completions?.Length == 0 ? null : _completions;
+
+                    // If we have no completions, bail
+                    if (_completions == null)
+                        return;
+
+                    // Start the auto completion
+                    StartAutoComplete();
+                }
+            }
+            else
+            {
+                WriteChar();
+            }
+        }
+
+        /// <summary>
+        /// Does the reverse auto complete
+        /// </summary>
+        private void DoReverseAutoComplete()
+        {
+            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            {
+                if (IsInAutoCompleteMode)
+                {
+                    // We're in the middle of auto-completion. Get the previous suggestion
+                    PreviousAutoComplete();
+                }
+            }
+            else
+            {
+                WriteChar();
+            }
+        }
+
+        /// <summary>
         /// Starts the auto-completion, showing the first suggestion
         /// </summary>
         private void StartAutoComplete()
@@ -959,65 +1022,7 @@ namespace Internal.ReadLine
             _text = new StringBuilder();
             _currentLine = new StringBuilder();
             _killBuffer = new StringBuilder();
-
-            // Assign local functions for Tab actions
-            // -> Next suggestion
-            void DoAutoComplete()
-            {
-                if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
-                {
-                    if (IsInAutoCompleteMode)
-                    {
-                        // We're in the middle of auto-completion. Get the next suggestion
-                        NextAutoComplete();
-                    }
-                    else
-                    {
-                        // If there is no handler installed or if we're in the middle of the line
-                        if (autoCompleteHandler == null || !IsEndOfLine)
-                            return;
-
-                        // Get the initial text
-                        string text = _text.ToString();
-
-                        // Get the completion start index (get the last index of any of the separators found in the text)
-                        _completionStart = text.LastIndexOfAny(autoCompleteHandler.Separators);
-                        _completionStart = _completionStart == -1 ? 0 : _completionStart + 1;
-
-                        // Get the suggestions based on the current text and the completion start index
-                        _completions = autoCompleteHandler.GetSuggestions(text, _completionStart);
-                        _completions = _completions?.Length == 0 ? null : _completions;
-
-                        // If we have no completions, bail
-                        if (_completions == null)
-                            return;
-
-                        // Start the auto completion
-                        StartAutoComplete();
-                    }
-                }
-                else
-                {
-                    WriteChar();
-                }
-            }
-
-            // -> Previous suggestion
-            void DoReverseAutoComplete()
-            {
-                if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
-                {
-                    if (IsInAutoCompleteMode)
-                    {
-                        // We're in the middle of auto-completion. Get the previous suggestion
-                        PreviousAutoComplete();
-                    }
-                }
-                else
-                {
-                    WriteChar();
-                }
-            }
+            _autoCompleteHandler = autoCompleteHandler;
 
             // Assign the key actions
             _keyActions = new Dictionary<string, Action>
