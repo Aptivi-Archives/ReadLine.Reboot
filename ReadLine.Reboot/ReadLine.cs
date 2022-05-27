@@ -61,6 +61,11 @@ namespace ReadLineReboot
         public static bool UndoEnabled { get; set; } = true;
 
         /// <summary>
+        /// Whether the CTRL + C to EOL feature is enabled. Currently false. If false, exits program upon pressing CTRL + C.
+        /// </summary>
+        public static bool CtrlCEnabled { get; set; }
+
+        /// <summary>
         /// The auto completion handler. You need to make a class that implements <see cref="IAutoCompleteHandler"/>
         /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }
@@ -144,16 +149,27 @@ namespace ReadLineReboot
 
         private static string GetText(KeyHandler keyHandler)
         {
+            // Check to see if we're going to treat CTRL + C as actual input
+            if (CtrlCEnabled)
+                Console.TreatControlCAsInput = true;
+
             // Get the key
             ConsoleKeyInfo keyInfo = Console.ReadKey(true);
 
             // Stop handling keys if Enter is pressed
-            while (keyInfo.Key != ConsoleKey.Enter && !keyInfo.Equals(KeyHandler.SimulatedEnter) && !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0))
+            while (keyInfo.Key != ConsoleKey.Enter && 
+                   !keyInfo.Equals(KeyHandler.SimulatedEnter) && 
+                   !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
+                   !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
             {
                 // Handle the key as appropriate
                 keyHandler.Handle(keyInfo);
                 keyInfo = Console.ReadKey(true);
             }
+
+            // Restore CTRL + C state
+            if (CtrlCEnabled)
+                Console.TreatControlCAsInput = false;
 
             // Write a new line and get the text
             Console.WriteLine();

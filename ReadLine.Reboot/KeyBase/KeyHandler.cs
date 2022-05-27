@@ -86,6 +86,7 @@ namespace Internal.ReadLineReboot
         private bool IsKillBufferEmpty => _killBuffer.Length == 0;
         internal static ConsoleKeyInfo SimulatedEnter => new ConsoleKeyInfo('\u000A', ConsoleKey.J, false, false, true);
         internal static ConsoleKeyInfo SimulatedEnterAlt => new ConsoleKeyInfo('\u0004', ConsoleKey.D, false, false, true);
+        internal static ConsoleKeyInfo SimulatedEnterCtrlC => new ConsoleKeyInfo('\u0003', ConsoleKey.C, false, false, true);
 
         #region Cursor Movement
 
