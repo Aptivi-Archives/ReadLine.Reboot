@@ -24,8 +24,8 @@
  * 
  */
 
-using Internal.ReadLine;
-using Internal.ReadLine.Abstractions;
+using Internal.ReadLineReboot;
+using Internal.ReadLineReboot.Abstractions;
 using System;
 using System.Collections.Generic;
 

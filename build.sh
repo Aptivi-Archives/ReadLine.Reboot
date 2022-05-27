@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [[ !$1 ]]; then
-    CONFIGURATION="Debug"
+    CONFIGURATION="Release"
 fi
 
 if [[ $1 ]]; then
@@ -9,6 +9,6 @@ if [[ $1 ]]; then
 fi
 
 dotnet restore
-dotnet build ./src/ReadLine -c $CONFIGURATION
-dotnet build ./src/ReadLine.Demo -c $CONFIGURATION
-dotnet build ./test/ReadLine.Tests -c $CONFIGURATION
+dotnet build ./ReadLine.Reboot -c $CONFIGURATION
+dotnet build ./ReadLine.Reboot.Demo -c $CONFIGURATION
+dotnet build ./ReadLine.Reboot.Tests -c $CONFIGURATION

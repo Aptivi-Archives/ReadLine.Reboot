@@ -24,7 +24,7 @@
  * 
  */
 
-namespace Internal.ReadLine.Abstractions
+namespace Internal.ReadLineReboot.Abstractions
 {
     internal interface IConsole
     {

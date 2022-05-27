@@ -3,7 +3,7 @@
         {
             "src": [
                 {
-                    "files": [ "src/ReadLine/**.csproj" ],
+                    "files": [ "ReadLine.Reboot/**.csproj" ],
                     "src": ".."
                 }
             ],

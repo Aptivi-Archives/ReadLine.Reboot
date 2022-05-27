@@ -25,8 +25,8 @@
  */
 
 using Extensification.CharExts;
-using Internal.ReadLine;
-using Internal.ReadLine.Abstractions;
+using Internal.ReadLineReboot;
+using Internal.ReadLineReboot.Abstractions;
 using ReadLine.Tests.Abstractions;
 using System;
 using System.Collections.Generic;

@@ -24,45 +24,41 @@
  * 
  */
 
-using Internal.ReadLine.Abstractions;
+using System;
 
-namespace ReadLine.Tests.Abstractions
+namespace Internal.ReadLineReboot.Abstractions
 {
-    internal class DumbConsole : IConsole
+    internal class ConsoleWrapper : IConsole
     {
-        private int _cursorLeft;
-        private int _cursorTop;
-        private readonly int _bufferWidth;
+        public int CursorLeft => Console.CursorLeft;
 
-        public int CursorLeft => _cursorLeft;
+        public int CursorTop => Console.CursorTop;
 
-        public int CursorTop => _cursorTop;
+        public int BufferWidth => Console.BufferWidth;
 
-        public int BufferWidth => _bufferWidth;
+        /// <summary>
+        /// Whether we're in the password mode
+        /// </summary>
+        public bool PasswordMode { get; set; }
 
-        public bool PasswordMode { get; set; } = false;
-
-        public char PasswordMaskChar { get; set; } = default;
-
-        public DumbConsole()
-        {
-            _cursorLeft = 0;
-            _cursorTop = 0;
-            _bufferWidth = 100;
-        }
+        /// <summary>
+        /// The password mask character
+        /// </summary>
+        public char PasswordMaskChar { get; set; }
 
         public void SetCursorPosition(int left, int top)
         {
             if (!PasswordMode || PasswordMaskChar != default)
-            {
-                _cursorLeft = left;
-                _cursorTop = top;
-            }
+                Console.SetCursorPosition(left, top);
         }
 
         public void Write(string value)
         {
-            _cursorLeft += value.Length;
+            // If we're in the password mode, mask the rendered string
+            if (PasswordMode)
+                value = new string(PasswordMaskChar, value.Length);
+
+            Console.Write(value);
         }
     }
 }

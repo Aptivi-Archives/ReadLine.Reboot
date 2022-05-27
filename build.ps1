@@ -1,8 +1,8 @@
 param(
-    [string]$p1 = "Debug"
+    [string]$p1 = "Release"
 )
 
 dotnet restore
-dotnet build ".\src\ReadLine" -c $p1
-dotnet build ".\src\ReadLine.Demo" -c $p1
-dotnet build ".\test\ReadLine.Tests" -c $p1
+dotnet build ".\ReadLine.Reboot" -c $p1
+dotnet build ".\ReadLine.Reboot.Demo" -c $p1
+dotnet build ".\ReadLine.Reboot.Tests" -c $p1

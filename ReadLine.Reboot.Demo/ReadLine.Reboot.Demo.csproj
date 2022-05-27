@@ -5,7 +5,7 @@
     <DebugType>portable</DebugType>
     <AssemblyName>ReadLine.Reboot.Demo</AssemblyName>
     <OutputType>Exe</OutputType>
-    <PackageId>ReadLine.Demo</PackageId>
+    <PackageId>ReadLine.Reboot.Demo</PackageId>
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../../src/ReadLine/ReadLine.csproj" />
+    <ProjectReference Include="../ReadLine.Reboot/ReadLine.Reboot.csproj" />
   </ItemGroup>
 
 </Project>

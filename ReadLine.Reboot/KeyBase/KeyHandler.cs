@@ -24,13 +24,13 @@
  * 
  */
 
-using Internal.ReadLine.Abstractions;
+using Internal.ReadLineReboot.Abstractions;
 using ReadLineReboot;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Internal.ReadLine
+namespace Internal.ReadLineReboot
 {
     /// <summary>
     /// The keyhandler class
@@ -673,7 +673,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void DoAutoComplete()
         {
-            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            if (ReadLine.AutoCompletionEnabled)
             {
                 if (IsInAutoCompleteMode)
                 {
@@ -717,7 +717,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void DoReverseAutoComplete()
         {
-            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            if (ReadLine.AutoCompletionEnabled)
             {
                 if (IsInAutoCompleteMode)
                 {
@@ -789,7 +789,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void InsertCompletions()
         {
-            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            if (ReadLine.AutoCompletionEnabled)
             {
                 // Initialize suggestions
                 DoAutoComplete();
@@ -953,7 +953,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void Yank()
         {
-            if (ReadLineReboot.ReadLine.ClipboardEnabled)
+            if (ReadLine.ClipboardEnabled)
             {
                 // Write the kill buffer content
                 if (!IsKillBufferEmpty)
@@ -972,7 +972,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void Undo()
         {
-            if (ReadLineReboot.ReadLine.UndoEnabled)
+            if (ReadLine.UndoEnabled)
             {
                 _middleOfUndo = true;
 
@@ -997,7 +997,7 @@ namespace Internal.ReadLine
         /// </summary>
         private void UndoAll()
         {
-            if (ReadLineReboot.ReadLine.UndoEnabled)
+            if (ReadLine.UndoEnabled)
             {
                 _middleOfUndoAll = true;
                 while (_currentLineEditHistory.Count > 0)
@@ -1126,7 +1126,7 @@ namespace Internal.ReadLine
             _keyInfo = keyInfo;
 
             // Reset the auto completion if we didn't press TAB
-            if (ReadLineReboot.ReadLine.AutoCompletionEnabled)
+            if (ReadLine.AutoCompletionEnabled)
             {
                 if (IsInAutoCompleteMode && _keyInfo.Key != ConsoleKey.Tab &&
                                             _keyInfo.Key != ConsoleKey.I && (!_keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control) ||
