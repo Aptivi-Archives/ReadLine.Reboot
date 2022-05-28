@@ -171,9 +171,19 @@ namespace ReadLineReboot
             if (CtrlCEnabled)
                 Console.TreatControlCAsInput = false;
 
-            // Write a new line and get the text
-            Console.WriteLine();
-            return keyHandler.Text;
+            // Check to see if we're aborting
+            if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+            {
+                // We're aborting. Return nothing.
+                Console.WriteLine("^C");
+                return "";
+            }
+            else
+            {
+                // Write a new line and get the text
+                Console.WriteLine();
+                return keyHandler.Text;
+            }
         }
     }
 }
