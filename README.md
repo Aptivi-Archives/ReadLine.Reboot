@@ -68,6 +68,33 @@ PM> Install-Package ReadLine.Reboot
 dotnet add package ReadLine.Reboot
 ```
 
+## Comparison
+
+Here, we'll compare some of the base features between [Original ReadLine](https://github.com/tonerdo/readline), [Latency's ReadLine](https://github.com/Latency/ReadLine), and ReadLine.Reboot.
+
+| Feature                         | Original       | Latency's   | ReadLine.Reboot  | Notes
+|:--------------------------------|:--------------:|:-----------:|:----------------:|:--------
+| `CTRL + A` / `HOME`             | Works          | Works       | Works            |
+| `CTRL + E` / `END`              | Works          | Works       | Works            |
+| `CTRL + B` / `LEFT`             | Works          | Malfunction | Works            | Cursor goes backwards too much until the crash occurs
+| `CTRL + F` / `RIGHT`            | Works          | Works       | Works            |
+| `CTRL + C`                      | Nonfunctional  | Malfunction | Works            | Unimplemented in original, Latency's implementation just [always exits the app](https://github.com/Latency/ReadLine/blob/master/ReadLine/KeyHandler.cs#L37), Ours works if you have CtrlCEnabled set to `true`
+| `CTRL + H` / `BACKSPACE`        | Works          | Malfunction | Works            | Cursor goes backwards too much until the crash occurs
+| `CTRL + D` / `DEL`              | Works          | Works       | Works            |
+| `CTRL + L` / `ESC`              | Works          | Malfunction | Works            | Cursor goes backwards too much until the crash occurs
+| `CTRL + U`                      | Works          | Malfunction | Works            | Cursor goes backwards too much until the crash occurs
+| `CTRL + K`                      | Works          | Malfunction | Works            | Cursor goes backwards too much until the crash occurs
+| `CTRL + W`                      | Partial        | Partial     | Works            | Wipe all whitespace before erasure in original and Latency's
+| `ALT + BACKSPACE`               | Nonfunctional  | Malfunction | Works            | Unimplemented in original and Latency, cursor goes backwards too much until the crash occurs (Latency)
+| `CTRL + T`                      | Works          | Malfunction | Works            | Corrupts output
+| `CTRL + J`                      | Partial        | Partial     | Works            | Appends ACTUAL newline on Windows in original and Latency's
+| `CTRL + N` / `DOWN` (history)   | Partial        | Malfunction | Works            | Clears line in original, corrupts output in Latency's
+| `CTRL + P` / `UP` (history)     | Partial        | Malfunction | Works            | Clears line in original, corrupts output in Latency's
+| `TAB` (autocomplete)            | Works          | Works       | Works            |
+| `TAB` (no autocomplete)         | Partial        | Partial     | Works            | Whole ReadLine doesn't really support tab chars, ReadLine.Reboot treats tabs as eight spaces
+| `SHIFT + TAB` (autocomplete)    | Works          | Works       | Works            |
+| `SHIFT + TAB` (no autocomplete) | Partial        | Partial     | Works            | Whole ReadLine doesn't really support tab chars, ReadLine.Reboot treats tabs as eight spaces
+
 ## Usage
 
 This section shows you how to use this library to read the lines and manage history. Just add this to the top of the source file you want to use ReadLine.Reboot on:
