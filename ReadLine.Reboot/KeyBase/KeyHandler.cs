@@ -153,6 +153,8 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void MoveCursorWordLeft()
         {
+            while (!IsStartOfLine && _text[_cursorPos - 1] == ' ')
+                MoveCursorLeft();
             while (!IsStartOfLine && _text[_cursorPos - 1] != ' ')
                 MoveCursorLeft();
         }
@@ -162,6 +164,8 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void MoveCursorWordRight()
         {
+            while (!IsEndOfLine && _text[_cursorPos] == ' ')
+                MoveCursorRight();
             while (!IsEndOfLine && _text[_cursorPos] != ' ')
                 MoveCursorRight();
         }
