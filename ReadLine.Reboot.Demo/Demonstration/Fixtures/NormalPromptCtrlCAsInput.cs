@@ -38,7 +38,8 @@ namespace ReadLineDemo.Demonstration.Fixtures
             {
                 ReadLine.CtrlCEnabled = true;
                 input = ReadLine.Read("(prompt)> ");
-                Console.WriteLine($"<< {input}");
+                if (ReadLine.ReadRanToCompletion)
+                    Console.WriteLine($"<< {input}");
             }
         }
     }

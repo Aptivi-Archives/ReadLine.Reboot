@@ -66,6 +66,11 @@ namespace ReadLineReboot
         public static bool CtrlCEnabled { get; set; }
 
         /// <summary>
+        /// Whether the last <see cref="Read(string, string)"/> or <see cref="ReadPassword(string, char)"/> request ran to completion
+        /// </summary>
+        public static bool ReadRanToCompletion { get; private set; }
+
+        /// <summary>
         /// The auto completion handler. You need to make a class that implements <see cref="IAutoCompleteHandler"/>
         /// </summary>
         public static IAutoCompleteHandler AutoCompletionHandler { private get; set; }
@@ -108,6 +113,9 @@ namespace ReadLineReboot
         /// <returns>The written text if anything is input from the user, or the default text if nothing if printed</returns>
         public static string Read(string prompt = "", string defaultText = "")
         {
+            // Reset the flag
+            ReadRanToCompletion = false;
+
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
@@ -139,6 +147,9 @@ namespace ReadLineReboot
         /// <returns>The written text</returns>
         public static string ReadPassword(string prompt = "", char mask = default)
         {
+            // Reset the flag
+            ReadRanToCompletion = false;
+
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null);
@@ -182,6 +193,7 @@ namespace ReadLineReboot
             {
                 // Write a new line and get the text
                 Console.WriteLine();
+                ReadRanToCompletion = true;
                 return keyHandler.Text;
             }
         }
