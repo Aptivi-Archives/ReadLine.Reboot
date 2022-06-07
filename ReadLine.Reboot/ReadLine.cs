@@ -61,6 +61,11 @@ namespace ReadLineReboot
         public static bool UndoEnabled { get; set; } = true;
 
         /// <summary>
+        /// Whether the default value should be pre-written or not. Currently false.
+        /// </summary>
+        public static bool PrewriteDefaultValue { get; set; }
+
+        /// <summary>
         /// Whether the CTRL + C to EOL feature is enabled. Currently false. If false, exits program upon pressing CTRL + C.
         /// </summary>
         public static bool CtrlCEnabled { get; set; }
@@ -119,6 +124,10 @@ namespace ReadLineReboot
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
+
+            // Pre-write default value if enabled
+            if (PrewriteDefaultValue && !string.IsNullOrWhiteSpace(defaultText))
+                keyHandler.WriteNewString(defaultText);
 
             // Get the written text
             string text = GetText(keyHandler);

@@ -37,16 +37,17 @@ namespace ReadLineDemo
         // All fixtures here
         private static readonly Dictionary<string, BaseFixture> fixtures = new()
         { 
-            { "NormalPrompt",               new NormalPrompt() },
-            { "NormalPromptHistoryEnabled", new NormalPromptHistoryEnabled() } ,
-            { "NormalPromptNoAutoComplete", new NormalPromptNoAutoComplete() } ,
-            { "NormalPromptDefault",        new NormalPromptDefault() } ,
-            { "NormalPromptCustomPrompt",   new NormalPromptCustomPrompt() } ,
-            { "NormalPromptNoYank",         new NormalPromptNoYank() } ,
-            { "NormalPromptCtrlCAsInput",   new NormalPromptCtrlCAsInput() } ,
-            { "MaskedPrompt",               new MaskedPrompt() } ,
-            { "MaskedPromptCustomMask",     new MaskedPromptCustomMask() } ,
-            { "CharDebug",                  new CharDebug() } 
+            { "NormalPrompt",                   new NormalPrompt() },
+            { "NormalPromptHistoryEnabled",     new NormalPromptHistoryEnabled() } ,
+            { "NormalPromptNoAutoComplete",     new NormalPromptNoAutoComplete() } ,
+            { "NormalPromptDefault",            new NormalPromptDefault() } ,
+            { "NormalPromptDefaultPrewritten",  new NormalPromptDefaultPrewritten() } ,
+            { "NormalPromptCustomPrompt",       new NormalPromptCustomPrompt() } ,
+            { "NormalPromptNoYank",             new NormalPromptNoYank() } ,
+            { "NormalPromptCtrlCAsInput",       new NormalPromptCtrlCAsInput() } ,
+            { "MaskedPrompt",                   new MaskedPrompt() } ,
+            { "MaskedPromptCustomMask",         new MaskedPromptCustomMask() } ,
+            { "CharDebug",                      new CharDebug() } 
         };
 
         public static void Main(string[] args)

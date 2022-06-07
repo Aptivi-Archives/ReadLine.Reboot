@@ -176,7 +176,7 @@ namespace Internal.ReadLineReboot
         /// Writes the string to the console, clearing the line beforehand
         /// </summary>
         /// <param name="str">The text to be printed</param>
-        private void WriteNewString(string str)
+        internal void WriteNewString(string str)
         {
             // We're in the middle of the job
             _middleOfWriteNewString = true;
