@@ -138,6 +138,12 @@ string password = ReadLine.ReadPassword("(prompt)> ");
 string password = ReadLine.ReadPassword("(prompt)> ", '*');
 ```
 
+#### Interrupt reading
+
+```csharp
+ReadLine.InterruptRead();
+```
+
 ### History management
 
 _Note: History information is persisted for an entire application session. Also, calls to `ReadLine.Read()` automatically adds the console input to history_

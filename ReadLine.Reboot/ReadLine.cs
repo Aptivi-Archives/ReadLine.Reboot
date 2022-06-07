@@ -38,6 +38,7 @@ namespace ReadLineReboot
     {
         // Internal variables
         private static readonly List<string> _history = new List<string>();
+        private static bool _readInterrupt;
 
         // Variables
         /// <summary>
@@ -71,7 +72,8 @@ namespace ReadLineReboot
         public static bool CtrlCEnabled { get; set; }
 
         /// <summary>
-        /// Whether the last <see cref="Read(string, string)"/> or <see cref="ReadPassword(string, char)"/> request ran to completion
+        /// Whether the last <see cref="Read(string, string)"/> or <see cref="ReadPassword(string, char)"/> request ran to completion.
+        /// If the request is either cancelled or interrupted, this is false.
         /// </summary>
         public static bool ReadRanToCompletion { get; private set; }
 
@@ -167,24 +169,41 @@ namespace ReadLineReboot
             return GetText(keyHandler);
         }
 
+        /// <summary>
+        /// Interrupts reading from the console
+        /// </summary>
+        public static void InterruptRead() => _readInterrupt = true;
+
         private static string GetText(KeyHandler keyHandler)
         {
+            bool _ctrlCPressed = false;
+            string _output = "";
+
             // Check to see if we're going to treat CTRL + C as actual input
             if (CtrlCEnabled)
                 Console.TreatControlCAsInput = true;
 
-            // Get the key
-            ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-
             // Stop handling keys if Enter is pressed
-            while (keyInfo.Key != ConsoleKey.Enter && 
-                   !keyInfo.Equals(KeyHandler.SimulatedEnter) && 
-                   !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
-                   !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+            while (!_readInterrupt)
             {
-                // Handle the key as appropriate
-                keyHandler.Handle(keyInfo);
-                keyInfo = Console.ReadKey(true);
+                if (Console.KeyAvailable)
+                {
+                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                    if (keyInfo.Key != ConsoleKey.Enter &&
+                        !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
+                        !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
+                        !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                    {
+                        // Handle the key as appropriate
+                        keyHandler.Handle(keyInfo);
+                    } 
+                    else
+                    {
+                        if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                            _ctrlCPressed = true;
+                        break;
+                    }
+                }
             }
 
             // Restore CTRL + C state
@@ -192,19 +211,24 @@ namespace ReadLineReboot
                 Console.TreatControlCAsInput = false;
 
             // Check to see if we're aborting
-            if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+            if (_ctrlCPressed)
             {
                 // We're aborting. Return nothing.
                 Console.WriteLine("^C");
-                return "";
             }
-            else
+            else if (!_readInterrupt)
             {
                 // Write a new line and get the text
                 Console.WriteLine();
                 ReadRanToCompletion = true;
-                return keyHandler.Text;
+                _output = keyHandler.Text;
+            } else
+            {
+                // Read is interrupted. Print a new line.
+                _readInterrupt = false;
+                Console.WriteLine();
             }
+            return _output;
         }
     }
 }
