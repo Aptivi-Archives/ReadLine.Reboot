@@ -4,7 +4,7 @@
     <AssemblyTitle>ReadLine.Reboot</AssemblyTitle>
     <AssemblyDescription>A reboot of tonerdo's ReadLine library for .NET</AssemblyDescription>
     <Description>A reboot of tonerdo's ReadLine library for .NET</Description>
-    <AssemblyVersion>3.1.1</AssemblyVersion>
+    <AssemblyVersion>3.1.2</AssemblyVersion>
     <Authors>Toni Solarin-Sodara,EoflaOE</Authors>
     <TargetFrameworks>net6.0;netcoreapp3.1;net48</TargetFrameworks>
     <DebugType>portable</DebugType>
@@ -17,7 +17,7 @@
     <RepositoryUrl>https://github.com/EoflaOE/ReadLine.Reboot</RepositoryUrl>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Version>3.1.1</Version>
+    <Version>3.1.2</Version>
     <Company>EoflaOE</Company>
     <Copyright>Copyright (c) 2022 EoflaOE and its companies.</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>

@@ -209,6 +209,7 @@ namespace ReadLineReboot
                         } 
                         else
                         {
+                            // Handle CTRL + C
                             if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
                                 _ctrlCPressed = true;
                             break;
@@ -231,6 +232,10 @@ namespace ReadLineReboot
                     keyHandler.Handle(keyInfo);
                     keyInfo = Console.ReadKey(true);
                 }
+
+                // Handle CTRL + C
+                if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                    _ctrlCPressed = true;
             }
 
             // Restore CTRL + C state
