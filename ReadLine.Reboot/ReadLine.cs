@@ -28,6 +28,7 @@ using Internal.ReadLineReboot;
 using Internal.ReadLineReboot.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace ReadLineReboot
 {
@@ -204,6 +205,7 @@ namespace ReadLineReboot
                         break;
                     }
                 }
+                Thread.Sleep(1);
             }
 
             // Restore CTRL + C state
