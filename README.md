@@ -141,6 +141,7 @@ string password = ReadLine.ReadPassword("(prompt)> ", '*');
 #### Interrupt reading
 
 ```csharp
+ReadLine.Interruptible = true;
 ReadLine.InterruptRead();
 ```
 

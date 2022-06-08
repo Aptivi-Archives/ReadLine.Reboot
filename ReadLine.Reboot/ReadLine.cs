@@ -68,6 +68,11 @@ namespace ReadLineReboot
         public static bool PrewriteDefaultValue { get; set; }
 
         /// <summary>
+        /// Whether the input is interruptible. Currently false.
+        /// </summary>
+        public static bool Interruptible { get; set; }
+
+        /// <summary>
         /// Whether the CTRL + C to EOL feature is enabled. Currently false. If false, exits program upon pressing CTRL + C.
         /// </summary>
         public static bool CtrlCEnabled { get; set; }
@@ -185,27 +190,47 @@ namespace ReadLineReboot
                 Console.TreatControlCAsInput = true;
 
             // Stop handling keys if Enter is pressed
-            while (!_readInterrupt)
+            if (Interruptible)
             {
-                if (Console.KeyAvailable)
+                // For some weird reason, keys will be missed if we're sleeping for 1 millisecond, but when we remove the sleep, the CPU will hog.
+                // Something has to be done about it.
+                while (!_readInterrupt)
                 {
-                    ConsoleKeyInfo keyInfo = Console.ReadKey(true);
-                    if (keyInfo.Key != ConsoleKey.Enter &&
-                        !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
-                        !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
-                        !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                    if (Console.KeyAvailable)
                     {
-                        // Handle the key as appropriate
-                        keyHandler.Handle(keyInfo);
-                    } 
-                    else
-                    {
-                        if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
-                            _ctrlCPressed = true;
-                        break;
+                        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+                        if (keyInfo.Key != ConsoleKey.Enter &&
+                            !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
+                            !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
+                            !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                        {
+                            // Handle the key as appropriate
+                            keyHandler.Handle(keyInfo);
+                        } 
+                        else
+                        {
+                            if (keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                                _ctrlCPressed = true;
+                            break;
+                        }
                     }
                 }
-                Thread.Sleep(1);
+            }
+            else
+            {
+                // Get the initial key
+                ConsoleKeyInfo keyInfo = Console.ReadKey(true);
+
+                // Stop handling keys if Enter is pressed
+                while (keyInfo.Key != ConsoleKey.Enter &&
+                       !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
+                       !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
+                       !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                {
+                    // Handle the key as appropriate
+                    keyHandler.Handle(keyInfo);
+                    keyInfo = Console.ReadKey(true);
+                }
             }
 
             // Restore CTRL + C state
@@ -218,13 +243,14 @@ namespace ReadLineReboot
                 // We're aborting. Return nothing.
                 Console.WriteLine("^C");
             }
-            else if (!_readInterrupt)
+            else if (!_readInterrupt || !Interruptible)
             {
                 // Write a new line and get the text
                 Console.WriteLine();
                 ReadRanToCompletion = true;
                 _output = keyHandler.Text;
-            } else
+            } 
+            else
             {
                 // Read is interrupted. Print a new line.
                 _readInterrupt = false;

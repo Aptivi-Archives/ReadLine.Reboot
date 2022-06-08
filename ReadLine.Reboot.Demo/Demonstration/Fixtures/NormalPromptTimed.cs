@@ -44,6 +44,7 @@ namespace ReadLineDemo.Demonstration.Fixtures
         public override void RunFixture()
         {
             timeTask.Start();
+            ReadLine.Interruptible = true;
             while (input != "exit")
             {
                 input = ReadLine.Read("(prompt)> ");
