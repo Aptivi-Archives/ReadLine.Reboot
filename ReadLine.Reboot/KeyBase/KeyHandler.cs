@@ -56,7 +56,6 @@ namespace Internal.ReadLineReboot
         // Private Variables
         private int _cursorPos;
         private int _cursorLimit;
-        private int _historyIndex;
         private ConsoleKeyInfo _keyInfo;
         private string[] _completions;
         private int _completionStart;
@@ -68,14 +67,15 @@ namespace Internal.ReadLineReboot
         private bool _middleOfWriteNewString;
         private bool _middleOfUndoAll;
         private bool _middleOfUndo;
-        private readonly List<string> _currentLineEditHistory;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
         private readonly StringBuilder _currentLine;
-        private readonly List<string> _history;
         private readonly Dictionary<string, Action> _keyActions;
         private readonly IAutoCompleteHandler _autoCompleteHandler;
         private readonly IConsole ConsoleWrapper;
+        internal int _historyIndex;
+        internal readonly List<string> _history;
+        internal readonly List<string> _currentLineEditHistory;
 
         // Private Properties
         private bool IsStartOfLine => _cursorPos == 0;

@@ -40,6 +40,7 @@ namespace ReadLineReboot
         // Internal variables
         private static readonly List<string> _history = new List<string>();
         private static bool _readInterrupt;
+        internal static bool _pressedEnterOnHistoryEntry;
 
         // Variables
         /// <summary>
@@ -149,10 +150,12 @@ namespace ReadLineReboot
             else
             {
                 // If the history is enabled, add the text to the history
-                if (HistoryEnabled)
+                if (HistoryEnabled && !_pressedEnterOnHistoryEntry)
                     AddHistory(text);
             }
 
+            // Reset the flag and return the text
+            _pressedEnterOnHistoryEntry = false;
             return text;
         }
 
@@ -241,6 +244,10 @@ namespace ReadLineReboot
             // Restore CTRL + C state
             if (CtrlCEnabled)
                 Console.TreatControlCAsInput = false;
+
+            // Check to see if ENTER is pressed in the middle of the history
+            if (keyHandler._historyIndex != keyHandler._history.Count && keyHandler._currentLineEditHistory.Count == 0)
+                _pressedEnterOnHistoryEntry = true;
 
             // Check to see if we're aborting
             if (_ctrlCPressed)
