@@ -92,7 +92,7 @@ namespace ReadLineReboot
         /// <summary>
         /// The prompt writing handler.
         /// </summary>
-        public static Action<string> WritePrompt { private get; set; } = (prompt) => Console.Write(prompt);
+        public static Action<string> WritePrompt { internal get; set; } = (prompt) => Console.Write(prompt);
 
         /// <summary>
         /// Adds a text or an array of texts to the history
@@ -130,9 +130,18 @@ namespace ReadLineReboot
             // Reset the flag
             ReadRanToCompletion = false;
 
+            // Get initial cursor left and top positions
+            int _prePromptCursorLeft = Console.CursorLeft;
+            int _prePromptCursorTop = Console.CursorTop;
+
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
+
+            // Prepare initial variables
+            keyHandler._cachedPrompt = prompt;
+            keyHandler._prePromptCursorLeft = _prePromptCursorLeft;
+            keyHandler._prePromptCursorTop = _prePromptCursorTop;
 
             // Pre-write default value if enabled
             if (PrewriteDefaultValue && !string.IsNullOrWhiteSpace(defaultText))
@@ -170,9 +179,18 @@ namespace ReadLineReboot
             // Reset the flag
             ReadRanToCompletion = false;
 
+            // Get initial cursor left and top positions
+            int _prePromptCursorLeft = Console.CursorLeft;
+            int _prePromptCursorTop = Console.CursorTop;
+
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null);
+
+            // Prepare initial variables
+            keyHandler._cachedPrompt = prompt;
+            keyHandler._prePromptCursorLeft = _prePromptCursorLeft;
+            keyHandler._prePromptCursorTop = _prePromptCursorTop;
 
             // Get the written text
             return GetText(keyHandler);

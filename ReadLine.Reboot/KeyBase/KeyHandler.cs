@@ -73,7 +73,12 @@ namespace Internal.ReadLineReboot
         private readonly Dictionary<string, Action> _keyActions;
         private readonly IAutoCompleteHandler _autoCompleteHandler;
         private readonly IConsole ConsoleWrapper;
+        private readonly char Escape = Convert.ToChar(27);
         internal int _historyIndex;
+        internal string _cachedPrompt;
+        internal string _initialPrompt;
+        internal int _prePromptCursorLeft;
+        internal int _prePromptCursorTop;
         internal readonly List<string> _history;
         internal readonly List<string> _currentLineEditHistory;
 
@@ -1025,6 +1030,29 @@ namespace Internal.ReadLineReboot
                 if (_updateCurrentLineHistory && !_middleOfWriteNewString && !_middleOfUndo && !_middleOfUndoAll)
                     _currentLineEditHistory.Add(_currentLine.ToString());
             }
+        }
+
+        /// <summary>
+        /// Updates the prompt
+        /// </summary>
+        /// <param name="newPrompt">Prompt to be updated</param>
+        private void UpdatePrompt(string newPrompt)
+        {
+            // Get number of newlines
+            int newLines = _cachedPrompt.Replace("\r", "").Split(new char[] { '\n' }).Length - 1;
+            int lastTop = _prePromptCursorTop == Console.BufferHeight - 1 ? _prePromptCursorTop - newLines : _prePromptCursorTop;
+
+            // Clear current line to destroy current prompt (prompt may have newlines)
+            Console.Write($"{Escape}[2K");
+            for (int i = Console.CursorTop; i >= lastTop; i--)
+            {
+                Console.SetCursorPosition(_prePromptCursorLeft, i);
+                Console.Write($"{Escape}[2K");
+            }
+
+            // Write the new prompt
+            ReadLine.WritePrompt.Invoke(newPrompt);
+            _cachedPrompt = newPrompt;
         }
         #endregion
 
