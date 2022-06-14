@@ -139,6 +139,7 @@ namespace ReadLineReboot
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
 
             // Prepare initial variables
+            keyHandler._initialPrompt = prompt;
             keyHandler._cachedPrompt = prompt;
             keyHandler._prePromptCursorLeft = _prePromptCursorLeft;
             keyHandler._prePromptCursorTop = _prePromptCursorTop;
@@ -188,6 +189,7 @@ namespace ReadLineReboot
             KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null);
 
             // Prepare initial variables
+            keyHandler._initialPrompt = prompt;
             keyHandler._cachedPrompt = prompt;
             keyHandler._prePromptCursorLeft = _prePromptCursorLeft;
             keyHandler._prePromptCursorTop = _prePromptCursorTop;

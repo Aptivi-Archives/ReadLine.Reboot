@@ -54,6 +54,7 @@ namespace Internal.ReadLineReboot
         public string KillBuffer => _killBuffer.ToString();
 
         // Private Variables
+        private int _argDigit;
         private int _cursorPos;
         private int _cursorLimit;
         private ConsoleKeyInfo _keyInfo;
@@ -67,6 +68,7 @@ namespace Internal.ReadLineReboot
         private bool _middleOfWriteNewString;
         private bool _middleOfUndoAll;
         private bool _middleOfUndo;
+        private bool _middleOfArgInsert;
         private readonly StringBuilder _text;
         private readonly StringBuilder _killBuffer;
         private readonly StringBuilder _currentLine;
@@ -1017,6 +1019,24 @@ namespace Internal.ReadLineReboot
         }
         #endregion
 
+        #region Argument manipulation
+        /// <summary>
+        /// Sets the argument
+        /// </summary>
+        /// <param name="arg">Argument digit to add</param>
+        private void SetArgument(int arg)
+        {
+            // Make a string builder to add the digit to the number
+            StringBuilder tempArg = new StringBuilder(_argDigit.ToString());
+            tempArg.Append(arg);
+
+            // Update digit
+            _argDigit = int.Parse(tempArg.ToString());
+            UpdatePrompt($"(arg: {_argDigit}) ");
+            _middleOfArgInsert = true;
+        }
+        #endregion
+
         #region Other logic
         /// <summary>
         /// Updates the current line variable
@@ -1036,7 +1056,8 @@ namespace Internal.ReadLineReboot
         /// Updates the prompt
         /// </summary>
         /// <param name="newPrompt">Prompt to be updated</param>
-        private void UpdatePrompt(string newPrompt)
+        /// <param name="rewriteCurrentLine">Whether to rewrite current line</param>
+        private void UpdatePrompt(string newPrompt, bool rewriteCurrentLine = true)
         {
             // Get number of newlines
             int newLines = _cachedPrompt.Replace("\r", "").Split(new char[] { '\n' }).Length - 1;
@@ -1053,6 +1074,20 @@ namespace Internal.ReadLineReboot
             // Write the new prompt
             ReadLine.WritePrompt.Invoke(newPrompt);
             _cachedPrompt = newPrompt;
+
+            // Re-write current line since we destroyed all the lines
+            if (rewriteCurrentLine)
+            {
+                _cursorPos = 0;
+                WriteNewString(CurrentLine);
+            }
+            else
+            {
+                _text.Clear();
+                _cursorLimit = 0;
+                _cursorPos = 0;
+            }
+
         }
         #endregion
 
@@ -1146,7 +1181,19 @@ namespace Internal.ReadLineReboot
 
                 // Undoing
                 ["Shift, ControlOemMinus"] =    Undo,
-                ["AltR"] =                      UndoAll
+                ["AltR"] =                      UndoAll,
+
+                // Argument support (0-9)
+                ["AltD0"] =                     () => SetArgument(0),
+                ["AltD1"] =                     () => SetArgument(1),
+                ["AltD2"] =                     () => SetArgument(2),
+                ["AltD3"] =                     () => SetArgument(3),
+                ["AltD4"] =                     () => SetArgument(4),
+                ["AltD5"] =                     () => SetArgument(5),
+                ["AltD6"] =                     () => SetArgument(6),
+                ["AltD7"] =                     () => SetArgument(7),
+                ["AltD8"] =                     () => SetArgument(8),
+                ["AltD9"] =                     () => SetArgument(9)
             };
         }
 
@@ -1172,12 +1219,31 @@ namespace Internal.ReadLineReboot
             _keyActions.TryGetValue(KeyInputName, out Action action);
             action ??= WriteChar;
 
+            // Because SetArgument is getting called from the lambda (we don't want to duplicate code for each number),
+            // the current handler is being set to some trash name with "lambda" in it, so we need to replace this gibberish
+            // name with the "SetArgument" to make it easy for KeyHandler to detect if we're not setting an argument on the
+            // next keypress.
+            _currentHandler = action.Method.Name.Contains("<.ctor>b__98_") ? nameof(SetArgument) : action.Method.Name;
+
             // Invoke it!
-            _currentHandler = action.Method.Name;
-            action.Invoke();
-            _lastHandler = action.Method.Name;
+            if (_middleOfArgInsert && _currentHandler != nameof(SetArgument))
+            {
+                UpdatePrompt(_initialPrompt);
+                for (int i = 1; i <= _argDigit; i++)
+                    action.Invoke();
+            }
+            else
+                action.Invoke();
+            _lastHandler = _currentHandler;
             _updateCurrentLine = true;
             _updateCurrentLineHistory = true;
+
+            // If not setting argument, reset flag
+            if (_currentHandler != nameof(SetArgument))
+            {
+                _middleOfArgInsert = false;
+                _argDigit = 0;
+            }
         }
         #endregion
     }

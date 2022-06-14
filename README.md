@@ -48,6 +48,7 @@ _Note: Some keys conflict with terminal emulator keybindings._
 | `Ctrl`+`I` / `Tab`                 | Command line completion                              |
 | `Shift`+`Ctrl`+`I` / `Shift`+`Tab` | Backwards command line completion                    |
 | `Shift`+`Alt`+`*`                  | Dump all suggestions to current line                 |
+| `Alt`+`0-9`                        | Argument number add                                  |
 
 - `*`: Conflicts with `Alt`+`Tab` on Windows.
 - `**`: Conflicts with `Ctrl`+`Shift`+`_` on Windows Command Prompt
