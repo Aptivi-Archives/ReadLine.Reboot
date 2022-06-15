@@ -1035,6 +1035,25 @@ namespace Internal.ReadLineReboot
             UpdatePrompt($"(arg: {_argDigit}) ");
             _middleOfArgInsert = true;
         }
+
+        /// <summary>
+        /// Add a minus to the argument number or write the minuses if an argument is already specified
+        /// </summary>
+        private void MinusArgumentOrWrite()
+        {
+            if (_middleOfArgInsert)
+            {
+                WriteChar();
+                _middleOfArgInsert = false;
+                _argDigit = 0;
+            }
+            else
+            {
+                _argDigit = -1;
+                UpdatePrompt($"(arg: {_argDigit}) ");
+                _middleOfArgInsert = true;
+            }
+        }
         #endregion
 
         #region Other logic
@@ -1183,7 +1202,7 @@ namespace Internal.ReadLineReboot
                 ["Shift, ControlOemMinus"] =    Undo,
                 ["AltR"] =                      UndoAll,
 
-                // Argument support (0-9)
+                // Argument support (0-9, -)
                 ["AltD0"] =                     () => SetArgument(0),
                 ["AltD1"] =                     () => SetArgument(1),
                 ["AltD2"] =                     () => SetArgument(2),
@@ -1193,7 +1212,8 @@ namespace Internal.ReadLineReboot
                 ["AltD6"] =                     () => SetArgument(6),
                 ["AltD7"] =                     () => SetArgument(7),
                 ["AltD8"] =                     () => SetArgument(8),
-                ["AltD9"] =                     () => SetArgument(9)
+                ["AltD9"] =                     () => SetArgument(9),
+                ["AltSubtract"] =                  MinusArgumentOrWrite
             };
         }
 
@@ -1223,7 +1243,7 @@ namespace Internal.ReadLineReboot
             // the current handler is being set to some trash name with "lambda" in it, so we need to replace this gibberish
             // name with the "SetArgument" to make it easy for KeyHandler to detect if we're not setting an argument on the
             // next keypress.
-            _currentHandler = action.Method.Name.Contains("<.ctor>b__98_") ? nameof(SetArgument) : action.Method.Name;
+            _currentHandler = action.Method.Name.Contains("<.ctor>b__99_") ? nameof(SetArgument) : action.Method.Name;
 
             // Invoke it!
             if (_middleOfArgInsert && _currentHandler != nameof(SetArgument))
@@ -1239,7 +1259,7 @@ namespace Internal.ReadLineReboot
             _updateCurrentLineHistory = true;
 
             // If not setting argument, reset flag
-            if (_currentHandler != nameof(SetArgument))
+            if (_currentHandler != nameof(SetArgument) && _currentHandler != nameof(MinusArgumentOrWrite))
             {
                 _middleOfArgInsert = false;
                 _argDigit = 0;

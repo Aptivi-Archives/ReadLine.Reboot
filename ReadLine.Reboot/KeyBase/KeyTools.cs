@@ -90,6 +90,19 @@ namespace Internal.ReadLineReboot
                         break;
                 }
             }
+            else
+            {
+                // Special cases for some characters
+                switch (keyInfo.KeyChar)
+                {
+                    // Rename the below keys
+                    case '-':
+                        initialKey = "Subtract";
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         /// <summary>
