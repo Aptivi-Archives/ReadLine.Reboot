@@ -159,8 +159,8 @@ namespace ReadLineReboot
             }
             else
             {
-                // If the history is enabled, add the text to the history
-                if (HistoryEnabled && !_pressedEnterOnHistoryEntry)
+                // If the history is enabled and the text was written, add the text to the history
+                if (HistoryEnabled && !_pressedEnterOnHistoryEntry && !string.IsNullOrWhiteSpace(text))
                     AddHistory(text);
             }
 

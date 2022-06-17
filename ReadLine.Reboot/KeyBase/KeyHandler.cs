@@ -1254,6 +1254,8 @@ namespace Internal.ReadLineReboot
             }
             else
                 action.Invoke();
+
+            // Set the last handler
             _lastHandler = _currentHandler;
             _updateCurrentLine = true;
             _updateCurrentLineHistory = true;
