@@ -74,6 +74,14 @@ namespace ReadLineReboot
         public static bool Interruptible { get; set; }
 
         /// <summary>
+        /// If <see cref="Interruptible"/> is enabled, sets how responsive the interruption listener while waiting for keypress.
+        /// <para>If zero, this means instant, but causes 100% CPU usage.</para>
+        /// <para>If more than zero, this means that the listener will sleep for assigned number of seconds before detecting the next keys.</para>
+        /// <para>Use this carefully, because it can cause missed keys depending on the application.</para>
+        /// </summary>
+        public static int InterruptionResponsiveness { get; set; } = 0;
+
+        /// <summary>
         /// Whether the CTRL + C to EOL feature is enabled. Currently false. If false, exits program upon pressing CTRL + C.
         /// </summary>
         public static bool CtrlCEnabled { get; set; }
@@ -215,8 +223,6 @@ namespace ReadLineReboot
             // Stop handling keys if Enter is pressed
             if (Interruptible)
             {
-                // For some weird reason, keys will be missed if we're sleeping for 1 millisecond, but when we remove the sleep, the CPU will hog.
-                // Something has to be done about it.
                 while (!_readInterrupt)
                 {
                     if (Console.KeyAvailable)
@@ -229,7 +235,7 @@ namespace ReadLineReboot
                         {
                             // Handle the key as appropriate
                             keyHandler.Handle(keyInfo);
-                        } 
+                        }
                         else
                         {
                             // Handle CTRL + C
@@ -238,6 +244,8 @@ namespace ReadLineReboot
                             break;
                         }
                     }
+                    else
+                        Thread.Sleep(InterruptionResponsiveness);
                 }
             }
             else
