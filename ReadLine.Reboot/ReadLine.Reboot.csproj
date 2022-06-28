@@ -26,6 +26,7 @@
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
     <PackageIcon>OfficialAppIcon-ReadLineReboot-512.png</PackageIcon>
     <LangVersion>8.0</LangVersion>
+    <PackageVersion>3.2.0</PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
