@@ -98,43 +98,83 @@ namespace Internal.ReadLineReboot
         #region Cursor Movement
 
         /// <summary>
-        /// Moves the cursor to the left
+        /// Moves the cursor to the left once
         /// </summary>
         private void MoveCursorLeft()
         {
-            // If we're in the beginning of the line, do absolutely nothing
-            if (IsStartOfLine)
-                return;
-
-            // Check to see if we're at the beginning of the console buffer
-            if (IsStartOfBuffer)
-                // We're at the beginning of the buffer. Move up and to the rightmost position
-                ConsoleWrapper.SetCursorPosition(ConsoleWrapper.BufferWidth - 1, ConsoleWrapper.CursorTop - 1);
-            else
-                // We're not at the beginning of the console buffer. Move the cursor one step backwards
-                ConsoleWrapper.SetCursorPosition(ConsoleWrapper.CursorLeft - 1, ConsoleWrapper.CursorTop);
-
-            _cursorPos--;
+            MoveCursorLeft(1);
         }
 
         /// <summary>
-        /// Moves the cursor to the right
+        /// Moves the cursor to the left n times
+        /// </summary>
+        private void MoveCursorLeft(int count)
+        {
+            int CursorLeft = ConsoleWrapper.CursorLeft;
+            int CursorTop = ConsoleWrapper.CursorTop;
+
+            for (int i = 0; i < count; i++)
+            {
+                // If we're in the beginning of the line, do absolutely nothing
+                if (IsStartOfLine)
+                    return;
+
+                // Check to see if we're at the beginning of the console buffer
+                if (CursorLeft == 0)
+                {
+                    // We're at the beginning of the buffer. Move up and to the rightmost position
+                    CursorLeft = ConsoleWrapper.BufferWidth - 1;
+                    CursorTop -= 1;
+                }
+                else
+                    // We're not at the beginning of the console buffer. Move the cursor one step backwards
+                    CursorLeft -= 1;
+
+                _cursorPos--;
+            }
+
+            // Now, go to the final position
+            ConsoleWrapper.SetCursorPosition(CursorLeft, CursorTop);
+        }
+
+        /// <summary>
+        /// Moves the cursor to the right once
         /// </summary>
         private void MoveCursorRight()
         {
-            // If we're in the end of the line, do absolutely nothing
-            if (IsEndOfLine)
-                return;
+            MoveCursorRight(1);
+        }
 
-            // Check to see if we're at the end of the console buffer
-            if (IsEndOfBuffer)
-                // We're at the end of the buffer. Move down and to the leftmost position
-                ConsoleWrapper.SetCursorPosition(0, ConsoleWrapper.CursorTop + 1);
-            else
-                // We're not at the end of the console buffer. Move the cursor one step forward
-                ConsoleWrapper.SetCursorPosition(ConsoleWrapper.CursorLeft + 1, ConsoleWrapper.CursorTop);
+        /// <summary>
+        /// Moves the cursor to the right n times
+        /// </summary>
+        private void MoveCursorRight(int count)
+        {
+            int CursorLeft = ConsoleWrapper.CursorLeft;
+            int CursorTop = ConsoleWrapper.CursorTop;
 
-            _cursorPos++;
+            for (int i = 0; i < count; i++)
+            { 
+                // If we're in the end of the line, do absolutely nothing
+                if (IsEndOfLine)
+                    return;
+
+                // Check to see if we're at the end of the console buffer
+                if (CursorLeft == ConsoleWrapper.BufferWidth - 1)
+                {
+                    // We're at the end of the buffer. Move down and to the leftmost position
+                    CursorLeft = 0;
+                    CursorTop += 1;
+                }
+                else
+                    // We're not at the end of the console buffer. Move the cursor one step forward
+                    CursorLeft += 1;
+
+                _cursorPos++;
+            }
+
+            // Now, go to the final position
+            ConsoleWrapper.SetCursorPosition(CursorLeft, CursorTop);
         }
 
         /// <summary>
@@ -142,8 +182,7 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void MoveCursorHome()
         {
-            while (!IsStartOfLine)
-                MoveCursorLeft();
+            MoveCursorLeft(_currentLine.Length);
         }
 
         /// <summary>
@@ -151,8 +190,7 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void MoveCursorEnd()
         {
-            while (!IsEndOfLine)
-                MoveCursorRight();
+            MoveCursorRight(_currentLine.Length);
         }
 
         /// <summary>
@@ -664,8 +702,7 @@ namespace Internal.ReadLineReboot
                 int initialPosition = ConsoleWrapper.CursorLeft;
                 int initialCursorPos = _cursorPos;
                 int charsToDelete = firstWord.Length + secondWord.Length + 1;
-                for (int i = 0; i < firstWord.Length; i++)
-                    MoveCursorLeft();
+                    MoveCursorLeft(firstWord.Length);
                 for (int i = 0; i < charsToDelete; i++)
                     DeleteChar();
 
