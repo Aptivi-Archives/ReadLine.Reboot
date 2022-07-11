@@ -378,10 +378,18 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void Backspace()
         {
+            Backspace(1);
+        }
+
+        /// <summary>
+        /// Erases the last letter. Simulates the backspace key.
+        /// </summary>
+        private void Backspace(int count)
+        {
             if (IsStartOfLine)
                 return;
-            MoveCursorLeft();
-            DeleteChar();
+            MoveCursorLeft(count);
+            DeleteChar(count);
         }
 
         /// <summary>
@@ -395,13 +403,21 @@ namespace Internal.ReadLineReboot
         }
 
         /// <summary>
-        /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace"/>
+        /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace()"/>
         /// </summary>
         private void DeleteChar()
         {
+            DeleteChar(1);
+        }
+
+        /// <summary>
+        /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace()"/>
+        /// </summary>
+        private void DeleteChar(int count)
+        {
             // Remove a character from the main text
             int index = _cursorPos;
-            _text.Remove(index, 1);
+            _text.Remove(index, count);
             UpdateCurrentLine();
 
             // Form the result
@@ -414,20 +430,21 @@ namespace Internal.ReadLineReboot
             // Write the resulting string and set the appropriate cursor position
             int left = ConsoleWrapper.CursorLeft;
             int top = ConsoleWrapper.CursorTop;
+            string spaces = new string(' ', count);
             if (ConsoleWrapper.PasswordMode && ConsoleWrapper.PasswordMaskChar != default)
             {
                 // Write the replacement, but use Console.Write to write the space, because we need to ensure that it really got deleted on render.
                 ConsoleWrapper.Write(replacement);
-                Console.Write(" ");
+                Console.Write(spaces);
             }
             else
             {
-                ConsoleWrapper.Write($"{replacement} ");
+                ConsoleWrapper.Write($"{replacement}{spaces}");
             }
             ConsoleWrapper.SetCursorPosition(left, top);
 
             // Sets the cursor limit appropriately
-            _cursorLimit--;
+            _cursorLimit -= count;
         }
 
         /// <summary>
@@ -785,8 +802,7 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void StartAutoComplete()
         {
-            while (_cursorPos > _completionStart)
-                Backspace();
+            Backspace(_cursorPos - _completionStart);
 
             // We usually start at index 0
             _completionsIndex = 0;
@@ -800,8 +816,7 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void NextAutoComplete()
         {
-            while (_cursorPos > _completionStart)
-                Backspace();
+            Backspace(_cursorPos - _completionStart);
 
             // Increment the completion index
             _completionsIndex++;
@@ -819,8 +834,7 @@ namespace Internal.ReadLineReboot
         /// </summary>
         private void PreviousAutoComplete()
         {
-            while (_cursorPos > _completionStart)
-                Backspace();
+            Backspace(_cursorPos - _completionStart);
 
             // Decrement the completion index
             _completionsIndex--;
