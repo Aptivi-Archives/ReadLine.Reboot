@@ -1201,7 +1201,15 @@ namespace Internal.ReadLineReboot
 
             // Get the key input and assign it to the action defined in the actions list. Otherwise, write the character.
             string KeyInputName = KeyTools.BuildKeyInput(keyInfo);
+
+            // Base key binding
             KeyBindings._baseKeyBindings.TryGetValue(KeyInputName, out Action action);
+
+            // Custom key binding
+            if (action == null)
+                KeyBindings._customKeyBindings.TryGetValue(KeyInputName, out action);
+
+            // Write character if nothing found
             action ??= WriteChar;
 
             // Because SetArgument is getting called from the lambda (we don't want to duplicate code for each number),

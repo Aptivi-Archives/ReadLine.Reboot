@@ -129,6 +129,39 @@ namespace ReadLineReboot
         }
 
         /// <summary>
+        /// Adds your own custom binding
+        /// </summary>
+        /// <param name="key">Console key to press</param>
+        /// <param name="action">Action to be done when key is pressed</param>
+        public static void AddCustomBinding(ConsoleKeyInfo key, Action action)
+        {
+            string ConsoleKeyName = KeyTools.BuildKeyInput(key);
+            KeyBindings._customKeyBindings.Add(ConsoleKeyName, action);
+        }
+
+        /// <summary>
+        /// Changes your own custom binding
+        /// </summary>
+        /// <param name="key">Console key to press</param>
+        /// <param name="action">Action to be done when key is pressed</param>
+        public static void ChangeCustomBinding(ConsoleKeyInfo key, Action action)
+        {
+            string ConsoleKeyName = KeyTools.BuildKeyInput(key);
+            if (KeyBindings._customKeyBindings.ContainsKey(ConsoleKeyName))
+                KeyBindings._customKeyBindings[ConsoleKeyName] = action;
+        }
+
+        /// <summary>
+        /// Removes your own custom binding
+        /// </summary>
+        /// <param name="key">Console key to press</param>
+        public static void RemoveCustomBinding(ConsoleKeyInfo key)
+        {
+            string ConsoleKeyName = KeyTools.BuildKeyInput(key);
+            KeyBindings._customKeyBindings.Remove(ConsoleKeyName);
+        }
+
+        /// <summary>
         /// Writes the prompt and reads the input
         /// </summary>
         /// <param name="prompt">The prompt to write</param>

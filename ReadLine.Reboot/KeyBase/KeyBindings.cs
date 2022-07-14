@@ -115,5 +115,6 @@ namespace Internal.ReadLineReboot
             ["AltD9"]                   = () => ReadLine._keyHandler.SetArgument(9),
             ["AltSubtract"]             = ReadLine._keyHandler.MinusArgumentOrWrite
         };
+        internal static Dictionary<string, Action> _customKeyBindings = new Dictionary<string, Action>();
     }
 }
