@@ -41,6 +41,7 @@ namespace ReadLineReboot
         private static readonly List<string> _history = new List<string>();
         private static bool _readInterrupt;
         internal static bool _pressedEnterOnHistoryEntry;
+        internal static KeyHandler _keyHandler;
 
         // Variables
         /// <summary>
@@ -144,7 +145,7 @@ namespace ReadLineReboot
 
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
-            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler)
+            _keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler)
             {
                 // Prepare initial variables
                 _initialPrompt = prompt,
@@ -155,10 +156,10 @@ namespace ReadLineReboot
 
             // Pre-write default value if enabled
             if (PrewriteDefaultValue && !string.IsNullOrWhiteSpace(defaultText))
-                keyHandler.WriteNewString(defaultText);
+                _keyHandler.WriteNewString(defaultText);
 
             // Get the written text
-            string text = GetText(keyHandler);
+            string text = GetText();
 
             // Add the text to the history if the text is written
             if (string.IsNullOrWhiteSpace(text) && !string.IsNullOrWhiteSpace(defaultText))
@@ -195,7 +196,7 @@ namespace ReadLineReboot
 
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
-            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null)
+            _keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null)
             {
                 // Prepare initial variables
                 _initialPrompt = prompt,
@@ -205,7 +206,7 @@ namespace ReadLineReboot
             };
 
             // Get the written text
-            return GetText(keyHandler);
+            return GetText();
         }
 
         /// <summary>
@@ -213,7 +214,7 @@ namespace ReadLineReboot
         /// </summary>
         public static void InterruptRead() => _readInterrupt = true;
 
-        private static string GetText(KeyHandler keyHandler)
+        private static string GetText()
         {
             bool _ctrlCPressed = false;
             string _output = "";
@@ -232,11 +233,11 @@ namespace ReadLineReboot
                         ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                         if (keyInfo.Key != ConsoleKey.Enter &&
                             !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
-                            !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
+                            !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && _keyHandler.Text.Length == 0) &&
                             !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
                         {
                             // Handle the key as appropriate
-                            keyHandler.Handle(keyInfo);
+                            _keyHandler.Handle(keyInfo);
                         }
                         else
                         {
@@ -258,11 +259,11 @@ namespace ReadLineReboot
                 // Stop handling keys if Enter is pressed
                 while (keyInfo.Key != ConsoleKey.Enter &&
                        !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
-                       !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && keyHandler.Text.Length == 0) &&
+                       !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && _keyHandler.Text.Length == 0) &&
                        !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
                 {
                     // Handle the key as appropriate
-                    keyHandler.Handle(keyInfo);
+                    _keyHandler.Handle(keyInfo);
                     keyInfo = Console.ReadKey(true);
                 }
 
@@ -276,7 +277,7 @@ namespace ReadLineReboot
                 Console.TreatControlCAsInput = false;
 
             // Check to see if ENTER is pressed in the middle of the history
-            if (keyHandler._historyIndex != keyHandler._history.Count && keyHandler._currentLineEditHistory.Count == 0)
+            if (_keyHandler._historyIndex != _keyHandler._history.Count && _keyHandler._currentLineEditHistory.Count == 0)
                 _pressedEnterOnHistoryEntry = true;
 
             // Check to see if we're aborting
@@ -290,7 +291,7 @@ namespace ReadLineReboot
                 // Write a new line and get the text
                 Console.WriteLine();
                 ReadRanToCompletion = true;
-                _output = keyHandler.Text;
+                _output = _keyHandler.Text;
             } 
             else
             {
