@@ -144,13 +144,14 @@ namespace ReadLineReboot
 
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
-            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler);
-
-            // Prepare initial variables
-            keyHandler._initialPrompt = prompt;
-            keyHandler._cachedPrompt = prompt;
-            keyHandler._prePromptCursorLeft = _prePromptCursorLeft;
-            keyHandler._prePromptCursorTop = _prePromptCursorTop;
+            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper(), _history, AutoCompletionHandler)
+            {
+                // Prepare initial variables
+                _initialPrompt = prompt,
+                _cachedPrompt = prompt,
+                _prePromptCursorLeft = _prePromptCursorLeft,
+                _prePromptCursorTop = _prePromptCursorTop
+            };
 
             // Pre-write default value if enabled
             if (PrewriteDefaultValue && !string.IsNullOrWhiteSpace(defaultText))
@@ -194,13 +195,14 @@ namespace ReadLineReboot
 
             // Prepare the prompt
             WritePrompt.Invoke(prompt);
-            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null);
-
-            // Prepare initial variables
-            keyHandler._initialPrompt = prompt;
-            keyHandler._cachedPrompt = prompt;
-            keyHandler._prePromptCursorLeft = _prePromptCursorLeft;
-            keyHandler._prePromptCursorTop = _prePromptCursorTop;
+            KeyHandler keyHandler = new KeyHandler(new ConsoleWrapper() { PasswordMode = true, PasswordMaskChar = mask }, null, null)
+            {
+                // Prepare initial variables
+                _initialPrompt = prompt,
+                _cachedPrompt = prompt,
+                _prePromptCursorLeft = _prePromptCursorLeft,
+                _prePromptCursorTop = _prePromptCursorTop
+            };
 
             // Get the written text
             return GetText(keyHandler);

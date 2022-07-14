@@ -1264,7 +1264,7 @@ namespace Internal.ReadLineReboot
                 ["AltD7"] =                     () => SetArgument(7),
                 ["AltD8"] =                     () => SetArgument(8),
                 ["AltD9"] =                     () => SetArgument(9),
-                ["AltSubtract"] =                  MinusArgumentOrWrite
+                ["AltSubtract"] =               MinusArgumentOrWrite
             };
         }
 
