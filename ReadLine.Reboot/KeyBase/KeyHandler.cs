@@ -1216,7 +1216,7 @@ namespace Internal.ReadLineReboot
             // the current handler is being set to some trash name with "lambda" in it, so we need to replace this gibberish
             // name with the "SetArgument" to make it easy for KeyHandler to detect if we're not setting an argument on the
             // next keypress.
-            _currentHandler = action.Method.Name.Contains("<.cctor>b__2_") ? nameof(SetArgument) : action.Method.Name;
+            _currentHandler = action.Method.Name.Contains("<InitializeBindings>b__2_") ? nameof(SetArgument) : action.Method.Name;
 
             // Invoke it!
             if (_middleOfArgInsert && _currentHandler != nameof(SetArgument))

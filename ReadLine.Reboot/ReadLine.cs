@@ -187,6 +187,9 @@ namespace ReadLineReboot
                 _prePromptCursorTop = _prePromptCursorTop
             };
 
+            // Initialize bindings
+            KeyBindings.InitializeBindings();
+
             // Pre-write default value if enabled
             if (PrewriteDefaultValue && !string.IsNullOrWhiteSpace(defaultText))
                 _keyHandler.WriteNewString(defaultText);
@@ -237,6 +240,9 @@ namespace ReadLineReboot
                 _prePromptCursorLeft = _prePromptCursorLeft,
                 _prePromptCursorTop = _prePromptCursorTop
             };
+
+            // Initialize bindings
+            KeyBindings.InitializeBindings();
 
             // Get the written text
             return GetText();

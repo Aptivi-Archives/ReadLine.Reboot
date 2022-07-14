@@ -147,6 +147,26 @@ ReadLine.Interruptible = true;
 ReadLine.InterruptRead();
 ```
 
+### Custom shortcuts
+
+#### Add custom shortcut
+
+```csharp
+ReadLine.AddCustomBinding(new ConsoleKeyInfo('R', ConsoleKey.R, true, true, true), FunctionName);
+```
+
+#### Change custom shortcut
+
+```csharp
+ReadLine.ChangeCustomBinding(new ConsoleKeyInfo('R', ConsoleKey.R, true, true, true), AlternateFunctionName);
+```
+
+#### Remove custom shortcut
+
+```csharp
+ReadLine.RemoveCustomBinding(new ConsoleKeyInfo('R', ConsoleKey.R, true, true, true));
+```
+
 ### History management
 
 _Note: History information is persisted for an entire application session. Also, calls to `ReadLine.Read()` automatically adds the console input to history_
