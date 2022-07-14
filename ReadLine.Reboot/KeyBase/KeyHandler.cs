@@ -116,7 +116,7 @@ namespace Internal.ReadLineReboot
             {
                 // If we're in the beginning of the line, do absolutely nothing
                 if (IsStartOfLine)
-                    return;
+                    continue;
 
                 // Check to see if we're at the beginning of the console buffer
                 if (CursorLeft == 0)
@@ -156,7 +156,7 @@ namespace Internal.ReadLineReboot
             { 
                 // If we're in the end of the line, do absolutely nothing
                 if (IsEndOfLine)
-                    return;
+                    continue;
 
                 // Check to see if we're at the end of the console buffer
                 if (CursorLeft == ConsoleWrapper.BufferWidth - 1)
