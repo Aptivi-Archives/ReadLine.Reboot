@@ -24,7 +24,7 @@
  * 
  */
 
-using Internal.ReadLineReboot.Abstractions;
+using ReadLineReboot.Abstractions;
 
 namespace ReadLine.Tests.Abstractions
 {

@@ -26,7 +26,6 @@
 
 using ReadLineReboot;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ReadLineDemo.Demonstration.Fixtures
