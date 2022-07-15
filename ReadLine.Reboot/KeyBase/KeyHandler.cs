@@ -446,6 +446,17 @@ namespace ReadLineReboot
         }
 
         /// <summary>
+        /// Backspace or delete
+        /// </summary>
+        public void BackspaceOrDelete()
+        {
+            if (IsEndOfLine)
+                Backspace();
+            else
+                Delete();
+        }
+
+        /// <summary>
         /// Clears the entire line
         /// </summary>
         public void ClearLine()

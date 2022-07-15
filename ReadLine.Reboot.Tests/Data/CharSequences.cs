@@ -112,6 +112,9 @@ namespace ReadLine.Tests
         public static readonly ConsoleKeyInfo AltBackspace =        new('\0', ConsoleKey.Backspace,  false, true,  false);
         public static readonly ConsoleKeyInfo AltTab =              new('\t', ConsoleKey.Tab,        false, true,  false);
 
+        // Normal control characters used for by-default unbound keys
+        public static readonly ConsoleKeyInfo AltShiftF =           new('F',  ConsoleKey.F,          true,  true,  false);
+
         // The actual characters used in test
         public static readonly ConsoleKeyInfo ExclamationPoint = ExclamationPointChar.ToConsoleKeyInfo(specialKeyCharMap);
         public static readonly ConsoleKeyInfo Space =            SpaceChar.ToConsoleKeyInfo(specialKeyCharMap);

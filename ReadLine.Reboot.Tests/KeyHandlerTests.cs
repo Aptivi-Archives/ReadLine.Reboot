@@ -62,6 +62,11 @@ namespace ReadLine.Tests
             // Initialize the key handler
             _console = new DumbConsole();
             _keyHandler = new KeyHandler(_console, _history, null);
+            ReadLineReboot.ReadLine._keyHandler = _keyHandler;
+
+            // Initialize custom bindings
+            ReadLineReboot.ReadLine.AddCustomBinding(AltShiftF, _keyHandler.BackspaceOrDelete);
+            KeyBindings.InitializeBindings();
 
             // Initialize platform variables
             _isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
@@ -309,6 +314,34 @@ namespace ReadLine.Tests
 
             // Nothing should be deleted. Or, we've got a serious bug
             Assert.Equal("Hello", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests deleting a character under the cursor unless we're at the end of the line
+        /// </summary>
+        [Fact]
+        public void TestBackspaceOrDelete()
+        {
+            // Simulate the user pressing the LEFT ARROW (2x) and ALT + SHIFT + F keys
+            Enumerable.Repeat(LeftArrow, 2)
+                      .Append(AltShiftF)
+                      .ToList()
+                      .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased the fourth character
+            Assert.Equal("Helo", _keyHandler.Text);
+
+            // Simulate the user pressing the ALT + SHIFT + F key
+            _keyHandler.Handle(AltShiftF);
+
+            // Ensure that we've erased the fourth character
+            Assert.Equal("Hel", _keyHandler.Text);
+
+            // Simulate the user pressing the ALT + SHIFT + F key
+            _keyHandler.Handle(AltShiftF);
+
+            // Ensure that we've backspaced
+            Assert.Equal("He", _keyHandler.Text);
         }
 
         /// <summary>
