@@ -1114,7 +1114,11 @@ namespace ReadLineReboot
             if (_updateCurrentLine)
             {
                 _currentLine.Clear();
+#if NETCOREAPP
+                _currentLine.Append(_text);
+#else
                 _currentLine.Append(_text.ToString());
+#endif
                 if (_updateCurrentLineHistory && !_middleOfWriteNewString && !_middleOfUndo && !_middleOfUndoAll)
                     _currentLineEditHistory.Add(_currentLine.ToString());
             }
@@ -1157,9 +1161,9 @@ namespace ReadLineReboot
             }
 
         }
-        #endregion
+#endregion
 
-        #region Main logic
+#region Main logic
         /// <summary>
         /// Initializes the new instance of the key handler class
         /// </summary>
@@ -1239,6 +1243,6 @@ namespace ReadLineReboot
                 _argDigit = 0;
             }
         }
-        #endregion
+#endregion
     }
 }
