@@ -36,7 +36,7 @@ namespace ReadLineDemo.Demonstration.Fixtures
         static string input = "";
         internal Task timeTask = new(async () => {
             while (input != "exit") { 
-                await Task.Delay(5000); 
+                await Task.Delay(5000);
                 ReadLine.InterruptRead(); 
             }
         });

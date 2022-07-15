@@ -42,6 +42,7 @@ namespace ReadLineReboot
         private static bool _readInterrupt;
         internal static bool _pressedEnterOnHistoryEntry;
         internal static KeyHandler _keyHandler;
+        internal static object _lock = new object();
 
         // Variables
         /// <summary>
@@ -88,7 +89,7 @@ namespace ReadLineReboot
         public static bool CtrlCEnabled { get; set; }
 
         /// <summary>
-        /// Whether the last <see cref="Read(string, string)"/> or <see cref="ReadPassword(string, char)"/> request ran to completion.
+        /// Whether the last <see cref="Read(string, string, bool)"/> or <see cref="ReadPassword(string, char, bool)"/> request ran to completion.
         /// If the request is either cancelled or interrupted, this is false.
         /// </summary>
         public static bool ReadRanToCompletion { get; private set; }
@@ -171,8 +172,47 @@ namespace ReadLineReboot
         /// </summary>
         /// <param name="prompt">The prompt to write</param>
         /// <param name="defaultText">The default text to write if nothing is written</param>
+        /// <param name="force">Force read the input (may cause instability)</param>
         /// <returns>The written text if anything is input from the user, or the default text if nothing if printed</returns>
-        public static string Read(string prompt = "", string defaultText = "")
+        public static string Read(string prompt = "", string defaultText = "", bool force = false)
+        {
+            if (force)
+                return ReadInternal(prompt, defaultText);
+            else
+            {
+                lock (_lock)
+                {
+                    return ReadInternal(prompt, defaultText);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Writes the prompt and reads the input while masking the written input
+        /// </summary>
+        /// <param name="prompt">The prompt to write</param>
+        /// <param name="mask">Character to use to mask password</param>
+        /// <param name="force">Force read the input (may cause instability)</param>
+        /// <returns>The written text</returns>
+        public static string ReadPassword(string prompt = "", char mask = default, bool force = false)
+        {
+            if (force)
+                return ReadPasswordInternal(prompt, mask);
+            else
+            {
+                lock (_lock)
+                {
+                    return ReadPasswordInternal(prompt, mask);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Interrupts reading from the console
+        /// </summary>
+        public static void InterruptRead() => _readInterrupt = true;
+
+        private static string ReadInternal(string prompt = "", string defaultText = "")
         {
             // Reset the flag
             ReadRanToCompletion = false;
@@ -220,13 +260,7 @@ namespace ReadLineReboot
             return text;
         }
 
-        /// <summary>
-        /// Writes the prompt and reads the input while masking the written input
-        /// </summary>
-        /// <param name="prompt">The prompt to write</param>
-        /// <param name="mask">Character to use to mask password</param>
-        /// <returns>The written text</returns>
-        public static string ReadPassword(string prompt = "", char mask = default)
+        private static string ReadPasswordInternal(string prompt = "", char mask = default)
         {
             // Reset the flag
             ReadRanToCompletion = false;
@@ -252,11 +286,6 @@ namespace ReadLineReboot
             // Get the written text
             return GetText();
         }
-
-        /// <summary>
-        /// Interrupts reading from the console
-        /// </summary>
-        public static void InterruptRead() => _readInterrupt = true;
 
         private static string GetText()
         {
