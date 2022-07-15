@@ -1168,9 +1168,14 @@ namespace ReadLineReboot
         {
             UpdateCurrentLine();
             Console.Clear();
-            UpdatePrompt(_cachedPrompt, true);
+            RewriteCurrentLine();
         }
-#endregion
+
+        /// <summary>
+        /// Rewrites the current line
+        /// </summary>
+        public void RewriteCurrentLine() => UpdatePrompt(_cachedPrompt, true);
+        #endregion
 
         #region Main logic
         /// <summary>
