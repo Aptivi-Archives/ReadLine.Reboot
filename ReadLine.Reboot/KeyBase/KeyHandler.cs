@@ -1159,11 +1159,20 @@ namespace ReadLineReboot
                 _cursorLimit = 0;
                 _cursorPos = 0;
             }
+        }
 
+        /// <summary>
+        /// Clears the screen and rewrites the current line
+        /// </summary>
+        public void ClearScreenAndRewrite()
+        {
+            UpdateCurrentLine();
+            Console.Clear();
+            UpdatePrompt(_cachedPrompt, true);
         }
 #endregion
 
-#region Main logic
+        #region Main logic
         /// <summary>
         /// Initializes the new instance of the key handler class
         /// </summary>
@@ -1243,6 +1252,6 @@ namespace ReadLineReboot
                 _argDigit = 0;
             }
         }
-#endregion
+        #endregion
     }
 }
