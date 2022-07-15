@@ -24,16 +24,43 @@
  * 
  */
 
-namespace Internal.ReadLineReboot.Abstractions
+namespace ReadLineReboot.Abstractions
 {
-    internal interface IConsole
+    /// <summary>
+    /// Console interface
+    /// </summary>
+    public interface IConsole
     {
+        /// <summary>
+        /// Cursor left position
+        /// </summary>
         int CursorLeft { get; }
+        /// <summary>
+        /// Cursor top position
+        /// </summary>
         int CursorTop { get; }
+        /// <summary>
+        /// Buffer width
+        /// </summary>
         int BufferWidth { get; }
+        /// <summary>
+        /// Password mode
+        /// </summary>
         bool PasswordMode { get; }
+        /// <summary>
+        /// Password mask character
+        /// </summary>
         char PasswordMaskChar { get; }
+        /// <summary>
+        /// Sets the cursor position
+        /// </summary>
+        /// <param name="left">Left position</param>
+        /// <param name="top">Top position</param>
         void SetCursorPosition(int left, int top);
+        /// <summary>
+        /// Writes text to the console
+        /// </summary>
+        /// <param name="value">Text to be printed</param>
         void Write(string value);
     }
 }

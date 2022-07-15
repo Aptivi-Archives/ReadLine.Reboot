@@ -24,8 +24,8 @@
  * 
  */
 
-using Internal.ReadLineReboot;
-using Internal.ReadLineReboot.Abstractions;
+using ReadLineReboot;
+using ReadLineReboot.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -102,6 +102,11 @@ namespace ReadLineReboot
         /// The prompt writing handler.
         /// </summary>
         public static Action<string> WritePrompt { internal get; set; } = (prompt) => Console.Write(prompt);
+
+        /// <summary>
+        /// The key handler.
+        /// </summary>
+        public static KeyHandler KeyHandler => _keyHandler;
 
         /// <summary>
         /// Adds a text or an array of texts to the history

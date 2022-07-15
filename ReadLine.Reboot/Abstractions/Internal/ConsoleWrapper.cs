@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Internal.ReadLineReboot.Abstractions
+namespace ReadLineReboot.Abstractions
 {
     internal class ConsoleWrapper : IConsole
     {

@@ -26,7 +26,7 @@
 
 using System;
 
-namespace Internal.ReadLineReboot
+namespace ReadLineReboot
 {
     internal static class KeyTools
     {

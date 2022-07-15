@@ -44,7 +44,7 @@ namespace ReadLineDemo.Demonstration.Fixtures
 
         internal static void InputCurrentFixtureName()
         {
-            ReadLine.WritePrompt = (prompt) => Console.Write($"NormalPromptCustomBinding> {prompt}");
+            ReadLine.KeyHandler.WriteNewString("NormalPromptCustomBinding");
         }
     }
 }

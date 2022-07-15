@@ -28,7 +28,7 @@ using ReadLineReboot;
 using System;
 using System.Collections.Generic;
 
-namespace Internal.ReadLineReboot
+namespace ReadLineReboot
 {
     internal class KeyBindings
     {

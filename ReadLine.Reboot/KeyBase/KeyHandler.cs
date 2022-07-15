@@ -24,18 +24,18 @@
  * 
  */
 
-using Internal.ReadLineReboot.Abstractions;
 using ReadLineReboot;
+using ReadLineReboot.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Internal.ReadLineReboot
+namespace ReadLineReboot
 {
     /// <summary>
     /// The keyhandler class
     /// </summary>
-    internal class KeyHandler
+    public class KeyHandler
     {
         // Public Variables
         /// <summary>
@@ -99,7 +99,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the left once
         /// </summary>
-        internal void MoveCursorLeft()
+        public void MoveCursorLeft()
         {
             MoveCursorLeft(1);
         }
@@ -107,7 +107,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the left n times
         /// </summary>
-        internal void MoveCursorLeft(int count)
+        public void MoveCursorLeft(int count)
         {
             int CursorLeft = ConsoleWrapper.CursorLeft;
             int CursorTop = ConsoleWrapper.CursorTop;
@@ -139,7 +139,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the right once
         /// </summary>
-        internal void MoveCursorRight()
+        public void MoveCursorRight()
         {
             MoveCursorRight(1);
         }
@@ -147,7 +147,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the right n times
         /// </summary>
-        internal void MoveCursorRight(int count)
+        public void MoveCursorRight(int count)
         {
             int CursorLeft = ConsoleWrapper.CursorLeft;
             int CursorTop = ConsoleWrapper.CursorTop;
@@ -179,7 +179,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the beginning of the line
         /// </summary>
-        internal void MoveCursorHome()
+        public void MoveCursorHome()
         {
             MoveCursorLeft(_currentLine.Length);
         }
@@ -187,7 +187,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the end of the line
         /// </summary>
-        internal void MoveCursorEnd()
+        public void MoveCursorEnd()
         {
             MoveCursorRight(_currentLine.Length);
         }
@@ -195,7 +195,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the left one word
         /// </summary>
-        internal void MoveCursorWordLeft()
+        public void MoveCursorWordLeft()
         {
             while (!IsStartOfLine && _text[_cursorPos - 1] == ' ')
                 MoveCursorLeft();
@@ -206,7 +206,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Moves the cursor to the right one word
         /// </summary>
-        internal void MoveCursorWordRight()
+        public void MoveCursorWordRight()
         {
             while (!IsEndOfLine && _text[_cursorPos] == ' ')
                 MoveCursorRight();
@@ -220,7 +220,7 @@ namespace Internal.ReadLineReboot
         /// Writes the string to the console, clearing the line beforehand
         /// </summary>
         /// <param name="str">The text to be printed</param>
-        internal void WriteNewString(string str)
+        public void WriteNewString(string str)
         {
             // We're in the middle of the job
             _middleOfWriteNewString = true;
@@ -238,7 +238,7 @@ namespace Internal.ReadLineReboot
         /// Writes the string to the console without clearing the line
         /// </summary>
         /// <param name="str">The text to be printed</param>
-        internal void WriteString(string str)
+        public void WriteString(string str)
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -254,13 +254,13 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Writes a single character to the console
         /// </summary>
-        internal void WriteChar() => WriteChar(_keyInfo.KeyChar);
+        public void WriteChar() => WriteChar(_keyInfo.KeyChar);
 
         /// <summary>
         /// Writes a specific character to the console
         /// </summary>
         /// <param name="c">A character to be printed</param>
-        internal void WriteChar(char c)
+        public void WriteChar(char c)
         {
             // If we have tabs, convert the character to eight spaces
             string finalChar = c.ToString();
@@ -315,7 +315,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Inserts the comment to the current command
         /// </summary>
-        internal void InsertComment()
+        public void InsertComment()
         {
             int initialConsoleLeft = ConsoleWrapper.CursorLeft + 1;
             int initialCursorLeft = _cursorPos + 1;
@@ -334,7 +334,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Inserts the home directory by replacing the tilde
         /// </summary>
-        internal void InsertHomeDirectory()
+        public void InsertHomeDirectory()
         {
             // We can't do this when the text is empty
             if (_text.Length == 0)
@@ -375,7 +375,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Erases the last letter. Simulates the backspace key.
         /// </summary>
-        internal void Backspace()
+        public void Backspace()
         {
             Backspace(1);
         }
@@ -383,7 +383,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Erases the last letter. Simulates the backspace key.
         /// </summary>
-        internal void Backspace(int count)
+        public void Backspace(int count)
         {
             if (IsStartOfLine)
                 return;
@@ -394,7 +394,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Deletes the letter in the current position
         /// </summary>
-        internal void Delete()
+        public void Delete()
         {
             if (IsEndOfLine)
                 return;
@@ -404,7 +404,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace()"/>
         /// </summary>
-        internal void DeleteChar()
+        public void DeleteChar()
         {
             DeleteChar(1);
         }
@@ -412,7 +412,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace()"/>
         /// </summary>
-        internal void DeleteChar(int count)
+        public void DeleteChar(int count)
         {
             // Remove a character from the main text
             int index = _cursorPos;
@@ -449,7 +449,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Clears the entire line
         /// </summary>
-        internal void ClearLine()
+        public void ClearLine()
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -467,7 +467,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Clears the line to the left
         /// </summary>
-        internal void ClearLineToLeft()
+        public void ClearLineToLeft()
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -496,7 +496,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Clears the line to the right
         /// </summary>
-        internal void ClearLineToRight()
+        public void ClearLineToRight()
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -527,7 +527,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Clears all characters until the space is spotted
         /// </summary>
-        internal void ClearLineUntilSpace()
+        public void ClearLineUntilSpace()
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -563,7 +563,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Clears all horizontal space
         /// </summary>
-        internal void ClearHorizontalSpace()
+        public void ClearHorizontalSpace()
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -584,7 +584,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Clears all characters after the space is spotted
         /// </summary>
-        internal void ClearLineAfterSpace()
+        public void ClearLineAfterSpace()
         {
             // We're in the middle of the job
             _updateCurrentLineHistory = false;
@@ -621,7 +621,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Transposes the two characters in the current position
         /// </summary>
-        internal void TransposeChars()
+        public void TransposeChars()
         {
             // Local helper functions to make life easier
             bool almostEndOfLine() => (_cursorLimit - _cursorPos) == 1;
@@ -657,7 +657,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Transposes the two words in the current position
         /// </summary>
-        internal void TransposeWords()
+        public void TransposeWords()
         {
             // We can't do this at the end of the line
             if (IsEndOfLine)
@@ -736,7 +736,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Initialize auto-complete initially
         /// </summary>
-        internal void DoAutoComplete()
+        public void DoAutoComplete()
         {
             if (ReadLine.AutoCompletionEnabled)
             {
@@ -780,7 +780,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Does the reverse auto complete
         /// </summary>
-        internal void DoReverseAutoComplete()
+        public void DoReverseAutoComplete()
         {
             if (ReadLine.AutoCompletionEnabled)
             {
@@ -799,7 +799,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Starts the auto-completion, showing the first suggestion
         /// </summary>
-        internal void StartAutoComplete()
+        public void StartAutoComplete()
         {
             Backspace(_cursorPos - _completionStart);
 
@@ -813,7 +813,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Goes to the next suggestion, or to the first suggestion if we reached the last suggestion
         /// </summary>
-        internal void NextAutoComplete()
+        public void NextAutoComplete()
         {
             Backspace(_cursorPos - _completionStart);
 
@@ -831,7 +831,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Goes to the previous suggestion, or to the last suggestion if we reached the first suggestion
         /// </summary>
-        internal void PreviousAutoComplete()
+        public void PreviousAutoComplete()
         {
             Backspace(_cursorPos - _completionStart);
 
@@ -849,7 +849,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Inserts available completions
         /// </summary>
-        internal void InsertCompletions()
+        public void InsertCompletions()
         {
             if (ReadLine.AutoCompletionEnabled)
             {
@@ -867,7 +867,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Resets the auto-completion
         /// </summary>
-        internal void ResetAutoComplete()
+        public void ResetAutoComplete()
         {
             _completions = null;
             _completionsIndex = 0;
@@ -878,7 +878,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Shows the previous history
         /// </summary>
-        internal void PrevHistory()
+        public void PrevHistory()
         {
             _updateCurrentLine = false;
             _updateCurrentLineHistory = false;
@@ -892,7 +892,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Shows the next history
         /// </summary>
-        internal void NextHistory()
+        public void NextHistory()
         {
             _updateCurrentLine = false;
             _updateCurrentLineHistory = false;
@@ -912,7 +912,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Adds last argument to the current input
         /// </summary>
-        internal void AddLastArgument()
+        public void AddLastArgument()
         {
             if (_history.Count > 0)
             {
@@ -925,7 +925,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Gets the first history
         /// </summary>
-        internal void FirstHistory()
+        public void FirstHistory()
         {
             _updateCurrentLine = false;
             _updateCurrentLineHistory = false;
@@ -939,7 +939,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Goes back to the current line
         /// </summary>
-        internal void GoBackToCurrentLine()
+        public void GoBackToCurrentLine()
         {
             if (_history.Count > 0)
             {
@@ -953,7 +953,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Makes the word lowercase
         /// </summary>
-        internal void LowercaseWord()
+        public void LowercaseWord()
         {
             // Skip all whitespaces found
             while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
@@ -971,7 +971,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Makes the word UPPERCASE
         /// </summary>
-        internal void UppercaseWord()
+        public void UppercaseWord()
         {
             // Skip all whitespaces found
             while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
@@ -989,7 +989,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Makes the character UPPERCASE and move to the end of the word
         /// </summary>
-        internal void UppercaseCharMoveToEndOfWord()
+        public void UppercaseCharMoveToEndOfWord()
         {
             char Result = char.ToUpper(_text[_cursorPos]);
             DeleteChar();
@@ -1000,7 +1000,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Makes the character lowercase and move to the end of the word
         /// </summary>
-        internal void LowercaseCharMoveToEndOfWord()
+        public void LowercaseCharMoveToEndOfWord()
         {
             char Result = char.ToLower(_text[_cursorPos]);
             DeleteChar();
@@ -1013,7 +1013,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Pastes the content of console clipboard (kill buffer)
         /// </summary>
-        internal void Yank()
+        public void Yank()
         {
             if (ReadLine.ClipboardEnabled)
             {
@@ -1032,7 +1032,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Undos the last edit done to the current line
         /// </summary>
-        internal void Undo()
+        public void Undo()
         {
             if (ReadLine.UndoEnabled)
             {
@@ -1057,7 +1057,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Undos all the edits done to the current line
         /// </summary>
-        internal void UndoAll()
+        public void UndoAll()
         {
             if (ReadLine.UndoEnabled)
             {
@@ -1074,7 +1074,7 @@ namespace Internal.ReadLineReboot
         /// Sets the argument
         /// </summary>
         /// <param name="arg">Argument digit to add</param>
-        internal void SetArgument(int arg)
+        public void SetArgument(int arg)
         {
             // Make a string builder to add the digit to the number
             StringBuilder tempArg = new StringBuilder(_argDigit.ToString());
@@ -1089,7 +1089,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Add a minus to the argument number or write the minuses if an argument is already specified
         /// </summary>
-        internal void MinusArgumentOrWrite()
+        public void MinusArgumentOrWrite()
         {
             if (_middleOfArgInsert)
             {
@@ -1110,7 +1110,7 @@ namespace Internal.ReadLineReboot
         /// <summary>
         /// Updates the current line variable
         /// </summary>
-        internal void UpdateCurrentLine()
+        public void UpdateCurrentLine()
         {
             if (_updateCurrentLine)
             {
@@ -1126,7 +1126,7 @@ namespace Internal.ReadLineReboot
         /// </summary>
         /// <param name="newPrompt">Prompt to be updated</param>
         /// <param name="rewriteCurrentLine">Whether to rewrite current line</param>
-        internal void UpdatePrompt(string newPrompt, bool rewriteCurrentLine = true)
+        public void UpdatePrompt(string newPrompt, bool rewriteCurrentLine = true)
         {
             // Get number of newlines
             int newLines = _cachedPrompt.Replace("\r", "").Split(new char[] { '\n' }).Length - 1;
