@@ -84,36 +84,37 @@ namespace ReadLine.Tests
         };
 
         // Normal control characters used in ReadLine.Reboot
-        public static readonly ConsoleKeyInfo Backspace =           new('\0', ConsoleKey.Backspace,  false, false, false);
-        public static readonly ConsoleKeyInfo Delete =              new('\0', ConsoleKey.Delete,     false, false, false);
-        public static readonly ConsoleKeyInfo Home =                new('\0', ConsoleKey.Home,       false, false, false);
-        public static readonly ConsoleKeyInfo End =                 new('\0', ConsoleKey.End,        false, false, false);
-        public static readonly ConsoleKeyInfo LeftArrow =           new('\0', ConsoleKey.LeftArrow,  false, false, false);
-        public static readonly ConsoleKeyInfo RightArrow =          new('\0', ConsoleKey.RightArrow, false, false, false);
-        public static readonly ConsoleKeyInfo UpArrow =             new('\0', ConsoleKey.UpArrow,    false, false, false);
-        public static readonly ConsoleKeyInfo DownArrow =           new('\0', ConsoleKey.DownArrow,  false, false, false);
-        public static readonly ConsoleKeyInfo Tab =                 new('\0', ConsoleKey.Tab,        false, false, false);
-        public static readonly ConsoleKeyInfo ShiftTab =            new('\0', ConsoleKey.Tab,        true,  false, false);
-        public static readonly ConsoleKeyInfo AltD =                new('d',  ConsoleKey.D,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltB =                new('b',  ConsoleKey.B,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltF =                new('f',  ConsoleKey.F,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltL =                new('l',  ConsoleKey.L,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltR =                new('r',  ConsoleKey.R,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltU =                new('u',  ConsoleKey.U,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltC =                new('c',  ConsoleKey.C,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltV =                new('v',  ConsoleKey.V,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltT =                new('t',  ConsoleKey.T,          false, true,  false);
-        public static readonly ConsoleKeyInfo AltOemPeriod =        new('.',  ConsoleKey.OemPeriod,  false, true,  false);
-        public static readonly ConsoleKeyInfo AltShiftOemComma =    new('<',  ConsoleKey.OemComma,   true,  true,  false);
-        public static readonly ConsoleKeyInfo AltShiftD3 =          new('#',  ConsoleKey.D3,         true,  true,  false);
-        public static readonly ConsoleKeyInfo AltShiftD7 =          new('&',  ConsoleKey.D7,         true,  true,  false);
-        public static readonly ConsoleKeyInfo AltShiftD8 =          new('*',  ConsoleKey.D8,         true,  true,  false);
-        public static readonly ConsoleKeyInfo AltOem5 =             new('\\', ConsoleKey.Oem5,       false, true,  false);
-        public static readonly ConsoleKeyInfo AltBackspace =        new('\0', ConsoleKey.Backspace,  false, true,  false);
-        public static readonly ConsoleKeyInfo AltTab =              new('\t', ConsoleKey.Tab,        false, true,  false);
+        public static readonly ConsoleKeyInfo Backspace =           new('\0',       ConsoleKey.Backspace,  false, false, false);
+        public static readonly ConsoleKeyInfo Delete =              new('\0',       ConsoleKey.Delete,     false, false, false);
+        public static readonly ConsoleKeyInfo Home =                new('\0',       ConsoleKey.Home,       false, false, false);
+        public static readonly ConsoleKeyInfo End =                 new('\0',       ConsoleKey.End,        false, false, false);
+        public static readonly ConsoleKeyInfo LeftArrow =           new('\0',       ConsoleKey.LeftArrow,  false, false, false);
+        public static readonly ConsoleKeyInfo RightArrow =          new('\0',       ConsoleKey.RightArrow, false, false, false);
+        public static readonly ConsoleKeyInfo UpArrow =             new('\0',       ConsoleKey.UpArrow,    false, false, false);
+        public static readonly ConsoleKeyInfo DownArrow =           new('\0',       ConsoleKey.DownArrow,  false, false, false);
+        public static readonly ConsoleKeyInfo Tab =                 new('\0',       ConsoleKey.Tab,        false, false, false);
+        public static readonly ConsoleKeyInfo ShiftTab =            new('\0',       ConsoleKey.Tab,        true,  false, false);
+        public static readonly ConsoleKeyInfo AltD =                new('d',        ConsoleKey.D,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltB =                new('b',        ConsoleKey.B,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltF =                new('f',        ConsoleKey.F,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltL =                new('l',        ConsoleKey.L,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltR =                new('r',        ConsoleKey.R,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltU =                new('u',        ConsoleKey.U,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltC =                new('c',        ConsoleKey.C,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltV =                new('v',        ConsoleKey.V,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltT =                new('t',        ConsoleKey.T,          false, true,  false);
+        public static readonly ConsoleKeyInfo AltOemPeriod =        new('.',        ConsoleKey.OemPeriod,  false, true,  false);
+        public static readonly ConsoleKeyInfo AltShiftOemComma =    new('<',        ConsoleKey.OemComma,   true,  true,  false);
+        public static readonly ConsoleKeyInfo AltShiftD3 =          new('#',        ConsoleKey.D3,         true,  true,  false);
+        public static readonly ConsoleKeyInfo AltShiftD7 =          new('&',        ConsoleKey.D7,         true,  true,  false);
+        public static readonly ConsoleKeyInfo AltShiftD8 =          new('*',        ConsoleKey.D8,         true,  true,  false);
+        public static readonly ConsoleKeyInfo AltOem5 =             new('\\',       ConsoleKey.Oem5,       false, true,  false);
+        public static readonly ConsoleKeyInfo AltBackspace =        new('\0',       ConsoleKey.Backspace,  false, true,  false);
+        public static readonly ConsoleKeyInfo AltTab =              new('\t',       ConsoleKey.Tab,        false, true,  false);
 
         // Normal control characters used for by-default unbound keys
-        public static readonly ConsoleKeyInfo AltShiftF =           new('F',  ConsoleKey.F,          true,  true,  false);
+        public static readonly ConsoleKeyInfo AltShiftF =           new('F',        ConsoleKey.F,          true,  true,  false);
+        public static readonly ConsoleKeyInfo CtrlAltW =            new(CtrlWChar,  ConsoleKey.W,          false, true,  true );
 
         // The actual characters used in test
         public static readonly ConsoleKeyInfo ExclamationPoint = ExclamationPointChar.ToConsoleKeyInfo(specialKeyCharMap);

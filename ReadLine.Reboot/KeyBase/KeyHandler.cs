@@ -81,6 +81,7 @@ namespace ReadLineReboot
         internal int _prePromptCursorTop;
         internal readonly List<string> _history;
         internal readonly List<string> _currentLineEditHistory;
+        private readonly bool _isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
 
         // Private Properties
         private bool IsStartOfLine => _cursorPos == 0;
@@ -556,6 +557,46 @@ namespace ReadLineReboot
 
             // Now, clear all the letters until we've found a whitespace
             while (!IsStartOfLine && !char.IsWhiteSpace(_text[_cursorPos - 1]))
+            {
+                chars.Add(_text[_cursorPos - 1]);
+                Backspace();
+            }
+
+            // Append the wiped characters to the kill buffer
+            chars.Reverse();
+            _killBuffer.Append(string.Join("", chars));
+
+            // Update the current line history
+            _updateCurrentLineHistory = true;
+            UpdateCurrentLine();
+        }
+
+        /// <summary>
+        /// Clears all characters until the space or slash (or backslash if running on Windows) is spotted
+        /// </summary>
+        public void ClearLineUntilSpaceOrSlash()
+        {
+            // We're in the middle of the job
+            _updateCurrentLineHistory = false;
+
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(ClearLineUntilSpaceOrSlash))
+                _killBuffer.Clear();
+
+            // Clear all whitespaces or slashes found
+            while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]) &&
+                                     _text[_cursorPos - 1] == '/' &&
+                                     _text[_cursorPos - 1] == '\\' && _isOnWindows)
+            {
+                chars.Add(_text[_cursorPos - 1]);
+                Backspace();
+            }
+
+            // Now, clear all the letters until we've found a whitespace or slash
+            while (!IsStartOfLine && !char.IsWhiteSpace(_text[_cursorPos - 1]) &&
+                                      _text[_cursorPos - 1] != '/' &&
+                                      _text[_cursorPos - 1] != '\\' && _isOnWindows)
             {
                 chars.Add(_text[_cursorPos - 1]);
                 Backspace();

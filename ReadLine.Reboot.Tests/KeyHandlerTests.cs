@@ -66,6 +66,7 @@ namespace ReadLine.Tests
 
             // Initialize custom bindings
             ReadLineReboot.ReadLine.AddCustomBinding(AltShiftF, _keyHandler.BackspaceOrDelete);
+            ReadLineReboot.ReadLine.AddCustomBinding(CtrlAltW,  _keyHandler.ClearLineUntilSpaceOrSlash);
             KeyBindings.InitializeBindings();
 
             // Initialize platform variables
@@ -509,6 +510,45 @@ namespace ReadLine.Tests
 
             // Ensure that everything is back to what they were
             Assert.Equal("Hello World", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line until space or slash is spotted
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceOrSlashWithControlAltW()
+        {
+            // Simulate the user pressing the CTRL + W key while writing the " World" string
+            " World/hworld.c".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                             .Append(CtrlAltW)
+                             .ToList()
+                             .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the slash is spotted
+            Assert.Equal("Hello World/", _keyHandler.Text);
+        }
+
+        /// <summary>
+        /// Tests clearing the line until space or slash is spotted and yanking
+        /// </summary>
+        [Fact]
+        public void TestClearLineUntilSpaceOrSlashWithControlAltWAndYanking()
+        {
+            // Simulate the user pressing the CTRL + W key while writing the " World" string
+            " World/hworld.c".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                             .Append(CtrlAltW)
+                             .ToList()
+                             .ForEach(_keyHandler.Handle);
+
+            // Ensure that we've erased everything until the slash is spotted
+            Assert.Equal("Hello World/", _keyHandler.Text);
+            Assert.Equal("hworld.c", _keyHandler.KillBuffer);
+
+            // Simulate the user pressing the CTRL + Y key
+            _keyHandler.Handle(CtrlY);
+
+            // Ensure that everything is back to what they were
+            Assert.Equal("Hello World/hworld.c", _keyHandler.Text);
         }
 
         /// <summary>
