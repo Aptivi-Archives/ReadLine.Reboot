@@ -1231,7 +1231,7 @@ namespace ReadLineReboot
 
         #region Main logic
         /// <summary>
-        /// Initializes the new instance of the key handler class
+        /// Initializes the new instance of the key handler class. Please note that you need to call <see cref="KeyBindings.InitializeBindings"/> directly after this.
         /// </summary>
         /// <param name="console">Console instance</param>
         /// <param name="history">History of written inputs</param>

@@ -1223,6 +1223,10 @@ namespace ReadLine.Tests
 
             // Let's set one up
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
+            ReadLineReboot.ReadLine._keyHandler = _keyHandler;
+
+            // Initialize bindings
+            KeyBindings.InitializeBindings();
 
             // Write this
             "Hi ".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
@@ -1250,6 +1254,10 @@ namespace ReadLine.Tests
 
             // Let's set one up
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
+            ReadLineReboot.ReadLine._keyHandler = _keyHandler;
+
+            // Initialize bindings
+            KeyBindings.InitializeBindings();
 
             // Write this
             "Hi ".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
@@ -1277,6 +1285,10 @@ namespace ReadLine.Tests
 
             // Let's set one up
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
+            ReadLineReboot.ReadLine._keyHandler = _keyHandler;
+
+            // Initialize bindings
+            KeyBindings.InitializeBindings();
 
             // Write this
             "Hi ".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
@@ -1301,6 +1313,10 @@ namespace ReadLine.Tests
         {
             // Let's set one up
             _keyHandler = new KeyHandler(new DumbConsole(), _history, _autoCompleteHandler);
+            ReadLineReboot.ReadLine._keyHandler = _keyHandler;
+
+            // Initialize bindings
+            KeyBindings.InitializeBindings();
 
             // Write this
             "Hi ".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
