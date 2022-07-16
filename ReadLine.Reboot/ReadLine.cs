@@ -134,14 +134,17 @@ namespace ReadLineReboot
         }
 
         /// <summary>
-        /// Adds your own custom binding
+        /// Adds your own custom binding. If a custom binding already exists, updates the custom binding.
         /// </summary>
         /// <param name="key">Console key to press</param>
         /// <param name="action">Action to be done when key is pressed</param>
         public static void AddCustomBinding(ConsoleKeyInfo key, Action action)
         {
             string ConsoleKeyName = KeyTools.BuildKeyInput(key);
-            KeyBindings._customKeyBindings.Add(ConsoleKeyName, action);
+            if (!KeyBindings._customKeyBindings.ContainsKey(ConsoleKeyName))
+                KeyBindings._customKeyBindings.Add(ConsoleKeyName, action);
+            else
+                ChangeCustomBinding(key, action);
         }
 
         /// <summary>
