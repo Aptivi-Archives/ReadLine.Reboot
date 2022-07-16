@@ -346,19 +346,6 @@ namespace ReadLine.Tests
         }
 
         /// <summary>
-        /// Tests clearing the line
-        /// </summary>
-        [Fact]
-        public void TestClearLineWithControlL()
-        {
-            // Simulate the user pressing the CTRL + L key
-            _keyHandler.Handle(CtrlL);
-
-            // Nothing should be there
-            Assert.Equal(string.Empty, _keyHandler.Text);
-        }
-
-        /// <summary>
         /// Tests clearing the line to the left
         /// </summary>
         [Fact]
