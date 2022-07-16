@@ -21,7 +21,6 @@ _Note: Some keys conflict with terminal emulator keybindings._
 | `Ctrl`+`C`                         | Send EOF                                             |
 | `Ctrl`+`H` / `Backspace`           | Delete previous character                            |
 | `Ctrl`+`D` / `Delete`              | Delete succeeding character / End of line if nothing |
-| `Esc`                              | Clear line                                           |
 | `Ctrl`+`L`                         | Clear screen and rewrite current line                |
 | `Ctrl`+`U`                         | Cut text to the start of line                        |
 | `Ctrl`+`K`                         | Cut text to the end of line                          |
@@ -71,7 +70,7 @@ PM> Install-Package ReadLine.Reboot
 dotnet add package ReadLine.Reboot
 ```
 
-## Comparison
+## Comparison as of ReadLine.Reboot 3.0.0
 
 Here, we'll compare some of the base features between [Original ReadLine](https://github.com/tonerdo/readline), [Latency's ReadLine](https://github.com/Latency/ReadLine), and ReadLine.Reboot.
 

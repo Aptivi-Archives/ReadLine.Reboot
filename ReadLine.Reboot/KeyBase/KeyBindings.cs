@@ -59,7 +59,6 @@ namespace ReadLineReboot
                 ["ControlD"]                = ReadLine._keyHandler.Delete,
 
                 // Deletion of whole line
-                ["Escape"]                  = ReadLine._keyHandler.ClearLine,
                 ["ControlL"]                = ReadLine._keyHandler.ClearScreenAndRewrite,
                 ["ControlU"]                = ReadLine._keyHandler.ClearLineToLeft,
                 ["ControlK"]                = ReadLine._keyHandler.ClearLineToRight,
