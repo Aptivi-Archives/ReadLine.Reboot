@@ -39,6 +39,7 @@ namespace ReadLineReboot
         // Internal variables
         private static readonly List<string> _history = new List<string>();
         private static bool _readInterrupt;
+        private static int _historySize = -1;
         internal static bool _pressedEnterOnHistoryEntry;
         internal static KeyHandler _keyHandler;
         internal static object _lock = new object();
@@ -115,10 +116,58 @@ namespace ReadLineReboot
         public static BellType BellStyle { get; set; } = BellType.Audible;
 
         /// <summary>
+        /// Specifies the history size. If set to 0, all entries are removed and nothing will be added to the history.
+        /// If set to a value less than 0, the history size is unlimited.
+        /// </summary>
+        public static int HistorySize
+        {
+            get
+            {
+                return _historySize;
+            }
+            set 
+            {
+                if (value == 0)
+                    ClearHistory();
+                _historySize = value;
+            }
+        }
+
+        /// <summary>
         /// Adds a text or an array of texts to the history
         /// </summary>
         /// <param name="texts">The strings to add to the history</param>
-        public static void AddHistory(params string[] texts) => _history.AddRange(texts);
+        public static void AddHistory(params string[] texts)
+        {
+            // If we have nothing to add, return.
+            if (texts == null)
+                return;
+
+            // Iterate through texts
+            if (HistorySize > 0)
+            {
+                // We have limited history.
+                foreach (string text in texts)
+                {
+                    // Add the text
+                    _history.Add(text);
+
+                    // Check to see if we've exceeded the history limit
+                    if (_history.Count > HistorySize)
+                    {
+                        // We may have more than one history entry added during the unlimited history size, so remove
+                        // entries until we reach the limit
+                        while (_history.Count > HistorySize)
+                            _history.RemoveAt(0);
+                    }
+                }
+            }
+            else if(HistorySize < 0)
+            {
+                // We have unlimited history.
+                _history.AddRange(texts);
+            }
+        }
 
         /// <summary>
         /// Gets the current history
