@@ -115,6 +115,8 @@ namespace ReadLine.Tests
         // Normal control characters used for by-default unbound keys
         public static readonly ConsoleKeyInfo AltShiftF =           new('F',        ConsoleKey.F,          true,  true,  false);
         public static readonly ConsoleKeyInfo CtrlAltW =            new(CtrlWChar,  ConsoleKey.W,          false, true,  true );
+        public static readonly ConsoleKeyInfo CtrlAltB =            new(CtrlBChar,  ConsoleKey.B,          false, true,  true );
+        public static readonly ConsoleKeyInfo CtrlAltF =            new(CtrlFChar,  ConsoleKey.F,          false, true,  true );
 
         // The actual characters used in test
         public static readonly ConsoleKeyInfo ExclamationPoint = ExclamationPointChar.ToConsoleKeyInfo(specialKeyCharMap);

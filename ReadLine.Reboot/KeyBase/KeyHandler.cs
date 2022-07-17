@@ -96,7 +96,6 @@ namespace ReadLineReboot
         internal static ConsoleKeyInfo SimulatedEnterCtrlC => new ConsoleKeyInfo('\u0003', ConsoleKey.C, false, false, true);
 
         #region Cursor Movement
-
         /// <summary>
         /// Moves the cursor to the left once
         /// </summary>
@@ -1077,6 +1076,69 @@ namespace ReadLineReboot
             {
                 WriteChar();
             }
+        }
+
+        /// <summary>
+        /// Copies the word before the cursor and stores it to the kill buffer
+        /// </summary>
+        public void CopyBackwardWord()
+        {
+            // Temporary cursor position
+            int peekCursorPos = _cursorPos;
+
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(CopyBackwardWord))
+                _killBuffer.Clear();
+
+            // Get all whitespaces found
+            while (!IsStartOfLine && char.IsWhiteSpace(_text[peekCursorPos - 1]))
+            {
+                chars.Add(_text[peekCursorPos - 1]);
+                peekCursorPos -= 1;
+            }
+
+            // Now, clear all the letters until we've found a whitespace
+            while (!IsStartOfLine && !char.IsWhiteSpace(_text[peekCursorPos - 1]))
+            {
+                chars.Add(_text[peekCursorPos - 1]);
+                peekCursorPos -= 1;
+            }
+
+            // Append the wiped characters to the kill buffer
+            chars.Reverse();
+            _killBuffer.Append(string.Join("", chars));
+        }
+
+        /// <summary>
+        /// Copies the word under the cursor and stores it to the kill buffer
+        /// </summary>
+        public void CopyForwardWord()
+        {
+            // Temporary cursor position
+            int peekCursorPos = _cursorPos;
+
+            // Clear the kill buffer if the last handler is not this command
+            List<char> chars = new List<char>();
+            if (_lastHandler != nameof(CopyForwardWord))
+                _killBuffer.Clear();
+
+            // Clear all whitespaces found
+            while (!IsEndOfLine && char.IsWhiteSpace(_text[peekCursorPos]))
+            {
+                chars.Add(_text[peekCursorPos]);
+                peekCursorPos += 1;
+            }
+
+            // Now, clear all the letters until we've found a whitespace
+            while (!IsEndOfLine && !char.IsWhiteSpace(_text[peekCursorPos]))
+            {
+                chars.Add(_text[peekCursorPos]);
+                peekCursorPos += 1;
+            }
+
+            // Append the wiped characters to the kill buffer
+            _killBuffer.Append(string.Join("", chars));
         }
         #endregion
 

@@ -67,6 +67,8 @@ namespace ReadLine.Tests
             // Initialize custom bindings
             ReadLineReboot.ReadLine.AddCustomBinding(AltShiftF, _keyHandler.BackspaceOrDelete);
             ReadLineReboot.ReadLine.AddCustomBinding(CtrlAltW,  _keyHandler.ClearLineUntilSpaceOrSlash);
+            ReadLineReboot.ReadLine.AddCustomBinding(CtrlAltB,  _keyHandler.CopyBackwardWord);
+            ReadLineReboot.ReadLine.AddCustomBinding(CtrlAltF,  _keyHandler.CopyForwardWord);
             KeyBindings.InitializeBindings();
 
             // Initialize platform variables
@@ -1349,6 +1351,45 @@ namespace ReadLine.Tests
 
             // Confirm that nothing is there
             Assert.Equal("", _keyHandler.Text);
+        }
+        #endregion
+
+        #region Clipboard management
+        /// <summary>
+        /// Tests copying the word backward
+        /// </summary>
+        [Fact]
+        public void TestCopyBackwardWord()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the CTRL + ALT + B key
+            _keyHandler.Handle(CtrlAltB);
+
+            // Ensure that we have "World" on the kill buffer
+            Assert.Equal("World", _keyHandler.KillBuffer);
+        }
+
+        /// <summary>
+        /// Tests copying the word forward
+        /// </summary>
+        [Fact]
+        public void TestCopyForwardWord()
+        {
+            // Write this
+            " World".Select(c => c.ToConsoleKeyInfo(specialKeyCharMap))
+                    .ToList()
+                    .ForEach(_keyHandler.Handle);
+
+            // Simulate the user pressing the HOME and CTRL + ALT + F key
+            new List<ConsoleKeyInfo>() { Home, CtrlAltF }
+                .ForEach(_keyHandler.Handle);
+
+            // Ensure that we have "Hello" on the kill buffer
+            Assert.Equal("Hello", _keyHandler.KillBuffer);
         }
         #endregion
     }
