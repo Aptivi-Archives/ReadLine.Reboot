@@ -27,6 +27,7 @@
 using ReadLineReboot.Abstractions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace ReadLineReboot
@@ -99,10 +100,7 @@ namespace ReadLineReboot
         /// <summary>
         /// Moves the cursor to the left once
         /// </summary>
-        public void MoveCursorLeft()
-        {
-            MoveCursorLeft(1);
-        }
+        public void MoveCursorLeft() => MoveCursorLeft(_argDigit);
 
         /// <summary>
         /// Moves the cursor to the left n times
@@ -139,10 +137,7 @@ namespace ReadLineReboot
         /// <summary>
         /// Moves the cursor to the right once
         /// </summary>
-        public void MoveCursorRight()
-        {
-            MoveCursorRight(1);
-        }
+        public void MoveCursorRight() => MoveCursorRight(_argDigit);
 
         /// <summary>
         /// Moves the cursor to the right n times
@@ -254,60 +249,65 @@ namespace ReadLineReboot
         /// <summary>
         /// Writes a single character to the console
         /// </summary>
-        public void WriteChar() => WriteChar(_keyInfo.KeyChar);
+        public void WriteChar() => WriteChar(_keyInfo.KeyChar, _argDigit);
 
         /// <summary>
         /// Writes a specific character to the console
         /// </summary>
         /// <param name="c">A character to be printed</param>
-        public void WriteChar(char c)
+        /// <param name="repeat">How many times to repeat the character?</param>
+        public void WriteChar(char c, int repeat = 1)
         {
-            // If we have tabs, convert the character to eight spaces
-            string finalChar = c.ToString();
-            int tabLength = 8 - ConsoleWrapper.CursorLeft % 8;
-            if (c == '\t')
-                finalChar = new string(' ', tabLength);
-
-            // If the character isn't a null character, go on
-            if (c != default)
+            if (repeat > 0)
             {
-                // If we're at the end of the line, just write
-                if (IsEndOfLine)
-                {
-                    // Just append the character and write it to the console
-                    _text.Append(finalChar);
-                    UpdateCurrentLine();
-                    ConsoleWrapper.Write(finalChar);
-                    _cursorPos += finalChar.Length;
+                // If we have tabs, convert the character to eight spaces
+                string finalChar = c.ToString();
+                int tabLength = 8 - ConsoleWrapper.CursorLeft % 8;
+                if (c == '\t')
+                    finalChar = new string(' ', tabLength);
+                finalChar = string.Concat(Enumerable.Repeat(finalChar, repeat));
 
-                    // Increase the cursor limit
-                    _cursorLimit += finalChar.Length;
-                }
-                else
+                // If the character isn't a null character, go on
+                if (c != default)
                 {
-                    // Get a part of the string from the cursor position
-                    int left = ConsoleWrapper.CursorLeft;
-                    int top = ConsoleWrapper.CursorTop;
+                    // If we're at the end of the line, just write
+                    if (IsEndOfLine)
+                    {
+                        // Just append the character and write it to the console
+                        _text.Append(finalChar);
+                        UpdateCurrentLine();
+                        ConsoleWrapper.Write(finalChar);
+                        _cursorPos += finalChar.Length;
+
+                        // Increase the cursor limit
+                        _cursorLimit += finalChar.Length;
+                    }
+                    else
+                    {
+                        // Get a part of the string from the cursor position
+                        int left = ConsoleWrapper.CursorLeft;
+                        int top = ConsoleWrapper.CursorTop;
 #if NETCOREAPP
-                    string str = _text.ToString()[_cursorPos..];
+                        string str = _text.ToString()[_cursorPos..];
 #else
-                    string str = _text.ToString().Substring(_cursorPos);
+                        string str = _text.ToString().Substring(_cursorPos);
 #endif
 
-                    // Inject a character to the main text in the cursor position
-                    _text.Insert(_cursorPos, finalChar);
-                    UpdateCurrentLine();
+                        // Inject a character to the main text in the cursor position
+                        _text.Insert(_cursorPos, finalChar);
+                        UpdateCurrentLine();
 
-                    // Write the result and set the correct console cursor position
-                    ConsoleWrapper.Write(finalChar + str);
-                    ConsoleWrapper.SetCursorPosition(left, top);
+                        // Write the result and set the correct console cursor position
+                        ConsoleWrapper.Write(finalChar + str);
+                        ConsoleWrapper.SetCursorPosition(left, top);
 
-                    // Increase the cursor limit
-                    _cursorLimit += finalChar.Length;
+                        // Increase the cursor limit
+                        _cursorLimit += finalChar.Length;
 
-                    // Move the cursor to the right
-                    for (int i = 0; i < finalChar.Length; i++)
-                        MoveCursorRight();
+                        // Move the cursor to the right
+                        for (int i = 0; i < finalChar.Length; i++)
+                            MoveCursorRight();
+                    }
                 }
             }
         }
@@ -375,10 +375,7 @@ namespace ReadLineReboot
         /// <summary>
         /// Erases the last letter. Simulates the backspace key.
         /// </summary>
-        public void Backspace()
-        {
-            Backspace(1);
-        }
+        public void Backspace() => Backspace(_argDigit);
 
         /// <summary>
         /// Erases the last letter. Simulates the backspace key.
@@ -404,46 +401,50 @@ namespace ReadLineReboot
         /// <summary>
         /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace()"/>
         /// </summary>
-        public void DeleteChar()
-        {
-            DeleteChar(1);
-        }
+        public void DeleteChar() => DeleteChar(_argDigit);
 
         /// <summary>
         /// Deletes the character in the current position. Invoked by <see cref="Delete"/> and <see cref="Backspace()"/>
         /// </summary>
         public void DeleteChar(int count)
         {
-            // Remove a character from the main text
-            int index = _cursorPos;
-            _text.Remove(index, count);
-            UpdateCurrentLine();
+            if (count > 0)
+            {
+                // If we're trying to delete more characters than we already have, set it to this limit
+                if (_text.Length < count)
+                    count = _text.Length;
 
-            // Form the result
+                // Remove a character from the main text
+                int index = _cursorPos;
+                _text.Remove(index, count);
+                UpdateCurrentLine();
+
+                // Form the result
 #if NETCOREAPP
-            string replacement = _text.ToString()[index..];
+                string replacement = _text.ToString()[index..];
 #else
-            string replacement = _text.ToString().Substring(index);
+                string replacement = _text.ToString().Substring(index);
 #endif
 
-            // Write the resulting string and set the appropriate cursor position
-            int left = ConsoleWrapper.CursorLeft;
-            int top = ConsoleWrapper.CursorTop;
-            string spaces = new string(' ', count);
-            if (ConsoleWrapper.PasswordMode && ConsoleWrapper.PasswordMaskChar != default)
-            {
-                // Write the replacement, but use Console.Write to write the space, because we need to ensure that it really got deleted on render.
-                ConsoleWrapper.Write(replacement);
-                Console.Write(spaces);
-            }
-            else
-            {
-                ConsoleWrapper.Write($"{replacement}{spaces}");
-            }
-            ConsoleWrapper.SetCursorPosition(left, top);
+                // Write the resulting string and set the appropriate cursor position
+                int left = ConsoleWrapper.CursorLeft;
+                int top = ConsoleWrapper.CursorTop;
+                string spaces = new string(' ', count);
+                if (ConsoleWrapper.PasswordMode && ConsoleWrapper.PasswordMaskChar != default)
+                {
+                    // Write the replacement, but use Console.Write to write the space, because we need to ensure that it really got deleted on render.
+                    ConsoleWrapper.Write(replacement);
+                    Console.Write(spaces);
+                }
+                else
+                {
+                    ConsoleWrapper.Write($"{replacement}{spaces}");
+                }
+                ConsoleWrapper.SetCursorPosition(left, top);
 
-            // Sets the cursor limit appropriately
-            _cursorLimit -= count;
+                // Sets the cursor limit appropriately
+                _cursorLimit -= count;
+            }
         }
 
         /// <summary>
@@ -1289,13 +1290,10 @@ namespace ReadLineReboot
 
             // Invoke it!
             if (_middleOfArgInsert && _currentHandler != nameof(SetArgument))
-            {
                 UpdatePrompt(_initialPrompt);
-                for (int i = 1; i <= _argDigit; i++)
-                    action.Invoke();
-            }
-            else
-                action.Invoke();
+            if (_argDigit == 0)
+                _argDigit = 1;
+            action.Invoke();
 
             // Set the last handler
             _lastHandler = _currentHandler;
