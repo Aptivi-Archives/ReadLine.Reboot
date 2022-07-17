@@ -109,6 +109,10 @@ namespace ReadLineReboot
             int CursorLeft = ConsoleWrapper.CursorLeft;
             int CursorTop = ConsoleWrapper.CursorTop;
 
+            // If we're in the beginning of the line, ring bell
+            if (IsStartOfLine)
+                ReadLine.RingBell();
+
             for (int i = 0; i < count; i++)
             {
                 // If we're in the beginning of the line, do absolutely nothing
@@ -145,6 +149,10 @@ namespace ReadLineReboot
         {
             int CursorLeft = ConsoleWrapper.CursorLeft;
             int CursorTop = ConsoleWrapper.CursorTop;
+
+            // If we're in the end of the line, ring bell
+            if (IsEndOfLine)
+                ReadLine.RingBell();
 
             for (int i = 0; i < count; i++)
             { 

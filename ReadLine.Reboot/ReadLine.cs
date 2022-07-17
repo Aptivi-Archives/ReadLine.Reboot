@@ -42,6 +42,7 @@ namespace ReadLineReboot
         internal static bool _pressedEnterOnHistoryEntry;
         internal static KeyHandler _keyHandler;
         internal static object _lock = new object();
+        internal static char _escapeChar = Convert.ToChar(0x1B);
 
         // Variables
         /// <summary>
@@ -107,6 +108,11 @@ namespace ReadLineReboot
         /// The key handler.
         /// </summary>
         public static KeyHandler KeyHandler => _keyHandler;
+
+        /// <summary>
+        /// The bell style.
+        /// </summary>
+        public static BellType BellStyle { get; set; } = BellType.Audible;
 
         /// <summary>
         /// Adds a text or an array of texts to the history
@@ -375,6 +381,27 @@ namespace ReadLineReboot
                 Console.WriteLine();
             }
             return _output;
+        }
+
+        internal static void RingBell()
+        {
+            switch (BellStyle)
+            {
+                case BellType.None:
+                    break;
+                case BellType.Audible:
+                    // Write the bell character to the console
+                    Console.Write("\a");
+                    break;
+                case BellType.Visible:
+                    // Try to emit the visible bell
+                    Console.Write($"{_escapeChar}[?5h");
+                    Thread.Sleep(100);
+                    Console.Write($"{_escapeChar}[?5l");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
