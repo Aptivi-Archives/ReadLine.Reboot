@@ -176,7 +176,7 @@ namespace ReadLineReboot
         /// <param name="defaultText">The default text to write if nothing is written</param>
         /// <param name="force">Force read the input (may cause instability)</param>
         /// <returns>The written text if anything is input from the user, or the default text if nothing if printed</returns>
-        public static string Read(string prompt = "", string defaultText = "", bool force = false)
+        public static string Read(string prompt = "", string defaultText = "", bool force = true)
         {
             if (force)
                 return ReadInternal(prompt, defaultText);
@@ -196,7 +196,7 @@ namespace ReadLineReboot
         /// <param name="mask">Character to use to mask password</param>
         /// <param name="force">Force read the input (may cause instability)</param>
         /// <returns>The written text</returns>
-        public static string ReadPassword(string prompt = "", char mask = default, bool force = false)
+        public static string ReadPassword(string prompt = "", char mask = default, bool force = true)
         {
             if (force)
                 return ReadPasswordInternal(prompt, mask);
