@@ -826,7 +826,8 @@ namespace ReadLineReboot
                         return;
 
                     // Start the auto completion
-                    if (_currentHandler != nameof(InsertCompletions))
+                    if (_currentHandler != nameof(InsertCompletions) && 
+                        _currentHandler != nameof(ListPossibleCompletions))
                         StartAutoComplete();
                 }
             }
@@ -915,8 +916,46 @@ namespace ReadLineReboot
                 // Initialize suggestions
                 DoAutoComplete();
 
+                // If we have no completions, bail
+                if (_completions == null)
+                    return;
+
                 // Dump all the suggestions
                 WriteString(string.Join(" ", _completions));
+
+                // Finalize suggestions
+                ResetAutoComplete();
+            }
+        }
+        
+        /// <summary>
+        /// Lists possible completions
+        /// </summary>
+        public void ListPossibleCompletions()
+        {
+            if (ReadLine.AutoCompletionEnabled)
+            {
+                // Initialize auto complete
+                DoAutoComplete();
+
+                // If we have no completions, bail
+                if (_completions == null)
+                    return;
+
+                // Move to the end of the line so we know how to write it at the end, saving the cursor position
+                int initialCursorPos = _cursorPos;
+                MoveCursorEnd();
+
+                // Now, write a new line and list all possible completions
+                ConsoleWrapper.Write("\n");
+                foreach (var completion in _completions)
+                    ConsoleWrapper.Write($"{completion}\n");
+
+                // Write the prompt again
+                _prePromptCursorTop = ConsoleWrapper.CursorTop;
+                RewriteCurrentLine();
+                MoveCursorHome();
+                MoveCursorRight(initialCursorPos);
 
                 // Finalize suggestions
                 ResetAutoComplete();

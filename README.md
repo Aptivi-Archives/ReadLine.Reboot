@@ -47,6 +47,7 @@ _Note: Some keys conflict with terminal emulator keybindings._
 | `Alt`+`.`                          | Add last argument to current input                   |
 | `Ctrl`+`I` / `Tab`                 | Command line completion                              |
 | `Shift`+`Ctrl`+`I` / `Shift`+`Tab` | Backwards command line completion                    |
+| `Alt`+`Shift`+`?`                  | List possible completion                             |
 | `Shift`+`Alt`+`*`                  | Dump all suggestions to current line                 |
 | `Alt`+`0-9`                        | Argument number add                                  |
 | `Alt`+`-`                          | Argument number negation                             |

@@ -84,8 +84,9 @@ namespace ReadLineReboot
                 ["Tab"]                     = ReadLine._keyHandler.DoAutoComplete,
                 ["ControlI"]                = ReadLine._keyHandler.DoAutoComplete,
                 ["ShiftTab"]                = ReadLine._keyHandler.DoReverseAutoComplete,
-                ["Shift, ControlI"]          = ReadLine._keyHandler.DoReverseAutoComplete,
+                ["Shift, ControlI"]         = ReadLine._keyHandler.DoReverseAutoComplete,
                 ["Alt, ShiftD8"]            = ReadLine._keyHandler.InsertCompletions,
+                ["Alt, ShiftOem2"]          = ReadLine._keyHandler.ListPossibleCompletions,
 
                 // Case manipulation
                 ["AltL"]                    = ReadLine._keyHandler.LowercaseWord,

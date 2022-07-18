@@ -62,6 +62,12 @@ namespace ReadLineReboot
                         if (keyInfo.KeyChar == '<')
                             initialModifiers |= ConsoleModifiers.Shift;
                         break;
+                    case '/':
+                    case '?':
+                        initialKey = "Oem2";
+                        if (keyInfo.KeyChar == '?')
+                            initialModifiers |= ConsoleModifiers.Shift;
+                        break;
                     case '_':
                         initialKey = "OemMinus";
                         initialModifiers |= ConsoleModifiers.Shift;
