@@ -127,6 +127,9 @@ namespace ReadLineReboot
         {
             // On Mono Linux, some of the characters (usually Oem*) is actually "0" according to _keyInfo.Key, screwing the shortcut up and causing
             // it to not work as defined in the below _keyActions, so give such systems special treatment so they work equally to Windows.
+            //
+            // However, some of the keyboard shortcuts like ALT + SHIFT + ? can't be distinguished from the wrong key, like ESCAPE in
+            // .NET 6.0 on Linux, making it impossible to tell whether we pressed that shortcut or ESCAPE unless something concrete is found.
             CorrectKeyChar(keyInfo, out string initialKey, out ConsoleModifiers initialModifiers);
 
             // Get the key input name

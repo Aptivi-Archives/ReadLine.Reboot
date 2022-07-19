@@ -37,12 +37,12 @@ namespace ReadLineReboot
     public static class ReadLine
     {
         // Internal variables
-        private static readonly List<string> _history = new List<string>();
+        private static readonly List<string> _history = new();
         private static bool _readInterrupt;
         private static int _historySize = -1;
         internal static bool _pressedEnterOnHistoryEntry;
         internal static KeyHandler _keyHandler;
-        internal static object _lock = new object();
+        internal static object _lock = new();
         internal static char _escapeChar = Convert.ToChar(0x1B);
 
         // Variables
