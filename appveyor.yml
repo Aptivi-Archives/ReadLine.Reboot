@@ -1,9 +1,11 @@
-version: v3.x-{build}
+version: 'v3.x-{build}'
 image: Visual Studio 2022
 dotnet_csproj:
   patch: true
   file: ReadLine.Reboot\ReadLine.Reboot.csproj
-  package_version: 3.3.1-build{build}
+  version: ''
+  package_version: '3.3.1-build{build}'
+  assembly_version: ''
 environment:
   WEBHOOK_URL:
     secure: p3nnkhnWtqFFH8UJ1eaKFfRjFPlOVhNtmLjd94R7+KSbgj9uzPvIyEJjJTk6G9e4wy94jdHku81r6zqWBCRF7Ddeex1jMhVvzUNgV5yDPURp05PY++UBxApBZ8NTiFz8KHxXsH4FR7OLfqML+gr8TS/nfHk2peNSEN75jO/OAs4=
