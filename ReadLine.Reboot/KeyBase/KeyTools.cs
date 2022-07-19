@@ -31,6 +31,7 @@ namespace ReadLineReboot
     internal static class KeyTools
     {
         private const char CtrlSMinusChar = '\u001f';
+        private const char FlippedQuestionMark = '\u00bf';
 
         /// <summary>
         /// Corrects the key enumerator on some systems
@@ -64,9 +65,16 @@ namespace ReadLineReboot
                         break;
                     case '/':
                     case '?':
+                        // SHIFT + Slash or Question Mark on Mono
                         initialKey = "Oem2";
                         if (keyInfo.KeyChar == '?')
                             initialModifiers |= ConsoleModifiers.Shift;
+                        break;
+                    case FlippedQuestionMark:
+                        // SHIFT + Slash or Question Mark on .NET 6.0 (xterm)
+                        initialKey = "Oem2";
+                        initialModifiers |= ConsoleModifiers.Alt;
+                        initialModifiers |= ConsoleModifiers.Shift;
                         break;
                     case '_':
                         initialKey = "OemMinus";

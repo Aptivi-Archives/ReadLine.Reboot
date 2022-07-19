@@ -1303,6 +1303,7 @@ namespace ReadLineReboot
             {
                 Console.SetCursorPosition(_prePromptCursorLeft, i);
                 Console.Write($"{Escape}[2K");
+                Console.SetCursorPosition(_prePromptCursorLeft, i);
             }
 
             // Write the new prompt
