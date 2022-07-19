@@ -4,7 +4,7 @@
     <AssemblyTitle>ReadLine.Reboot</AssemblyTitle>
     <AssemblyDescription>A reboot of tonerdo's ReadLine library for .NET</AssemblyDescription>
     <Description>A reboot of tonerdo's ReadLine library for .NET</Description>
-    <Version>3.3.1</Version>
+    <Version>3.3.2</Version>
     <Authors>Toni Solarin-Sodara,EoflaOE</Authors>
     <TargetFrameworks>net6.0;netcoreapp3.1;net48</TargetFrameworks>
     <DebugType>portable</DebugType>
@@ -23,32 +23,8 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
     <PackageIcon>OfficialAppIcon-ReadLineReboot-512.png</PackageIcon>
-    <AssemblyVersion>3.3.1</AssemblyVersion>
-    <PackageVersion>3.3.1</PackageVersion>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net6.0|AnyCPU'">
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net48|AnyCPU'">
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net6.0|AnyCPU'">
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp3.1|AnyCPU'">
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net48|AnyCPU'">
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netcoreapp3.1|AnyCPU'">
+    <AssemblyVersion>3.3.2</AssemblyVersion>
+    <PackageVersion>3.3.2</PackageVersion>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
 
