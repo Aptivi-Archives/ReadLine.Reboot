@@ -91,9 +91,9 @@ namespace ReadLineReboot
         private bool IsEndOfBuffer => ConsoleWrapper.CursorLeft == ConsoleWrapper.BufferWidth - 1;
         private bool IsInAutoCompleteMode => _completions != null;
         private bool IsKillBufferEmpty => _killBuffer.Length == 0;
-        internal static ConsoleKeyInfo SimulatedEnter => new ConsoleKeyInfo('\u000A', ConsoleKey.J, false, false, true);
-        internal static ConsoleKeyInfo SimulatedEnterAlt => new ConsoleKeyInfo('\u0004', ConsoleKey.D, false, false, true);
-        internal static ConsoleKeyInfo SimulatedEnterCtrlC => new ConsoleKeyInfo('\u0003', ConsoleKey.C, false, false, true);
+        internal static ConsoleKeyInfo SimulatedEnter => new('\u000A', ConsoleKey.J, false, false, true);
+        internal static ConsoleKeyInfo SimulatedEnterAlt => new('\u0004', ConsoleKey.D, false, false, true);
+        internal static ConsoleKeyInfo SimulatedEnterCtrlC => new('\u0003', ConsoleKey.C, false, false, true);
 
         #region Cursor Movement
         /// <summary>
@@ -436,7 +436,7 @@ namespace ReadLineReboot
                 // Write the resulting string and set the appropriate cursor position
                 int left = ConsoleWrapper.CursorLeft;
                 int top = ConsoleWrapper.CursorTop;
-                string spaces = new string(' ', count);
+                string spaces = new(' ', count);
                 if (ConsoleWrapper.PasswordMode && ConsoleWrapper.PasswordMaskChar != default)
                 {
                     // Write the replacement, but use Console.Write to write the space, because we need to ensure that it really got deleted on render.
@@ -492,7 +492,7 @@ namespace ReadLineReboot
             _updateCurrentLineHistory = false;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(ClearLineToLeft))
                 _killBuffer.Clear();
 
@@ -521,7 +521,7 @@ namespace ReadLineReboot
             _updateCurrentLineHistory = false;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(ClearLineToRight))
                 _killBuffer.Clear();
 
@@ -552,7 +552,7 @@ namespace ReadLineReboot
             _updateCurrentLineHistory = false;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(ClearLineUntilSpace))
                 _killBuffer.Clear();
 
@@ -588,7 +588,7 @@ namespace ReadLineReboot
             _updateCurrentLineHistory = false;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(ClearLineUntilSpaceOrSlash))
                 _killBuffer.Clear();
 
@@ -649,7 +649,7 @@ namespace ReadLineReboot
             _updateCurrentLineHistory = false;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(ClearLineAfterSpace))
                 _killBuffer.Clear();
 
@@ -727,9 +727,9 @@ namespace ReadLineReboot
                 return;
 
             // Build the two words required
-            List<char> wordChars = new List<char>();
-            StringBuilder firstWord = new StringBuilder();
-            StringBuilder secondWord = new StringBuilder();
+            List<char> wordChars = new();
+            StringBuilder firstWord = new();
+            StringBuilder secondWord = new();
             int currentCursorPosition = _cursorPos - 1;
 
             // Build the first word
@@ -1014,9 +1014,15 @@ namespace ReadLineReboot
         {
             if (_history.Count > 0)
             {
+#if NETCOREAPP
+                string[] lastHistoryArgs = _history[^1].Split(' ');
+                if (lastHistoryArgs.Length > 0)
+                    WriteString(lastHistoryArgs[^1]);
+#else
                 string[] lastHistoryArgs = _history[_history.Count - 1].Split(' ');
                 if (lastHistoryArgs.Length > 0)
                     WriteString(lastHistoryArgs[lastHistoryArgs.Length - 1]);
+#endif
             }
         }
 
@@ -1134,7 +1140,7 @@ namespace ReadLineReboot
             int peekCursorPos = _cursorPos;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(CopyBackwardWord))
                 _killBuffer.Clear();
 
@@ -1166,7 +1172,7 @@ namespace ReadLineReboot
             int peekCursorPos = _cursorPos;
 
             // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new List<char>();
+            List<char> chars = new();
             if (_lastHandler != nameof(CopyForwardWord))
                 _killBuffer.Clear();
 
@@ -1201,7 +1207,11 @@ namespace ReadLineReboot
 
                 if (_currentLineEditHistory.Count > 1)
                 {
+#if NETCOREAPP
+                    WriteNewString(_currentLineEditHistory[^2]);
+#else
                     WriteNewString(_currentLineEditHistory[_currentLineEditHistory.Count - 2]);
+#endif
                     _currentLineEditHistory.RemoveAt(_currentLineEditHistory.Count - 1);
                 }
                 else
@@ -1238,7 +1248,7 @@ namespace ReadLineReboot
         public void SetArgument(int arg)
         {
             // Make a string builder to add the digit to the number
-            StringBuilder tempArg = new StringBuilder(_argDigit.ToString());
+            StringBuilder tempArg = new(_argDigit.ToString());
             tempArg.Append(arg);
 
             // Update digit
@@ -1342,7 +1352,7 @@ namespace ReadLineReboot
         /// <summary>
         /// No operation.
         /// </summary>
-        public void SuppressAction()
+        public static void SuppressAction()
         {
             return;
         }
@@ -1398,7 +1408,7 @@ namespace ReadLineReboot
                 KeyBindings._customKeyBindings.TryGetValue(KeyInputName, out action);
 
             // Write character if nothing found
-            action ??= char.IsControl(keyInfo.KeyChar) ? SuppressAction : WriteChar;
+            action ??= char.IsControl(keyInfo.KeyChar) ? global::ReadLineReboot.KeyHandler.SuppressAction : WriteChar;
 
             // Because SetArgument is getting called from the lambda (we don't want to duplicate code for each number),
             // the current handler is being set to some trash name with "lambda" in it, so we need to replace this gibberish
