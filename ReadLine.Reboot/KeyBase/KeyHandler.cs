@@ -1337,6 +1337,14 @@ namespace ReadLineReboot
         /// Rewrites the current line
         /// </summary>
         public void RewriteCurrentLine() => UpdatePrompt(_cachedPrompt, true);
+
+        /// <summary>
+        /// No operation.
+        /// </summary>
+        public void SuppressAction()
+        {
+            return;
+        }
         #endregion
 
         #region Main logic
@@ -1389,7 +1397,7 @@ namespace ReadLineReboot
                 KeyBindings._customKeyBindings.TryGetValue(KeyInputName, out action);
 
             // Write character if nothing found
-            action ??= WriteChar;
+            action ??= char.IsControl(keyInfo.KeyChar) ? SuppressAction : WriteChar;
 
             // Because SetArgument is getting called from the lambda (we don't want to duplicate code for each number),
             // the current handler is being set to some trash name with "lambda" in it, so we need to replace this gibberish
