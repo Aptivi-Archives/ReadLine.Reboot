@@ -1,0 +1,1419 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class KeyHandler
+   | ReadLine.Reboot API - Eofla Internals </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class KeyHandler
+   | ReadLine.Reboot API - Eofla Internals ">
+    <meta name="generator" content="docfx 2.58.9.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    <meta property="docfx:rel" content="../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+        
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first="First" data-prev="Previous" data-next="Next" data-last="Last"></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="ReadLineReboot.KeyHandler">
+  
+  
+  <h1 id="ReadLineReboot_KeyHandler" data-uid="ReadLineReboot.KeyHandler" class="text-break">Class KeyHandler
+  </h1>
+  <div class="markdown level0 summary"><p>The keyhandler class</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">KeyHandler</span></div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="ReadLineReboot.html">ReadLineReboot</a></h6>
+  <h6><strong>Assembly</strong>: ReadLine.Reboot.dll</h6>
+  <h5 id="ReadLineReboot_KeyHandler_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class KeyHandler : object</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler__ctor_ReadLineReboot_Abstractions_IConsole_List_System_String__ReadLineReboot_IAutoCompleteHandler_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.%23ctor(ReadLineReboot.Abstractions.IConsole%2CList%7BSystem.String%7D%2CReadLineReboot.IAutoCompleteHandler)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1368">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler__ctor_" data-uid="ReadLineReboot.KeyHandler.#ctor*"></a>
+  <h4 id="ReadLineReboot_KeyHandler__ctor_ReadLineReboot_Abstractions_IConsole_List_System_String__ReadLineReboot_IAutoCompleteHandler_" data-uid="ReadLineReboot.KeyHandler.#ctor(ReadLineReboot.Abstractions.IConsole,List{System.String},ReadLineReboot.IAutoCompleteHandler)">KeyHandler(IConsole, List&lt;String&gt;, IAutoCompleteHandler)</h4>
+  <div class="markdown level1 summary"><p>Initializes the new instance of the key handler class. Please note that you need to call <span class="xref">ReadLineReboot.KeyBindings.InitializeBindings</span> directly after this.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public KeyHandler(IConsole console, List&lt;string&gt; history, IAutoCompleteHandler autoCompleteHandler)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="ReadLineReboot.Abstractions.IConsole.html">IConsole</a></td>
+        <td><span class="parametername">console</span></td>
+        <td><p>Console instance</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">List</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">history</span></td>
+        <td><p>History of written inputs</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="ReadLineReboot.IAutoCompleteHandler.html">IAutoCompleteHandler</a></td>
+        <td><span class="parametername">autoCompleteHandler</span></td>
+        <td><p>Auto completion handler</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_CurrentLine.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.CurrentLine%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L49">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_CurrentLine_" data-uid="ReadLineReboot.KeyHandler.CurrentLine*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_CurrentLine" data-uid="ReadLineReboot.KeyHandler.CurrentLine">CurrentLine</h4>
+  <div class="markdown level1 summary"><p>The current line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string CurrentLine { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_KillBuffer.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.KillBuffer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L54">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_KillBuffer_" data-uid="ReadLineReboot.KeyHandler.KillBuffer*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_KillBuffer" data-uid="ReadLineReboot.KeyHandler.KillBuffer">KillBuffer</h4>
+  <div class="markdown level1 summary"><p>The current console clipboard content for use with CTRL + Y (Yank)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string KillBuffer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Text.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Text%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L44">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Text_" data-uid="ReadLineReboot.KeyHandler.Text*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Text" data-uid="ReadLineReboot.KeyHandler.Text">Text</h4>
+  <div class="markdown level1 summary"><p>The current text</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Text { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_AddLastArgument.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.AddLastArgument%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1013">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_AddLastArgument_" data-uid="ReadLineReboot.KeyHandler.AddLastArgument*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_AddLastArgument" data-uid="ReadLineReboot.KeyHandler.AddLastArgument">AddLastArgument()</h4>
+  <div class="markdown level1 summary"><p>Adds last argument to the current input</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddLastArgument()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Backspace.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Backspace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L385">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Backspace_" data-uid="ReadLineReboot.KeyHandler.Backspace*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Backspace" data-uid="ReadLineReboot.KeyHandler.Backspace">Backspace()</h4>
+  <div class="markdown level1 summary"><p>Erases the last letter. Simulates the backspace key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Backspace()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Backspace_System_Int32_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Backspace(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L390">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Backspace_" data-uid="ReadLineReboot.KeyHandler.Backspace*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Backspace_System_Int32_" data-uid="ReadLineReboot.KeyHandler.Backspace(System.Int32)">Backspace(Int32)</h4>
+  <div class="markdown level1 summary"><p>Erases the last letter. Simulates the backspace key.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Backspace(int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_BackspaceOrDelete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.BackspaceOrDelete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L460">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_BackspaceOrDelete_" data-uid="ReadLineReboot.KeyHandler.BackspaceOrDelete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_BackspaceOrDelete" data-uid="ReadLineReboot.KeyHandler.BackspaceOrDelete">BackspaceOrDelete()</h4>
+  <div class="markdown level1 summary"><p>Backspace or delete</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BackspaceOrDelete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearHorizontalSpace.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearHorizontalSpace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L625">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearHorizontalSpace_" data-uid="ReadLineReboot.KeyHandler.ClearHorizontalSpace*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearHorizontalSpace" data-uid="ReadLineReboot.KeyHandler.ClearHorizontalSpace">ClearHorizontalSpace()</h4>
+  <div class="markdown level1 summary"><p>Clears all horizontal space</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearHorizontalSpace()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearLine.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearLine%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L471">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearLine_" data-uid="ReadLineReboot.KeyHandler.ClearLine*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearLine" data-uid="ReadLineReboot.KeyHandler.ClearLine">ClearLine()</h4>
+  <div class="markdown level1 summary"><p>Clears the entire line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearLine()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearLineAfterSpace.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearLineAfterSpace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L646">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearLineAfterSpace_" data-uid="ReadLineReboot.KeyHandler.ClearLineAfterSpace*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearLineAfterSpace" data-uid="ReadLineReboot.KeyHandler.ClearLineAfterSpace">ClearLineAfterSpace()</h4>
+  <div class="markdown level1 summary"><p>Clears all characters after the space is spotted</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearLineAfterSpace()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearLineToLeft.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearLineToLeft%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L489">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearLineToLeft_" data-uid="ReadLineReboot.KeyHandler.ClearLineToLeft*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearLineToLeft" data-uid="ReadLineReboot.KeyHandler.ClearLineToLeft">ClearLineToLeft()</h4>
+  <div class="markdown level1 summary"><p>Clears the line to the left</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearLineToLeft()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearLineToRight.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearLineToRight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L518">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearLineToRight_" data-uid="ReadLineReboot.KeyHandler.ClearLineToRight*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearLineToRight" data-uid="ReadLineReboot.KeyHandler.ClearLineToRight">ClearLineToRight()</h4>
+  <div class="markdown level1 summary"><p>Clears the line to the right</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearLineToRight()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearLineUntilSpace.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearLineUntilSpace%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L549">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearLineUntilSpace_" data-uid="ReadLineReboot.KeyHandler.ClearLineUntilSpace*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearLineUntilSpace" data-uid="ReadLineReboot.KeyHandler.ClearLineUntilSpace">ClearLineUntilSpace()</h4>
+  <div class="markdown level1 summary"><p>Clears all characters until the space is spotted</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearLineUntilSpace()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearLineUntilSpaceOrSlash.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearLineUntilSpaceOrSlash%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L585">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearLineUntilSpaceOrSlash_" data-uid="ReadLineReboot.KeyHandler.ClearLineUntilSpaceOrSlash*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearLineUntilSpaceOrSlash" data-uid="ReadLineReboot.KeyHandler.ClearLineUntilSpaceOrSlash">ClearLineUntilSpaceOrSlash()</h4>
+  <div class="markdown level1 summary"><p>Clears all characters until the space or slash (or backslash if running on Windows) is spotted</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearLineUntilSpaceOrSlash()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ClearScreenAndRewrite.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ClearScreenAndRewrite%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1340">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ClearScreenAndRewrite_" data-uid="ReadLineReboot.KeyHandler.ClearScreenAndRewrite*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ClearScreenAndRewrite" data-uid="ReadLineReboot.KeyHandler.ClearScreenAndRewrite">ClearScreenAndRewrite()</h4>
+  <div class="markdown level1 summary"><p>Clears the screen and rewrites the current line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearScreenAndRewrite()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_CopyBackwardWord.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.CopyBackwardWord%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1137">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_CopyBackwardWord_" data-uid="ReadLineReboot.KeyHandler.CopyBackwardWord*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_CopyBackwardWord" data-uid="ReadLineReboot.KeyHandler.CopyBackwardWord">CopyBackwardWord()</h4>
+  <div class="markdown level1 summary"><p>Copies the word before the cursor and stores it to the kill buffer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyBackwardWord()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_CopyForwardWord.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.CopyForwardWord%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1169">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_CopyForwardWord_" data-uid="ReadLineReboot.KeyHandler.CopyForwardWord*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_CopyForwardWord" data-uid="ReadLineReboot.KeyHandler.CopyForwardWord">CopyForwardWord()</h4>
+  <div class="markdown level1 summary"><p>Copies the word under the cursor and stores it to the kill buffer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CopyForwardWord()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Delete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Delete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L401">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Delete_" data-uid="ReadLineReboot.KeyHandler.Delete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Delete" data-uid="ReadLineReboot.KeyHandler.Delete">Delete()</h4>
+  <div class="markdown level1 summary"><p>Deletes the letter in the current position</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Delete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_DeleteChar.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.DeleteChar%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L411">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_DeleteChar_" data-uid="ReadLineReboot.KeyHandler.DeleteChar*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_DeleteChar" data-uid="ReadLineReboot.KeyHandler.DeleteChar">DeleteChar()</h4>
+  <div class="markdown level1 summary"><p>Deletes the character in the current position. Invoked by <a class="xref" href="ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_Delete">Delete()</a> and <a class="xref" href="ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_Backspace">Backspace()</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeleteChar()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_DeleteChar_System_Int32_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.DeleteChar(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L416">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_DeleteChar_" data-uid="ReadLineReboot.KeyHandler.DeleteChar*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_DeleteChar_System_Int32_" data-uid="ReadLineReboot.KeyHandler.DeleteChar(System.Int32)">DeleteChar(Int32)</h4>
+  <div class="markdown level1 summary"><p>Deletes the character in the current position. Invoked by <a class="xref" href="ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_Delete">Delete()</a> and <a class="xref" href="ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_Backspace">Backspace()</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DeleteChar(int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_DoAutoComplete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.DoAutoComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L798">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_DoAutoComplete_" data-uid="ReadLineReboot.KeyHandler.DoAutoComplete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_DoAutoComplete" data-uid="ReadLineReboot.KeyHandler.DoAutoComplete">DoAutoComplete()</h4>
+  <div class="markdown level1 summary"><p>Initialize auto-complete initially</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DoAutoComplete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_DoReverseAutoComplete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.DoReverseAutoComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L843">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_DoReverseAutoComplete_" data-uid="ReadLineReboot.KeyHandler.DoReverseAutoComplete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_DoReverseAutoComplete" data-uid="ReadLineReboot.KeyHandler.DoReverseAutoComplete">DoReverseAutoComplete()</h4>
+  <div class="markdown level1 summary"><p>Does the reverse auto complete</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DoReverseAutoComplete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_FirstHistory.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.FirstHistory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1032">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_FirstHistory_" data-uid="ReadLineReboot.KeyHandler.FirstHistory*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_FirstHistory" data-uid="ReadLineReboot.KeyHandler.FirstHistory">FirstHistory()</h4>
+  <div class="markdown level1 summary"><p>Gets the first history</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FirstHistory()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_GoBackToCurrentLine.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.GoBackToCurrentLine%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1046">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_GoBackToCurrentLine_" data-uid="ReadLineReboot.KeyHandler.GoBackToCurrentLine*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_GoBackToCurrentLine" data-uid="ReadLineReboot.KeyHandler.GoBackToCurrentLine">GoBackToCurrentLine()</h4>
+  <div class="markdown level1 summary"><p>Goes back to the current line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GoBackToCurrentLine()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Handle_ConsoleKeyInfo_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Handle(ConsoleKeyInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1387">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Handle_" data-uid="ReadLineReboot.KeyHandler.Handle*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Handle_ConsoleKeyInfo_" data-uid="ReadLineReboot.KeyHandler.Handle(ConsoleKeyInfo)">Handle(ConsoleKeyInfo)</h4>
+  <div class="markdown level1 summary"><p>Handles the pressed key</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Handle(ConsoleKeyInfo keyInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">ConsoleKeyInfo</span></td>
+        <td><span class="parametername">keyInfo</span></td>
+        <td><p>Key information</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_InsertComment.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.InsertComment%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L325">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_InsertComment_" data-uid="ReadLineReboot.KeyHandler.InsertComment*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_InsertComment" data-uid="ReadLineReboot.KeyHandler.InsertComment">InsertComment()</h4>
+  <div class="markdown level1 summary"><p>Inserts the comment to the current command</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InsertComment()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_InsertCompletions.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.InsertCompletions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L912">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_InsertCompletions_" data-uid="ReadLineReboot.KeyHandler.InsertCompletions*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_InsertCompletions" data-uid="ReadLineReboot.KeyHandler.InsertCompletions">InsertCompletions()</h4>
+  <div class="markdown level1 summary"><p>Inserts available completions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InsertCompletions()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_InsertHomeDirectory.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.InsertHomeDirectory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L344">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_InsertHomeDirectory_" data-uid="ReadLineReboot.KeyHandler.InsertHomeDirectory*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_InsertHomeDirectory" data-uid="ReadLineReboot.KeyHandler.InsertHomeDirectory">InsertHomeDirectory()</h4>
+  <div class="markdown level1 summary"><p>Inserts the home directory by replacing the tilde</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void InsertHomeDirectory()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ListPossibleCompletions.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ListPossibleCompletions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L934">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ListPossibleCompletions_" data-uid="ReadLineReboot.KeyHandler.ListPossibleCompletions*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ListPossibleCompletions" data-uid="ReadLineReboot.KeyHandler.ListPossibleCompletions">ListPossibleCompletions()</h4>
+  <div class="markdown level1 summary"><p>Lists possible completions</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ListPossibleCompletions()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_LowercaseCharMoveToEndOfWord.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.LowercaseCharMoveToEndOfWord%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1107">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_LowercaseCharMoveToEndOfWord_" data-uid="ReadLineReboot.KeyHandler.LowercaseCharMoveToEndOfWord*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_LowercaseCharMoveToEndOfWord" data-uid="ReadLineReboot.KeyHandler.LowercaseCharMoveToEndOfWord">LowercaseCharMoveToEndOfWord()</h4>
+  <div class="markdown level1 summary"><p>Makes the character lowercase and move to the end of the word</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LowercaseCharMoveToEndOfWord()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_LowercaseWord.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.LowercaseWord%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1060">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_LowercaseWord_" data-uid="ReadLineReboot.KeyHandler.LowercaseWord*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_LowercaseWord" data-uid="ReadLineReboot.KeyHandler.LowercaseWord">LowercaseWord()</h4>
+  <div class="markdown level1 summary"><p>Makes the word lowercase</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LowercaseWord()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MinusArgumentOrWrite.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MinusArgumentOrWrite%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1263">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MinusArgumentOrWrite_" data-uid="ReadLineReboot.KeyHandler.MinusArgumentOrWrite*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MinusArgumentOrWrite" data-uid="ReadLineReboot.KeyHandler.MinusArgumentOrWrite">MinusArgumentOrWrite()</h4>
+  <div class="markdown level1 summary"><p>Add a minus to the argument number or write the minuses if an argument is already specified</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MinusArgumentOrWrite()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorEnd.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L192">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorEnd_" data-uid="ReadLineReboot.KeyHandler.MoveCursorEnd*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorEnd" data-uid="ReadLineReboot.KeyHandler.MoveCursorEnd">MoveCursorEnd()</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the end of the line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorEnd()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorHome.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorHome%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L184">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorHome_" data-uid="ReadLineReboot.KeyHandler.MoveCursorHome*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorHome" data-uid="ReadLineReboot.KeyHandler.MoveCursorHome">MoveCursorHome()</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the beginning of the line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorHome()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorLeft.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorLeft%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L102">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorLeft_" data-uid="ReadLineReboot.KeyHandler.MoveCursorLeft*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorLeft" data-uid="ReadLineReboot.KeyHandler.MoveCursorLeft">MoveCursorLeft()</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the left once</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorLeft()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorLeft_System_Int32_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorLeft(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L107">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorLeft_" data-uid="ReadLineReboot.KeyHandler.MoveCursorLeft*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorLeft_System_Int32_" data-uid="ReadLineReboot.KeyHandler.MoveCursorLeft(System.Int32)">MoveCursorLeft(Int32)</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the left n times</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorLeft(int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorRight.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorRight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L143">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorRight_" data-uid="ReadLineReboot.KeyHandler.MoveCursorRight*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorRight" data-uid="ReadLineReboot.KeyHandler.MoveCursorRight">MoveCursorRight()</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the right once</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorRight()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorRight_System_Int32_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorRight(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L148">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorRight_" data-uid="ReadLineReboot.KeyHandler.MoveCursorRight*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorRight_System_Int32_" data-uid="ReadLineReboot.KeyHandler.MoveCursorRight(System.Int32)">MoveCursorRight(Int32)</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the right n times</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorRight(int count)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">count</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorWordLeft.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorWordLeft%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L200">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorWordLeft_" data-uid="ReadLineReboot.KeyHandler.MoveCursorWordLeft*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorWordLeft" data-uid="ReadLineReboot.KeyHandler.MoveCursorWordLeft">MoveCursorWordLeft()</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the left one word</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorWordLeft()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_MoveCursorWordRight.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.MoveCursorWordRight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L211">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_MoveCursorWordRight_" data-uid="ReadLineReboot.KeyHandler.MoveCursorWordRight*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_MoveCursorWordRight" data-uid="ReadLineReboot.KeyHandler.MoveCursorWordRight">MoveCursorWordRight()</h4>
+  <div class="markdown level1 summary"><p>Moves the cursor to the right one word</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void MoveCursorWordRight()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_NextAutoComplete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.NextAutoComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L876">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_NextAutoComplete_" data-uid="ReadLineReboot.KeyHandler.NextAutoComplete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_NextAutoComplete" data-uid="ReadLineReboot.KeyHandler.NextAutoComplete">NextAutoComplete()</h4>
+  <div class="markdown level1 summary"><p>Goes to the next suggestion, or to the first suggestion if we reached the last suggestion</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NextAutoComplete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_NextHistory.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.NextHistory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L993">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_NextHistory_" data-uid="ReadLineReboot.KeyHandler.NextHistory*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_NextHistory" data-uid="ReadLineReboot.KeyHandler.NextHistory">NextHistory()</h4>
+  <div class="markdown level1 summary"><p>Shows the next history</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void NextHistory()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_PrevHistory.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.PrevHistory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L979">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_PrevHistory_" data-uid="ReadLineReboot.KeyHandler.PrevHistory*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_PrevHistory" data-uid="ReadLineReboot.KeyHandler.PrevHistory">PrevHistory()</h4>
+  <div class="markdown level1 summary"><p>Shows the previous history</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PrevHistory()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_PreviousAutoComplete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.PreviousAutoComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L894">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_PreviousAutoComplete_" data-uid="ReadLineReboot.KeyHandler.PreviousAutoComplete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_PreviousAutoComplete" data-uid="ReadLineReboot.KeyHandler.PreviousAutoComplete">PreviousAutoComplete()</h4>
+  <div class="markdown level1 summary"><p>Goes to the previous suggestion, or to the last suggestion if we reached the first suggestion</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void PreviousAutoComplete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_ResetAutoComplete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.ResetAutoComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L968">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_ResetAutoComplete_" data-uid="ReadLineReboot.KeyHandler.ResetAutoComplete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_ResetAutoComplete" data-uid="ReadLineReboot.KeyHandler.ResetAutoComplete">ResetAutoComplete()</h4>
+  <div class="markdown level1 summary"><p>Resets the auto-completion</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetAutoComplete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_RewriteCurrentLine.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.RewriteCurrentLine%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1350">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_RewriteCurrentLine_" data-uid="ReadLineReboot.KeyHandler.RewriteCurrentLine*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_RewriteCurrentLine" data-uid="ReadLineReboot.KeyHandler.RewriteCurrentLine">RewriteCurrentLine()</h4>
+  <div class="markdown level1 summary"><p>Rewrites the current line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RewriteCurrentLine()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_SetArgument_System_Int32_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.SetArgument(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1248">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_SetArgument_" data-uid="ReadLineReboot.KeyHandler.SetArgument*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_SetArgument_System_Int32_" data-uid="ReadLineReboot.KeyHandler.SetArgument(System.Int32)">SetArgument(Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the argument</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetArgument(int arg)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">arg</span></td>
+        <td><p>Argument digit to add</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_StartAutoComplete.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.StartAutoComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L862">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_StartAutoComplete_" data-uid="ReadLineReboot.KeyHandler.StartAutoComplete*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_StartAutoComplete" data-uid="ReadLineReboot.KeyHandler.StartAutoComplete">StartAutoComplete()</h4>
+  <div class="markdown level1 summary"><p>Starts the auto-completion, showing the first suggestion</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartAutoComplete()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_SuppressAction.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.SuppressAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1355">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_SuppressAction_" data-uid="ReadLineReboot.KeyHandler.SuppressAction*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_SuppressAction" data-uid="ReadLineReboot.KeyHandler.SuppressAction">SuppressAction()</h4>
+  <div class="markdown level1 summary"><p>No operation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SuppressAction()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_TransposeChars.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.TransposeChars%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L683">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_TransposeChars_" data-uid="ReadLineReboot.KeyHandler.TransposeChars*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_TransposeChars" data-uid="ReadLineReboot.KeyHandler.TransposeChars">TransposeChars()</h4>
+  <div class="markdown level1 summary"><p>Transposes the two characters in the current position</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TransposeChars()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_TransposeWords.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.TransposeWords%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L719">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_TransposeWords_" data-uid="ReadLineReboot.KeyHandler.TransposeWords*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_TransposeWords" data-uid="ReadLineReboot.KeyHandler.TransposeWords">TransposeWords()</h4>
+  <div class="markdown level1 summary"><p>Transposes the two words in the current position</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TransposeWords()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Undo.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Undo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1202">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Undo_" data-uid="ReadLineReboot.KeyHandler.Undo*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Undo" data-uid="ReadLineReboot.KeyHandler.Undo">Undo()</h4>
+  <div class="markdown level1 summary"><p>Undos the last edit done to the current line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Undo()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_UndoAll.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.UndoAll%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1231">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_UndoAll_" data-uid="ReadLineReboot.KeyHandler.UndoAll*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_UndoAll" data-uid="ReadLineReboot.KeyHandler.UndoAll">UndoAll()</h4>
+  <div class="markdown level1 summary"><p>Undos all the edits done to the current line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UndoAll()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_UpdateCurrentLine.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.UpdateCurrentLine%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1284">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_UpdateCurrentLine_" data-uid="ReadLineReboot.KeyHandler.UpdateCurrentLine*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_UpdateCurrentLine" data-uid="ReadLineReboot.KeyHandler.UpdateCurrentLine">UpdateCurrentLine()</h4>
+  <div class="markdown level1 summary"><p>Updates the current line variable</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateCurrentLine()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_UpdatePrompt_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.UpdatePrompt(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1304">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_UpdatePrompt_" data-uid="ReadLineReboot.KeyHandler.UpdatePrompt*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_UpdatePrompt_System_String_System_Boolean_" data-uid="ReadLineReboot.KeyHandler.UpdatePrompt(System.String,System.Boolean)">UpdatePrompt(String, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Updates the prompt</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdatePrompt(string newPrompt, bool rewriteCurrentLine = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">newPrompt</span></td>
+        <td><p>Prompt to be updated</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">rewriteCurrentLine</span></td>
+        <td><p>Whether to rewrite current line</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_UppercaseCharMoveToEndOfWord.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.UppercaseCharMoveToEndOfWord%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1096">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_UppercaseCharMoveToEndOfWord_" data-uid="ReadLineReboot.KeyHandler.UppercaseCharMoveToEndOfWord*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_UppercaseCharMoveToEndOfWord" data-uid="ReadLineReboot.KeyHandler.UppercaseCharMoveToEndOfWord">UppercaseCharMoveToEndOfWord()</h4>
+  <div class="markdown level1 summary"><p>Makes the character UPPERCASE and move to the end of the word</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UppercaseCharMoveToEndOfWord()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_UppercaseWord.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.UppercaseWord%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1078">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_UppercaseWord_" data-uid="ReadLineReboot.KeyHandler.UppercaseWord*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_UppercaseWord" data-uid="ReadLineReboot.KeyHandler.UppercaseWord">UppercaseWord()</h4>
+  <div class="markdown level1 summary"><p>Makes the word UPPERCASE</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UppercaseWord()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_WriteChar.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.WriteChar%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L259">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_WriteChar_" data-uid="ReadLineReboot.KeyHandler.WriteChar*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_WriteChar" data-uid="ReadLineReboot.KeyHandler.WriteChar">WriteChar()</h4>
+  <div class="markdown level1 summary"><p>Writes a single character to the console</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteChar()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_WriteChar_System_Char_System_Int32_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.WriteChar(System.Char%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L266">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_WriteChar_" data-uid="ReadLineReboot.KeyHandler.WriteChar*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_WriteChar_System_Char_System_Int32_" data-uid="ReadLineReboot.KeyHandler.WriteChar(System.Char,System.Int32)">WriteChar(Char, Int32)</h4>
+  <div class="markdown level1 summary"><p>Writes a specific character to the console</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteChar(char c, int repeat = 1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Char</span></td>
+        <td><span class="parametername">c</span></td>
+        <td><p>A character to be printed</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">repeat</span></td>
+        <td><p>How many times to repeat the character?</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_WriteNewString_System_String_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.WriteNewString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L225">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_WriteNewString_" data-uid="ReadLineReboot.KeyHandler.WriteNewString*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_WriteNewString_System_String_" data-uid="ReadLineReboot.KeyHandler.WriteNewString(System.String)">WriteNewString(String)</h4>
+  <div class="markdown level1 summary"><p>Writes the string to the console, clearing the line beforehand</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteNewString(string str)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">str</span></td>
+        <td><p>The text to be printed</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_WriteString_System_String_.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.WriteString(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L243">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_WriteString_" data-uid="ReadLineReboot.KeyHandler.WriteString*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_WriteString_System_String_" data-uid="ReadLineReboot.KeyHandler.WriteString(System.String)">WriteString(String)</h4>
+  <div class="markdown level1 summary"><p>Writes the string to the console without clearing the line</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void WriteString(string str)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">str</span></td>
+        <td><p>The text to be printed</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler_Yank.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler.Yank%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L1120">View Source</a>
+  </span>
+  <a id="ReadLineReboot_KeyHandler_Yank_" data-uid="ReadLineReboot.KeyHandler.Yank*"></a>
+  <h4 id="ReadLineReboot_KeyHandler_Yank" data-uid="ReadLineReboot.KeyHandler.Yank">Yank()</h4>
+  <div class="markdown level1 summary"><p>Pastes the content of console clipboard (kill buffer)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Yank()</code></pre>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/EoflaOE/ReadLine.Reboot/new/main/apiSpec/new?filename=ReadLineReboot_KeyHandler.md&amp;value=---%0Auid%3A%20ReadLineReboot.KeyHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/EoflaOE/ReadLine.Reboot/blob/main/ReadLine.Reboot/KeyBase/KeyHandler.cs/#L38" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>
