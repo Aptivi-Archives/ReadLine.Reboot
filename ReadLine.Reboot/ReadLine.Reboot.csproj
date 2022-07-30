@@ -5,19 +5,19 @@
     <AssemblyDescription>A reboot of tonerdo's ReadLine library for .NET</AssemblyDescription>
     <Description>A reboot of tonerdo's ReadLine library for .NET</Description>
     <Version>3.4.0</Version>
-    <Authors>Toni Solarin-Sodara,EoflaOE</Authors>
+    <Authors>Toni Solarin-Sodara,Aptivi</Authors>
     <TargetFrameworks>net6.0;netcoreapp3.1;net48</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>ReadLine.Reboot</AssemblyName>
     <PackageId>ReadLine.Reboot</PackageId>
     <PackageTags>readline;gnu;console;shell;cui</PackageTags>
-    <PackageProjectUrl>https://github.com/EoflaOE/ReadLine.Reboot</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Aptivi/ReadLine.Reboot</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/EoflaOE/ReadLine.Reboot</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Aptivi/ReadLine.Reboot</RepositoryUrl>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <Company>EoflaOE</Company>
-    <Copyright>Copyright (c) 2022 EoflaOE and its companies.</Copyright>
+    <Company>Aptivi</Company>
+    <Copyright>Copyright (c) 2022 Aptivi.</Copyright>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>

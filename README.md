@@ -1,6 +1,6 @@
 # ReadLine.Reboot
 
-[![Build status](https://ci.appveyor.com/api/projects/status/twc6ovqb6cc8s184?svg=true)](https://ci.appveyor.com/project/EoflaOE/readline-reboot)
+[![Build status](https://ci.appveyor.com/api/projects/status/twc6ovqb6cc8s184?svg=true)](https://ci.appveyor.com/project/Aptivi/readline-reboot)
 
 ReadLine.Reboot is a reboot of Toni Solarin-Sodara's original ReadLine that is discontinued. It's a [GNU Readline](https://en.wikipedia.org/wiki/GNU_Readline) like library built in pure C#. It can serve as a drop in replacement for the inbuilt `Console.ReadLine()` and brings along with it some of the terminal goodness you get from Unix shells, like command history navigation and tab auto completion.
 
@@ -232,7 +232,7 @@ ReadLine.AutoCompletionEnabled = true;
 | Author              | For                                                      |
 |:--------------------|:---------------------------------------------------------|
 | Toni Solarin-Sodara | [Original ReadLine](https://github.com/tonerdo/readline) |
-| EoflaOE             | Rebooting the ReadLine project                           |
+| Aptivi             | Rebooting the ReadLine project                           |
 
 ## License
 
@@ -240,7 +240,7 @@ ReadLine.AutoCompletionEnabled = true;
 MIT License
 
 Copyright (c) 2017 Toni Solarin-Sodara
-Copyright (c) 2022 EoflaOE and its companies
+Copyright (c) 2022 Aptivi
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
