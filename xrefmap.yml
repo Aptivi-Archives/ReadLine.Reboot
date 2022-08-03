@@ -1188,6 +1188,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.ReadLine.KeyHandler
   nameWithType: ReadLine.KeyHandler
+- uid: ReadLineReboot.ReadLine.NumberOfCharsToRead
+  name: NumberOfCharsToRead
+  href: api/ReadLineReboot.ReadLine.html#ReadLineReboot_ReadLine_NumberOfCharsToRead
+  commentId: P:ReadLineReboot.ReadLine.NumberOfCharsToRead
+  fullName: ReadLineReboot.ReadLine.NumberOfCharsToRead
+  nameWithType: ReadLine.NumberOfCharsToRead
+- uid: ReadLineReboot.ReadLine.NumberOfCharsToRead*
+  name: NumberOfCharsToRead
+  href: api/ReadLineReboot.ReadLine.html#ReadLineReboot_ReadLine_NumberOfCharsToRead_
+  commentId: Overload:ReadLineReboot.ReadLine.NumberOfCharsToRead
+  isSpec: "True"
+  fullName: ReadLineReboot.ReadLine.NumberOfCharsToRead
+  nameWithType: ReadLine.NumberOfCharsToRead
 - uid: ReadLineReboot.ReadLine.PrewriteDefaultValue
   name: PrewriteDefaultValue
   href: api/ReadLineReboot.ReadLine.html#ReadLineReboot_ReadLine_PrewriteDefaultValue
