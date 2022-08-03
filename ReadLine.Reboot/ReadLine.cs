@@ -45,6 +45,7 @@ namespace ReadLineReboot
         internal static KeyHandler _keyHandler;
         internal static object _lock = new();
         internal static char _escapeChar = Convert.ToChar(0x1B);
+        private static int _numChars = -1;
 
         // Variables
         /// <summary>
@@ -126,13 +127,18 @@ namespace ReadLineReboot
             {
                 return _historySize;
             }
-            set 
+            set
             {
                 if (value == 0)
                     ClearHistory();
                 _historySize = value;
             }
         }
+
+        /// <summary>
+        /// Number of characters to read. If set to -1, ReadLine will read all characters as long as ENTER is pressed.
+        /// </summary>
+        public static int NumberOfCharsToRead { get => _numChars; set => _numChars = value; }
 
         /// <summary>
         /// Adds a text or an array of texts to the history
@@ -163,7 +169,7 @@ namespace ReadLineReboot
                     }
                 }
             }
-            else if(HistorySize < 0)
+            else if (HistorySize < 0)
             {
                 // We have unlimited history.
                 _history.AddRange(texts);
@@ -349,6 +355,7 @@ namespace ReadLineReboot
         {
             bool _ctrlCPressed = false;
             string _output = "";
+            int _chars = 0;
 
             // Check to see if we're going to treat CTRL + C as actual input
             if (CtrlCEnabled)
@@ -365,10 +372,12 @@ namespace ReadLineReboot
                         if (keyInfo.Key != ConsoleKey.Enter &&
                             !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
                             !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && _keyHandler.Text.Length == 0) &&
-                            !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                            !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC) &&
+                            _chars != _numChars)
                         {
                             // Handle the key as appropriate
                             _keyHandler.Handle(keyInfo);
+                            _chars += 1;
                         }
                         else
                         {
@@ -391,11 +400,13 @@ namespace ReadLineReboot
                 while (keyInfo.Key != ConsoleKey.Enter &&
                        !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
                        !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && _keyHandler.Text.Length == 0) &&
-                       !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC))
+                       !keyInfo.Equals(KeyHandler.SimulatedEnterCtrlC) &&
+                       _chars != _numChars)
                 {
                     // Handle the key as appropriate
                     _keyHandler.Handle(keyInfo);
                     keyInfo = Console.ReadKey(true);
+                    _chars += 1;
                 }
 
                 // Handle CTRL + C
@@ -423,7 +434,7 @@ namespace ReadLineReboot
                 Console.WriteLine();
                 ReadRanToCompletion = true;
                 _output = _keyHandler.Text;
-            } 
+            }
             else
             {
                 // Read is interrupted. Print a new line.
