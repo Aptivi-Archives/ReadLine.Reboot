@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
+// TODO: Rewrite entire project as base itself is bad.
 namespace ReadLineReboot
 {
     /// <summary>
