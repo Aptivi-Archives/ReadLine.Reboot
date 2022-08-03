@@ -1,0 +1,60 @@
+{
+  "profiles": {
+    "NormalPrompt": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPrompt"
+    },
+    "NormalPromptHistoryEnabled": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptHistoryEnabled"
+    },
+    "NormalPromptNoAutoComplete": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptNoAutoComplete"
+    },
+    "NormalPromptDefault": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptDefault"
+    },
+    "NormalPromptDefaultPrewritten": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptDefaultPrewritten"
+    },
+    "NormalPromptCustomPrompt": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptCustomPrompt"
+    },
+    "NormalPromptNoYank": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptNoYank"
+    },
+    "NormalPromptCtrlCAsInput": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptCtrlCAsInput"
+    },
+    "NormalPromptTimed": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptTimed"
+    },
+    "NormalPromptCustomBinding": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptCustomBinding"
+    },
+    "NormalPromptOnlyFive": {
+      "commandName": "Project",
+      "commandLineArgs": "NormalPromptOnlyFive"
+    },
+    "MaskedPrompt": {
+      "commandName": "Project",
+      "commandLineArgs": "MaskedPrompt"
+    },
+    "MaskedPromptCustomMask": {
+      "commandName": "Project",
+      "commandLineArgs": "MaskedPromptCustomMask"
+    },
+    "CharDebug": {
+      "commandName": "Project",
+      "commandLineArgs": "CharDebug"
+    }
+  }
+}
