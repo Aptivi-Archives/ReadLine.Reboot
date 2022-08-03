@@ -55,6 +55,7 @@ namespace ReadLineReboot
 
         // Private Variables
         private int _argDigit;
+        private bool _argDigitNegative;
         private int _cursorPos;
         private int _cursorLimit;
         private ConsoleKeyInfo _keyInfo;
@@ -692,7 +693,7 @@ namespace ReadLineReboot
                 return;
 
             // If we've been provided negative argument, do nothing
-            if (_argDigit < 0)
+            if (_argDigitNegative)
                 return;
 
             // Get the two character indexes
@@ -731,7 +732,7 @@ namespace ReadLineReboot
                 return;
 
             // If we've been provided negative argument, do nothing
-            if (_argDigit < 0)
+            if (_argDigitNegative)
                 return;
 
             // Build the two words required
@@ -1067,16 +1068,34 @@ namespace ReadLineReboot
         /// </summary>
         public void LowercaseWord()
         {
-            // Skip all whitespaces found
-            while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
-                MoveCursorRight();
-
-            // Now, lowercase the entire word
-            while (!IsEndOfLine && _text[_cursorPos] != ' ')
+            if (_argDigitNegative)
             {
-                char Result = char.ToLower(_text[_cursorPos]);
-                DeleteChar();
-                WriteChar(Result);
+                // Skip all whitespaces found
+                while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]))
+                    MoveCursorLeft();
+
+                // Now, lowercase the entire word
+                while (!IsStartOfLine && _text[_cursorPos - 1] != ' ')
+                {
+                    char Result = char.ToLower(_text[_cursorPos - 1]);
+                    Backspace();
+                    WriteChar(Result);
+                    MoveCursorLeft();
+                }
+            }
+            else
+            {
+                // Skip all whitespaces found
+                while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+                    MoveCursorRight();
+
+                // Now, lowercase the entire word
+                while (!IsEndOfLine && _text[_cursorPos] != ' ')
+                {
+                    char Result = char.ToLower(_text[_cursorPos]);
+                    DeleteChar();
+                    WriteChar(Result);
+                }
             }
         }
 
@@ -1085,16 +1104,34 @@ namespace ReadLineReboot
         /// </summary>
         public void UppercaseWord()
         {
-            // Skip all whitespaces found
-            while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
-                MoveCursorRight();
-
-            // Now, UPPERCASE the entire word
-            while (!IsEndOfLine && _text[_cursorPos] != ' ')
+            if (_argDigitNegative)
             {
-                char Result = char.ToUpper(_text[_cursorPos]);
-                DeleteChar();
-                WriteChar(Result);
+                // Skip all whitespaces found
+                while (!IsStartOfLine && char.IsWhiteSpace(_text[_cursorPos - 1]))
+                    MoveCursorLeft();
+
+                // Now, UPPERCASE the entire word
+                while (!IsStartOfLine && _text[_cursorPos - 1] != ' ')
+                {
+                    char Result = char.ToUpper(_text[_cursorPos - 1]);
+                    Backspace();
+                    WriteChar(Result);
+                    MoveCursorLeft();
+                }
+            }
+            else
+            {
+                // Skip all whitespaces found
+                while (!IsEndOfLine && char.IsWhiteSpace(_text[_cursorPos]))
+                    MoveCursorRight();
+
+                // Now, UPPERCASE the entire word
+                while (!IsEndOfLine && _text[_cursorPos] != ' ')
+                {
+                    char Result = char.ToUpper(_text[_cursorPos]);
+                    DeleteChar();
+                    WriteChar(Result);
+                }
             }
         }
 
@@ -1261,7 +1298,10 @@ namespace ReadLineReboot
 
             // Update digit
             _argDigit = int.Parse(tempArg.ToString());
-            UpdatePrompt($"(arg: {_argDigit}) ");
+            if (_argDigitNegative)
+                UpdatePrompt($"(arg: -{_argDigit}) ");
+            else
+                UpdatePrompt($"(arg: {_argDigit}) ");
             _middleOfArgInsert = true;
         }
 
@@ -1274,12 +1314,14 @@ namespace ReadLineReboot
             {
                 WriteChar();
                 _middleOfArgInsert = false;
+                _argDigitNegative = false;
                 _argDigit = 0;
             }
             else
             {
-                _argDigit = -1;
-                UpdatePrompt($"(arg: {_argDigit}) ");
+                _argDigit = 1;
+                _argDigitNegative = true;
+                UpdatePrompt($"(arg: -{_argDigit}) ");
                 _middleOfArgInsert = true;
             }
         }
@@ -1440,6 +1482,7 @@ namespace ReadLineReboot
             if (_currentHandler != nameof(SetArgument) && _currentHandler != nameof(MinusArgumentOrWrite))
             {
                 _middleOfArgInsert = false;
+                _argDigitNegative = false;
                 _argDigit = 0;
             }
         }
