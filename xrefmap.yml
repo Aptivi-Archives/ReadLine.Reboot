@@ -201,6 +201,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.KeyHandler.AddLastArgument
   nameWithType: KeyHandler.AddLastArgument
+- uid: ReadLineReboot.KeyHandler.AppendMeta
+  name: AppendMeta()
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_AppendMeta
+  commentId: M:ReadLineReboot.KeyHandler.AppendMeta
+  fullName: ReadLineReboot.KeyHandler.AppendMeta()
+  nameWithType: KeyHandler.AppendMeta()
+- uid: ReadLineReboot.KeyHandler.AppendMeta*
+  name: AppendMeta
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_AppendMeta_
+  commentId: Overload:ReadLineReboot.KeyHandler.AppendMeta
+  isSpec: "True"
+  fullName: ReadLineReboot.KeyHandler.AppendMeta
+  nameWithType: KeyHandler.AppendMeta
 - uid: ReadLineReboot.KeyHandler.Backspace
   name: Backspace()
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_Backspace
