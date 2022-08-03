@@ -117,7 +117,10 @@ namespace ReadLineReboot
                 ["AltD7"]                   = () => ReadLine._keyHandler.SetArgument(7),
                 ["AltD8"]                   = () => ReadLine._keyHandler.SetArgument(8),
                 ["AltD9"]                   = () => ReadLine._keyHandler.SetArgument(9),
-                ["AltSubtract"]             = ReadLine._keyHandler.MinusArgumentOrWrite
+                ["AltSubtract"]             = ReadLine._keyHandler.MinusArgumentOrWrite,
+
+                // Misc
+                ["Escape"]                  = ReadLine._keyHandler.AppendMeta
                 };
         }
     }

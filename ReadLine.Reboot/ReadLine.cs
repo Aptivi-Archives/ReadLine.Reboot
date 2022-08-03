@@ -41,11 +41,12 @@ namespace ReadLineReboot
         private static readonly List<string> _history = new();
         private static bool _readInterrupt;
         private static int _historySize = -1;
+        private static int _numChars = -1;
         internal static bool _pressedEnterOnHistoryEntry;
         internal static KeyHandler _keyHandler;
         internal static object _lock = new();
         internal static char _escapeChar = Convert.ToChar(0x1B);
-        private static int _numChars = -1;
+        internal static bool _prependAlt = false;
 
         // Variables
         /// <summary>
@@ -376,6 +377,14 @@ namespace ReadLineReboot
                             _chars != _numChars)
                         {
                             // Handle the key as appropriate
+                            if (_prependAlt)
+                            {
+                                keyInfo = new ConsoleKeyInfo(keyInfo.KeyChar, keyInfo.Key,
+                                                             keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift), 
+                                                             true, 
+                                                             keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control));
+                                _prependAlt = false;
+                            }
                             _keyHandler.Handle(keyInfo);
                             _chars += 1;
                         }
@@ -404,6 +413,14 @@ namespace ReadLineReboot
                        _chars != _numChars)
                 {
                     // Handle the key as appropriate
+                    if (_prependAlt)
+                    {
+                        keyInfo = new ConsoleKeyInfo(keyInfo.KeyChar, keyInfo.Key,
+                                                     keyInfo.Modifiers.HasFlag(ConsoleModifiers.Shift),
+                                                     true,
+                                                     keyInfo.Modifiers.HasFlag(ConsoleModifiers.Control));
+                        _prependAlt = false;
+                    }
                     _keyHandler.Handle(keyInfo);
                     keyInfo = Console.ReadKey(true);
                     _chars += 1;

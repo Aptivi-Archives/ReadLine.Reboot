@@ -1424,6 +1424,11 @@ namespace ReadLineReboot
         public void RewriteCurrentLine() => UpdatePrompt(_cachedPrompt, true);
 
         /// <summary>
+        /// Appends Meta (ALT) character
+        /// </summary>
+        public void AppendMeta() => ReadLine._prependAlt = true;
+
+        /// <summary>
         /// No operation.
         /// </summary>
         public static void SuppressAction()
