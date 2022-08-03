@@ -278,6 +278,12 @@ references:
   commentId: M:ReadLineReboot.KeyHandler.ClearLineToLeft
   fullName: ReadLineReboot.KeyHandler.ClearLineToLeft()
   nameWithType: KeyHandler.ClearLineToLeft()
+- uid: ReadLineReboot.KeyHandler.ClearLineToLeft(System.Boolean)
+  name: ClearLineToLeft(Boolean)
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ClearLineToLeft_System_Boolean_
+  commentId: M:ReadLineReboot.KeyHandler.ClearLineToLeft(System.Boolean)
+  fullName: ReadLineReboot.KeyHandler.ClearLineToLeft(System.Boolean)
+  nameWithType: KeyHandler.ClearLineToLeft(Boolean)
 - uid: ReadLineReboot.KeyHandler.ClearLineToLeft*
   name: ClearLineToLeft
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ClearLineToLeft_
@@ -291,6 +297,12 @@ references:
   commentId: M:ReadLineReboot.KeyHandler.ClearLineToRight
   fullName: ReadLineReboot.KeyHandler.ClearLineToRight()
   nameWithType: KeyHandler.ClearLineToRight()
+- uid: ReadLineReboot.KeyHandler.ClearLineToRight(System.Boolean)
+  name: ClearLineToRight(Boolean)
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ClearLineToRight_System_Boolean_
+  commentId: M:ReadLineReboot.KeyHandler.ClearLineToRight(System.Boolean)
+  fullName: ReadLineReboot.KeyHandler.ClearLineToRight(System.Boolean)
+  nameWithType: KeyHandler.ClearLineToRight(Boolean)
 - uid: ReadLineReboot.KeyHandler.ClearLineToRight*
   name: ClearLineToRight
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ClearLineToRight_
