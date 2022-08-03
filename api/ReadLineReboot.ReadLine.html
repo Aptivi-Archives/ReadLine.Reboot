@@ -359,7 +359,7 @@ If set to a value less than 0, the history size is unlimited.</p>
   <h4 id="ReadLineReboot_ReadLine_InterruptionResponsiveness" data-uid="ReadLineReboot.ReadLine.InterruptionResponsiveness">InterruptionResponsiveness</h4>
   <div class="markdown level1 summary"><p>If <a class="xref" href="ReadLineReboot.ReadLine.html#ReadLineReboot_ReadLine_Interruptible">Interruptible</a> is enabled, sets how responsive the interruption listener while waiting for keypress.</p>
 <p>If zero, this means instant, but causes 100% CPU usage.</p>
-<p>If more than zero, this means that the listener will sleep for assigned number of seconds before detecting the next keys.</p>
+<p>If more than zero, this means that the listener will sleep for assigned number of milliseconds before detecting the next keys.</p>
 <p>Use this carefully, because it can cause missed keys depending on the application.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
