@@ -75,6 +75,7 @@ namespace ReadLineReboot
         private readonly IAutoCompleteHandler _autoCompleteHandler;
         private readonly IConsole ConsoleWrapper;
         private readonly char Escape = Convert.ToChar(27);
+        private readonly bool _isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
         internal int _historyIndex;
         internal string _cachedPrompt;
         internal string _initialPrompt;
@@ -82,7 +83,6 @@ namespace ReadLineReboot
         internal int _prePromptCursorTop;
         internal readonly List<string> _history;
         internal readonly List<string> _currentLineEditHistory;
-        private readonly bool _isOnWindows = Environment.OSVersion.Platform == PlatformID.Win32NT;
 
         // Private Properties
         private bool IsStartOfLine => _cursorPos == 0;
@@ -691,6 +691,10 @@ namespace ReadLineReboot
             if (IsStartOfLine) 
                 return;
 
+            // If we've been provided negative argument, do nothing
+            if (_argDigit < 0)
+                return;
+
             // Get the two character indexes
             int firstIdx = decrementIf(IsEndOfLine, _cursorPos - 1);
             int secondIdx = decrementIf(IsEndOfLine, _cursorPos);
@@ -724,6 +728,10 @@ namespace ReadLineReboot
 
             // We can't transpose the words in the middle of the words
             if (_text[_cursorPos] != ' ')
+                return;
+
+            // If we've been provided negative argument, do nothing
+            if (_argDigit < 0)
                 return;
 
             // Build the two words required
