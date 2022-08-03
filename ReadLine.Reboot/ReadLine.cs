@@ -82,7 +82,7 @@ namespace ReadLineReboot
         /// <summary>
         /// If <see cref="Interruptible"/> is enabled, sets how responsive the interruption listener while waiting for keypress.
         /// <para>If zero, this means instant, but causes 100% CPU usage.</para>
-        /// <para>If more than zero, this means that the listener will sleep for assigned number of seconds before detecting the next keys.</para>
+        /// <para>If more than zero, this means that the listener will sleep for assigned number of milliseconds before detecting the next keys.</para>
         /// <para>Use this carefully, because it can cause missed keys depending on the application.</para>
         /// </summary>
         public static int InterruptionResponsiveness { get; set; } = 0;
