@@ -47,6 +47,7 @@ namespace ReadLineDemo
             { "NormalPromptCtrlCAsInput",       new NormalPromptCtrlCAsInput() } ,
             { "NormalPromptTimed",              new NormalPromptTimed() } ,
             { "NormalPromptCustomBinding",      new NormalPromptCustomBinding() } ,
+            { "NormalPromptOnlyFive",           new NormalPromptOnlyFive() } ,
             { "MaskedPrompt",                   new MaskedPrompt() } ,
             { "MaskedPromptCustomMask",         new MaskedPromptCustomMask() } ,
             { "CharDebug",                      new CharDebug() } 
