@@ -487,61 +487,81 @@ namespace ReadLineReboot
         /// <summary>
         /// Clears the line to the left
         /// </summary>
-        public void ClearLineToLeft()
+        public void ClearLineToLeft() => ClearLineToLeft(false);
+
+        /// <summary>
+        /// Clears the line to the left
+        /// </summary>
+        public void ClearLineToLeft(bool force)
         {
-            // We're in the middle of the job
-            _updateCurrentLineHistory = false;
-
-            // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new();
-            if (_lastHandler != nameof(ClearLineToLeft))
-                _killBuffer.Clear();
-
-            // Now, do the job
-            while (!IsStartOfLine)
+            if (!force && _argDigitNegative)
+                ClearLineToRight(true);
+            else
             {
-                chars.Add(_text[_cursorPos - 1]);
-                Backspace();
+                // We're in the middle of the job
+                _updateCurrentLineHistory = false;
+
+                // Clear the kill buffer if the last handler is not this command
+                List<char> chars = new();
+                if (_lastHandler != nameof(ClearLineToLeft))
+                    _killBuffer.Clear();
+
+                // Now, do the job
+                while (!IsStartOfLine)
+                {
+                    chars.Add(_text[_cursorPos - 1]);
+                    Backspace();
+                }
+
+                // Append the wiped characters to the kill buffer
+                chars.Reverse();
+                _killBuffer.Append(string.Join("", chars));
+
+                // Update the current line history
+                _updateCurrentLineHistory = true;
+                UpdateCurrentLine();
             }
-
-            // Append the wiped characters to the kill buffer
-            chars.Reverse();
-            _killBuffer.Append(string.Join("", chars));
-
-            // Update the current line history
-            _updateCurrentLineHistory = true;
-            UpdateCurrentLine();
         }
 
         /// <summary>
         /// Clears the line to the right
         /// </summary>
-        public void ClearLineToRight()
+        public void ClearLineToRight() => ClearLineToRight(false);
+
+        /// <summary>
+        /// Clears the line to the right
+        /// </summary>
+        public void ClearLineToRight(bool force)
         {
-            // We're in the middle of the job
-            _updateCurrentLineHistory = false;
-
-            // Clear the kill buffer if the last handler is not this command
-            List<char> chars = new();
-            if (_lastHandler != nameof(ClearLineToRight))
-                _killBuffer.Clear();
-
-            // Now, do the job
-            int pos = _cursorPos;
-            MoveCursorEnd();
-            while (_cursorPos > pos)
+            if (!force && _argDigitNegative)
+                ClearLineToLeft(true);
+            else
             {
-                chars.Add(_text[_cursorPos - 1]);
-                Backspace();
+                // We're in the middle of the job
+                _updateCurrentLineHistory = false;
+
+                // Clear the kill buffer if the last handler is not this command
+                List<char> chars = new();
+                if (_lastHandler != nameof(ClearLineToRight))
+                    _killBuffer.Clear();
+
+                // Now, do the job
+                int pos = _cursorPos;
+                MoveCursorEnd();
+                while (_cursorPos > pos)
+                {
+                    chars.Add(_text[_cursorPos - 1]);
+                    Backspace();
+                }
+
+                // Append the wiped characters to the kill buffer
+                chars.Reverse();
+                _killBuffer.Append(string.Join("", chars));
+
+                // Update the current line history
+                _updateCurrentLineHistory = true;
+                UpdateCurrentLine();
             }
-
-            // Append the wiped characters to the kill buffer
-            chars.Reverse();
-            _killBuffer.Append(string.Join("", chars));
-
-            // Update the current line history
-            _updateCurrentLineHistory = true;
-            UpdateCurrentLine();
         }
 
         /// <summary>
