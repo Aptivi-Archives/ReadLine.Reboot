@@ -1140,6 +1140,10 @@ namespace ReadLineReboot
         /// </summary>
         public void UppercaseCharMoveToEndOfWord()
         {
+            // Move to previous word if negative
+            if (_argDigitNegative)
+                MoveCursorWordLeft();
+
             char Result = char.ToUpper(_text[_cursorPos]);
             DeleteChar();
             WriteChar(Result);
