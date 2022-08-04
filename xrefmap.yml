@@ -246,6 +246,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.KeyHandler.BackspaceOrDelete
   nameWithType: KeyHandler.BackspaceOrDelete
+- uid: ReadLineReboot.KeyHandler.CallLastKeyboardMacro
+  name: CallLastKeyboardMacro()
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_CallLastKeyboardMacro
+  commentId: M:ReadLineReboot.KeyHandler.CallLastKeyboardMacro
+  fullName: ReadLineReboot.KeyHandler.CallLastKeyboardMacro()
+  nameWithType: KeyHandler.CallLastKeyboardMacro()
+- uid: ReadLineReboot.KeyHandler.CallLastKeyboardMacro*
+  name: CallLastKeyboardMacro
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_CallLastKeyboardMacro_
+  commentId: Overload:ReadLineReboot.KeyHandler.CallLastKeyboardMacro
+  isSpec: "True"
+  fullName: ReadLineReboot.KeyHandler.CallLastKeyboardMacro
+  nameWithType: KeyHandler.CallLastKeyboardMacro
 - uid: ReadLineReboot.KeyHandler.ClearHorizontalSpace
   name: ClearHorizontalSpace()
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ClearHorizontalSpace
@@ -459,6 +472,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.KeyHandler.DoReverseAutoComplete
   nameWithType: KeyHandler.DoReverseAutoComplete
+- uid: ReadLineReboot.KeyHandler.EndKeyboardMacro
+  name: EndKeyboardMacro()
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_EndKeyboardMacro
+  commentId: M:ReadLineReboot.KeyHandler.EndKeyboardMacro
+  fullName: ReadLineReboot.KeyHandler.EndKeyboardMacro()
+  nameWithType: KeyHandler.EndKeyboardMacro()
+- uid: ReadLineReboot.KeyHandler.EndKeyboardMacro*
+  name: EndKeyboardMacro
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_EndKeyboardMacro_
+  commentId: Overload:ReadLineReboot.KeyHandler.EndKeyboardMacro
+  isSpec: "True"
+  fullName: ReadLineReboot.KeyHandler.EndKeyboardMacro
+  nameWithType: KeyHandler.EndKeyboardMacro
 - uid: ReadLineReboot.KeyHandler.ExtendedFunctionMode
   name: ExtendedFunctionMode()
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ExtendedFunctionMode
@@ -822,6 +848,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.KeyHandler.StartAutoComplete
   nameWithType: KeyHandler.StartAutoComplete
+- uid: ReadLineReboot.KeyHandler.StartKeyboardMacro
+  name: StartKeyboardMacro()
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_StartKeyboardMacro
+  commentId: M:ReadLineReboot.KeyHandler.StartKeyboardMacro
+  fullName: ReadLineReboot.KeyHandler.StartKeyboardMacro()
+  nameWithType: KeyHandler.StartKeyboardMacro()
+- uid: ReadLineReboot.KeyHandler.StartKeyboardMacro*
+  name: StartKeyboardMacro
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_StartKeyboardMacro_
+  commentId: Overload:ReadLineReboot.KeyHandler.StartKeyboardMacro
+  isSpec: "True"
+  fullName: ReadLineReboot.KeyHandler.StartKeyboardMacro
+  nameWithType: KeyHandler.StartKeyboardMacro
 - uid: ReadLineReboot.KeyHandler.SuppressAction
   name: SuppressAction()
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_SuppressAction
