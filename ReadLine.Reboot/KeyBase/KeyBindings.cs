@@ -128,6 +128,9 @@ namespace ReadLineReboot
             };
             _extendedKeyBindings = new Dictionary<string, Action>()
             {
+                ["ShiftD9"]                 = ReadLine._keyHandler.StartKeyboardMacro,
+                ["ShiftD0"]                 = ReadLine._keyHandler.EndKeyboardMacro,
+                ["E"]                       = ReadLine._keyHandler.CallLastKeyboardMacro
             };
         }
     }

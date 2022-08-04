@@ -85,6 +85,8 @@ namespace ReadLineReboot
         internal int _prePromptCursorTop;
         internal readonly List<string> _history;
         internal readonly List<string> _currentLineEditHistory;
+        internal readonly List<(string, bool)> _keyboardMacro = new();
+        internal bool _keyboardMacroRecording = false;
 
         // Private Properties
         private bool IsStartOfLine => _cursorPos == 0;
@@ -1352,6 +1354,33 @@ namespace ReadLineReboot
         }
         #endregion
 
+        #region Keyboard Macro
+        /// <summary>
+        /// Starts the keyboard macro
+        /// </summary>
+        public void StartKeyboardMacro()
+        {
+            _keyboardMacroRecording = true;
+            _keyboardMacro.Clear();
+        }
+
+        /// <summary>
+        /// Stops recording the keyboard macro
+        /// </summary>
+        public void EndKeyboardMacro() => _keyboardMacroRecording = false;
+
+        /// <summary>
+        /// Calls the last keyboard macro
+        /// </summary>
+        public void CallLastKeyboardMacro()
+        {
+            foreach (var recordedKey in _keyboardMacro)
+            {
+                Handle(recordedKey.Item1, recordedKey.Item2);
+            }
+        }
+        #endregion
+
         #region Other logic
         /// <summary>
         /// Updates the current line variable
@@ -1489,7 +1518,21 @@ namespace ReadLineReboot
 
             // Get the key input and assign it to the action defined in the actions list. Otherwise, write the character.
             string KeyInputName = KeyTools.BuildKeyInput(keyInfo);
+            bool KeyControlChar = char.IsControl(keyInfo.KeyChar);
 
+            // Record the keypress if macro is enabled
+            if (_keyboardMacroRecording)
+                _keyboardMacro.Add((KeyInputName, KeyControlChar));
+
+            // Do the job in internal overload
+            Handle(KeyInputName, KeyControlChar);
+        }
+
+        /// <summary>
+        /// Handles the pressed key
+        /// </summary>
+        internal void Handle(string KeyInputName, bool KeyControlChar)
+        {
             // Base key binding
             KeyBindings._baseKeyBindings.TryGetValue(KeyInputName, out Action action);
 
@@ -1505,7 +1548,7 @@ namespace ReadLineReboot
                 KeyBindings._customKeyBindings.TryGetValue(KeyInputName, out action);
 
             // Write character if nothing found
-            action ??= char.IsControl(keyInfo.KeyChar) ? global::ReadLineReboot.KeyHandler.SuppressAction : WriteChar;
+            action ??= KeyControlChar ? global::ReadLineReboot.KeyHandler.SuppressAction : WriteChar;
 
             // Because SetArgument is getting called from the lambda (we don't want to duplicate code for each number),
             // the current handler is being set to some trash name with "lambda" in it, so we need to replace this gibberish
