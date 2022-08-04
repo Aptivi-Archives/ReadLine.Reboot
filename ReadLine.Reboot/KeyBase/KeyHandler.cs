@@ -58,6 +58,7 @@ namespace ReadLineReboot
         private bool _argDigitNegative;
         private int _cursorPos;
         private int _cursorLimit;
+        private int _cursorMark;
         private ConsoleKeyInfo _keyInfo;
         private string[] _completions;
         private int _completionStart;
@@ -1429,6 +1430,16 @@ namespace ReadLineReboot
         public void AppendMeta() => ReadLine._prependAlt = true;
 
         /// <summary>
+        /// Enters the extended function mode
+        /// </summary>
+        public void ExtendedFunctionMode() => ReadLine._extendedMode = true;
+
+        /// <summary>
+        /// Sets mark position
+        /// </summary>
+        public void SetMark() => _cursorMark = _cursorPos;
+
+        /// <summary>
         /// No operation.
         /// </summary>
         public static void SuppressAction()
@@ -1481,6 +1492,13 @@ namespace ReadLineReboot
 
             // Base key binding
             KeyBindings._baseKeyBindings.TryGetValue(KeyInputName, out Action action);
+
+            // Extended key binding
+            if (ReadLine._extendedMode)
+            {
+                ReadLine._extendedMode = false;
+                KeyBindings._extendedKeyBindings.TryGetValue(KeyInputName, out action);
+            }
 
             // Custom key binding
             if (action == null)

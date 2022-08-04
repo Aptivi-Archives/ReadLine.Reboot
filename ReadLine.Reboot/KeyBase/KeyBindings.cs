@@ -32,6 +32,7 @@ namespace ReadLineReboot
     internal class KeyBindings
     {
         internal static Dictionary<string, Action> _baseKeyBindings;
+        internal static Dictionary<string, Action> _extendedKeyBindings;
         internal static Dictionary<string, Action> _customKeyBindings = new Dictionary<string, Action>();
 
         internal static void InitializeBindings()
@@ -120,8 +121,13 @@ namespace ReadLineReboot
                 ["AltSubtract"]             = ReadLine._keyHandler.MinusArgumentOrWrite,
 
                 // Misc
-                ["Escape"]                  = ReadLine._keyHandler.AppendMeta
-                };
+                ["Escape"]                  = ReadLine._keyHandler.AppendMeta,
+                ["ControlX"]                = ReadLine._keyHandler.ExtendedFunctionMode,
+                ["CtrlD2"]                  = ReadLine._keyHandler.SetMark
+            };
+            _extendedKeyBindings = new Dictionary<string, Action>()
+            {
+            };
         }
     }
 }

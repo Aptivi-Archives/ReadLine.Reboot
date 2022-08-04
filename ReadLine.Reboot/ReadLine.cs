@@ -47,6 +47,7 @@ namespace ReadLineReboot
         internal static object _lock = new();
         internal static char _escapeChar = Convert.ToChar(0x1B);
         internal static bool _prependAlt = false;
+        internal static bool _extendedMode = false;
 
         // Variables
         /// <summary>
