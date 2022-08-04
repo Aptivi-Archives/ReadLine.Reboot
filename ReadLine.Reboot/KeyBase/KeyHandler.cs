@@ -85,7 +85,7 @@ namespace ReadLineReboot
         internal int _prePromptCursorTop;
         internal readonly List<string> _history;
         internal readonly List<string> _currentLineEditHistory;
-        internal readonly List<(string, bool)> _keyboardMacro = new();
+        internal readonly List<ConsoleKeyInfo> _keyboardMacro = new();
         internal bool _keyboardMacroRecording = false;
 
         // Private Properties
@@ -1376,7 +1376,7 @@ namespace ReadLineReboot
         {
             foreach (var recordedKey in _keyboardMacro)
             {
-                Handle(recordedKey.Item1, recordedKey.Item2);
+                Handle(recordedKey);
             }
         }
         #endregion
@@ -1522,7 +1522,7 @@ namespace ReadLineReboot
 
             // Record the keypress if macro is enabled
             if (_keyboardMacroRecording)
-                _keyboardMacro.Add((KeyInputName, KeyControlChar));
+                _keyboardMacro.Add(keyInfo);
 
             // Do the job in internal overload
             Handle(KeyInputName, KeyControlChar);
