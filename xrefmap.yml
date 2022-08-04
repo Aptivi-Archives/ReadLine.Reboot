@@ -459,6 +459,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.KeyHandler.DoReverseAutoComplete
   nameWithType: KeyHandler.DoReverseAutoComplete
+- uid: ReadLineReboot.KeyHandler.ExtendedFunctionMode
+  name: ExtendedFunctionMode()
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ExtendedFunctionMode
+  commentId: M:ReadLineReboot.KeyHandler.ExtendedFunctionMode
+  fullName: ReadLineReboot.KeyHandler.ExtendedFunctionMode()
+  nameWithType: KeyHandler.ExtendedFunctionMode()
+- uid: ReadLineReboot.KeyHandler.ExtendedFunctionMode*
+  name: ExtendedFunctionMode
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_ExtendedFunctionMode_
+  commentId: Overload:ReadLineReboot.KeyHandler.ExtendedFunctionMode
+  isSpec: "True"
+  fullName: ReadLineReboot.KeyHandler.ExtendedFunctionMode
+  nameWithType: KeyHandler.ExtendedFunctionMode
 - uid: ReadLineReboot.KeyHandler.FirstHistory
   name: FirstHistory()
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_FirstHistory
@@ -783,6 +796,19 @@ references:
   isSpec: "True"
   fullName: ReadLineReboot.KeyHandler.SetArgument
   nameWithType: KeyHandler.SetArgument
+- uid: ReadLineReboot.KeyHandler.SetMark
+  name: SetMark()
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_SetMark
+  commentId: M:ReadLineReboot.KeyHandler.SetMark
+  fullName: ReadLineReboot.KeyHandler.SetMark()
+  nameWithType: KeyHandler.SetMark()
+- uid: ReadLineReboot.KeyHandler.SetMark*
+  name: SetMark
+  href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_SetMark_
+  commentId: Overload:ReadLineReboot.KeyHandler.SetMark
+  isSpec: "True"
+  fullName: ReadLineReboot.KeyHandler.SetMark
+  nameWithType: KeyHandler.SetMark
 - uid: ReadLineReboot.KeyHandler.StartAutoComplete
   name: StartAutoComplete()
   href: api/ReadLineReboot.KeyHandler.html#ReadLineReboot_KeyHandler_StartAutoComplete
