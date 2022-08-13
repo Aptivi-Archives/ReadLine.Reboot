@@ -21,16 +21,11 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-    <ApplicationIcon>OfficialAppIcon-ReadLineReboot.ico</ApplicationIcon>
     <PackageIcon>OfficialAppIcon-ReadLineReboot-512.png</PackageIcon>
     <AssemblyVersion>3.4.0</AssemblyVersion>
     <PackageVersion>3.4.0</PackageVersion>
     <LangVersion>9.0</LangVersion>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Include="OfficialAppIcon-ReadLineReboot.ico" />
-  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\README.md">
