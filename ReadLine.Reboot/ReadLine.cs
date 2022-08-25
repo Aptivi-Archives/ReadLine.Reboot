@@ -86,7 +86,7 @@ namespace ReadLineReboot
         /// <para>If more than zero, this means that the listener will sleep for assigned number of milliseconds before detecting the next keys.</para>
         /// <para>Use this carefully, because it can cause missed keys depending on the application.</para>
         /// </summary>
-        public static int InterruptionResponsiveness { get; set; } = 0;
+        public static int InterruptionResponsiveness { get; set; } = 10;
 
         /// <summary>
         /// Whether the CTRL + C to EOL feature is enabled. Currently false. If false, exits program upon pressing CTRL + C.
@@ -353,6 +353,20 @@ namespace ReadLineReboot
             return GetText();
         }
 
+        private static bool TryGetConsoleKey(out ConsoleKeyInfo key)
+        {
+            if (Console.KeyAvailable)
+            {
+                key = Console.ReadKey(true);
+                return true;
+            }
+            else
+            {
+                key = new ConsoleKeyInfo();
+                return false;
+            }
+        }
+
         private static string GetText()
         {
             bool _ctrlCPressed = false;
@@ -368,9 +382,8 @@ namespace ReadLineReboot
             {
                 while (!_readInterrupt)
                 {
-                    if (Console.KeyAvailable)
+                    while (TryGetConsoleKey(out ConsoleKeyInfo keyInfo))
                     {
-                        ConsoleKeyInfo keyInfo = Console.ReadKey(true);
                         if (keyInfo.Key != ConsoleKey.Enter &&
                             !keyInfo.Equals(KeyHandler.SimulatedEnter) &&
                             !(keyInfo.Equals(KeyHandler.SimulatedEnterAlt) && _keyHandler.Text.Length == 0) &&
@@ -397,8 +410,7 @@ namespace ReadLineReboot
                             break;
                         }
                     }
-                    else
-                        Thread.Sleep(InterruptionResponsiveness);
+                    Thread.Sleep(InterruptionResponsiveness);
                 }
             }
             else
